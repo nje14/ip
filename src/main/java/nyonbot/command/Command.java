@@ -1,5 +1,12 @@
 package nyonbot.command;
 
-public class Command {
-    
+
+
+public record Command (Commands command, String message) {
+    public enum Commands {
+        EXIT,
+        ECHO,
+        NYON,
+        LIST
+    } 
 }

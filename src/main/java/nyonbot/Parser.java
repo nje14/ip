@@ -1,5 +1,6 @@
 package nyonbot;
 
+import nyonbot.command.Command;
 
 public class Parser {    
     private static Parser instance = null;
@@ -13,15 +14,17 @@ public class Parser {
         }
         return instance;
     }
-    public static void parse(String input) {
+    public Command parse(String input) {
         String[] command = input.split(" ", 1);
         switch (command[0]) {
             case ("bye"):
-   
+                return new Command(Command.Commands.EXIT, input);
             case ("nyon"):
-     
+                return new Command(Command.Commands.NYON, input);
+            case ("echo"):
+                return new Command(Command.Commands.ECHO, input);
             default:
-    
+                return new Command(Command.Commands.ECHO, input);
         }
     }
 }

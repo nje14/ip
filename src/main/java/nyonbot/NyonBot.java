@@ -1,12 +1,29 @@
 package nyonbot;
+
+import nyonbot.Logic.Result;
+import nyonbot.command.Command;
+
 public class NyonBot {
     public static void main(String[] args) {
-        String banner = ResourceLoader.readTextfile("static/ascii-banner.txt");
-        System.out.println(banner);
-        String welcome = ResourceLoader.readTextfile("static/welcome.txt");
-        System.out.println(welcome);
-        String goodbye = ResourceLoader.readTextfile("static/goodbye.txt");
-        System.out.println(goodbye);
+        Ui ui = Ui.getInstance();
+        Parser parser = Parser.getInstance();
+        Logic logic = Logic.getInstance();
+
+        ui.welcome();
+
+        boolean loop = true;
+
+        while (loop) {
+            System.out.println();
+            String userInput = ui.readCommand();
+            Command cmd = parser.parse(userInput);
+            Result res = logic.execute(cmd);
+            if (res.out() != null && res.out() != "") {
+                ui.showOutput(res.out());
+            }
+            loop = !res.exit();
+        }
+        ui.goodbye();
     }
 }
     
