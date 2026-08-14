@@ -7,11 +7,14 @@ import java.nio.charset.StandardCharsets;
 public class ResourceLoader {
     /// Reads a .txt file and returns its entire contents as one string
     /// Uses `getClassLoader()` so omit the preceding `/`
-    /// @param filename path to file; omit the preceding `/`
+    /// @param filename `String` path to file; omit the preceding `/`
     /// @return contents of `filename`
     /// @throws Error if read is interrupted or file cannot be found
     /// 
     public static String readTextfile(String filename) {
+        if (filename.charAt(0) == '/') {
+            filename = filename.substring(1);
+        }
         try (InputStream input = NyonBot.class.getClassLoader().getResourceAsStream(filename)) {
             if (input == null) {
                 throw new Error("Could not load text from "+filename);
