@@ -1,3 +1,4 @@
+package nyonbot;
 public class NyonBot {
     public static void main(String[] args) {
         String banner = "             *****                                                               \r\n" + //
