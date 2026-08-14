@@ -17,14 +17,13 @@ public class Ui {
     }
 
     public void welcome() {
-        banner();
-
         String welcome = ResourceLoader.readTextfile("static/welcome.txt");
         System.out.println(welcome);
     }
 
     public void goodbye() {
-        System.out.println("Nyon...");
+        String out = ResourceLoader.readTextfile("static/goodbye.txt");
+        System.out.println(out);
     }
 
     public void banner() {

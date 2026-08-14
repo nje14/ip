@@ -7,6 +7,7 @@ public record Command (Commands command, String message) {
         EXIT,
         ECHO,
         NYON,
-        LIST
+        LIST,
+        LIST_INSERT
     } 
 }

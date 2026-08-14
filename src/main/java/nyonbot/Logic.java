@@ -1,6 +1,9 @@
 package nyonbot;
 
+import java.util.ArrayList;
+
 import nyonbot.command.Command;
+
 
 public class Logic {
 
@@ -11,8 +14,10 @@ public class Logic {
     }   
 
     private static Logic instance = null;
+    private ArrayList<String> list;
 
     private Logic() {
+        this.list = new ArrayList<>();
     }
 
     public static synchronized Logic getInstance() {
@@ -32,6 +37,16 @@ public class Logic {
             case Command.Commands.NYON:
                 Ui.getInstance().banner();
                 return new Result("Nyon", "nyon");
+            case Command.Commands.LIST:
+                StringBuilder sb = new StringBuilder();
+                for (String str: list) {
+                    sb.append(str);
+                    sb.append("\n");
+                }
+                return new Result(new String(sb), "ls");
+            case Command.Commands.LIST_INSERT:
+                list.add(cmd.message());
+                return new Result("added "+cmd.message(), "add");
             default:
                 return new Result(null, "Unknown command");        
         }

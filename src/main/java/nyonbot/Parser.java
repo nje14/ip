@@ -23,8 +23,10 @@ public class Parser {
                 return new Command(Command.Commands.NYON, input);
             case ("echo"):
                 return new Command(Command.Commands.ECHO, input);
+            case ("list"):
+                return new Command(Command.Commands.LIST, input);
             default:
-                return new Command(Command.Commands.ECHO, input);
+                return new Command(Command.Commands.LIST_INSERT, input);
         }
     }
 }
