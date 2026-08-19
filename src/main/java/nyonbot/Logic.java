@@ -61,30 +61,44 @@ public class Logic {
                 return new Result(String.format("I've added this task:\n%s\nThere are %s tasks in your list", todo, list.size()), "todo");
             case Command.Commands.DEADLINE:
                 String deadlineCmd = cmd.message();
-                int nameIndex = "deadline ".length();
-                int byIndex = deadlineCmd.indexOf(" /by ");
-                if (byIndex == -1) {
+                int deadlineIndex = "deadline ".length();
+                int deadLineByIndex = deadlineCmd.indexOf(" /by ");
+                if (deadLineByIndex == -1) {
                     return new Result("use /by to specify the deadline", "err");
                 }
-                if (byIndex <= nameIndex + 1) {
+                if (deadLineByIndex <= deadlineIndex + 1) {
                     return new Result("cannot omit the description :(", "err");
                 }
-                if (byIndex + " /by ".length() > deadlineCmd.length()) {
+                if (deadLineByIndex + " /by ".length() > deadlineCmd.length()) {
                     return new Result("cannot omit the deadline date", "err");
                 }
-                Task deadline = new Deadline(deadlineCmd.substring(nameIndex, byIndex), deadlineCmd.substring(byIndex+" /by ".length()));
+                Task deadline = new Deadline(deadlineCmd.substring(deadlineIndex, deadLineByIndex), deadlineCmd.substring(deadLineByIndex+" /by ".length()));
                 list.add(deadline);
                 return new Result(String.format("I've added this task: \n%s\nThere are %s tasks in your list", deadline, list.size()), "deadline");
             case Command.Commands.EVENT:
-                String[] eventCmd = cmd.message().split(" ");
-                if (eventCmd.length < 2) {
-                    return new Result("cannot add an empty description :(", "err");
-                } else if (eventCmd.length < 4) {
-                    return new Result("cannot omit the start date and end date", "err");
+                String eventCmd = cmd.message();
+                int eventIndex = "event ".length();
+                int eventFromIndex = eventCmd.indexOf(" /from ");
+                int eventToIndex = eventCmd.indexOf(" /to ");
+                if (eventFromIndex == -1) {
+                    return new Result("use /from to specify the start time", "err");
                 }
-                Task event = new Event(eventCmd[1], eventCmd[2], eventCmd[3]);
+                if (eventToIndex == -1) {
+                    return new Result("use /to to specify the endtime", "err");
+                }
+                if (eventIndex + 1 >= Math.min(eventFromIndex, eventToIndex)) {
+                    return new Result("cannot omit the description", "err");
+                }
+                if (eventFromIndex + " /from ".length() > eventCmd.length()) {
+                    return new Result("cannot omit the start time", "err");
+                }
+                if (eventFromIndex + " /to ".length() > eventCmd.length()) {
+                    return new Result("cannot omit the end time", "err");
+                }
+                Task event = new Event(eventCmd.substring(eventIndex, eventFromIndex), eventCmd.substring(eventFromIndex + " /from ".length(), eventToIndex), eventCmd.substring(eventToIndex + " /to ".length()));
                 list.add(event);
-                return new Result( String.format("I've added this task: \n%s\nThere are %s tasks in your list", event, list.size()), "event");
+                return new Result(String.format("I've added this task: \n%s\nThere are %s tasks in your list", event, list.size()), "deadline");
+                
             case Command.Commands.MARK:
                 String[] markCmd = cmd.message().split(" ", 3);
                 if (markCmd.length < 2) {

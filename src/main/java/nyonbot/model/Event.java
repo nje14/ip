@@ -12,7 +12,7 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return String.format("[E][%s] %s (from %s to %s)",
+        return String.format("[E][%s] %s (from: %s to: %s)",
             this.done ? "X" : " ", 
             this.taskName, 
             this.startTime, 
