@@ -16,6 +16,14 @@ public class Task {
         this.done = false;
     }
 
+    public boolean isSameTask(String task) {
+        return this.taskName.equals(task);
+    }
+
+    public String getName() {
+        return this.taskName;
+    }
+
     @Override
     public String toString() {
         return String.format("[T][%s] %s", done ? "X" : " ", this.taskName);

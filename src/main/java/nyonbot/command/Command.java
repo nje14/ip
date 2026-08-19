@@ -10,6 +10,8 @@ public record Command (Commands command, String message) {
         LIST,
         TODO,
         DEADLINE,
-        EVENT
+        EVENT,
+        MARK,
+        UNMARK,
     } 
 }

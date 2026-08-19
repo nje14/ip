@@ -17,6 +17,8 @@ public class Logic {
         }
     }   
 
+
+
     private static Logic instance = null;
     private ArrayList<Task> list;
 
@@ -45,12 +47,12 @@ public class Logic {
                 StringBuilder sb = new StringBuilder("Here are your tasks:\n");
                 int idx = 0;
                 for (Task task: list) {
-                    sb.append(String.format("%s. %s", idx++, task));
+                    sb.append(String.format("%s. %s", ++idx, task));
                     sb.append("\n");
                 }
                 return new Result(new String(sb), "ls");
             case Command.Commands.TODO:
-                String[] todoCmd = cmd.message().split(" ");
+                String[] todoCmd = cmd.message().split(" ", 2);
                 if (todoCmd.length < 2) {
                     return new Result("cannot add a missing description :(", "err");
                 }
@@ -58,14 +60,19 @@ public class Logic {
                 list.add(todo);
                 return new Result(String.format("I've added this task:\n%s\nThere are %s tasks in your list", todo, list.size()), "todo");
             case Command.Commands.DEADLINE:
-                String[] deadlineCmd = cmd.message().split(" ");
-                if (deadlineCmd.length < 2) {
-                    return new Result("cannot add an empty description :(", "err");
+                String deadlineCmd = cmd.message();
+                int nameIndex = "deadline ".length();
+                int byIndex = deadlineCmd.indexOf(" /by ");
+                if (byIndex == -1) {
+                    return new Result("use /by to specify the deadline", "err");
                 }
-                if (deadlineCmd.length < 3) {
-                    return new Result("cannot omit a date of the deadline :(", "err");
+                if (byIndex <= nameIndex + 1) {
+                    return new Result("cannot omit the description :(", "err");
                 }
-                Task deadline = new Deadline(deadlineCmd[1], deadlineCmd[2]);
+                if (byIndex + " /by ".length() > deadlineCmd.length()) {
+                    return new Result("cannot omit the deadline date", "err");
+                }
+                Task deadline = new Deadline(deadlineCmd.substring(nameIndex, byIndex), deadlineCmd.substring(byIndex+" /by ".length()));
                 list.add(deadline);
                 return new Result(String.format("I've added this task: \n%s\nThere are %s tasks in your list", deadline, list.size()), "deadline");
             case Command.Commands.EVENT:
@@ -78,6 +85,31 @@ public class Logic {
                 Task event = new Event(eventCmd[1], eventCmd[2], eventCmd[3]);
                 list.add(event);
                 return new Result( String.format("I've added this task: \n%s\nThere are %s tasks in your list", event, list.size()), "event");
+            case Command.Commands.MARK:
+                String[] markCmd = cmd.message().split(" ", 3);
+                if (markCmd.length < 2) {
+                    return new Result("cannot mark without a description :(", "err");
+                }
+                for (Task task: list) {
+
+                    if (task.isSameTask(markCmd[1])) {
+                        task.completeTask();
+                        return new Result(String.format("Marked %s as completed", task), "mark");
+                    }
+                }
+                return new Result("couldn't find the task... did you spell it right?", "err");
+            case Command.Commands.UNMARK:
+                String[] unmarkCmd = cmd.message().split(" ", 3);
+                if (unmarkCmd.length < 2) {
+                    return new Result("cannot unmark without a description :(", "err");
+                }
+                for (Task task: list) {
+                    if (task.isSameTask(unmarkCmd[1])) {
+                        task.uncompleteTask();
+                        return new Result(String.format("Unmarked %s as completed", task), "unmark");
+                    }
+                }
+                return new Result("couldn't find the task... did you spell it right?", "err");
             default:
                 return new Result(null, "Unknown command");        
         }

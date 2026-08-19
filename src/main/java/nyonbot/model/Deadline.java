@@ -10,6 +10,6 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return String.format("[D][%s]  %s (by: %s)", this.done ? "X" : " ", this.taskName, this.deadline);
+        return String.format("[D][%s] %s (by: %s)", this.done ? "X" : " ", this.taskName, this.deadline);
     }
 }
