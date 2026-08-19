@@ -12,6 +12,10 @@ public class Task {
         this.done = true;
     }
 
+    public void uncompleteTask() {
+        this.done = false;
+    }
+
     @Override
     public String toString() {
         return String.format("[T][%s] %s", done ? "X" : " ", this.taskName);

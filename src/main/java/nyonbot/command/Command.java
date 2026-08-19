@@ -8,7 +8,6 @@ public record Command (Commands command, String message) {
         ECHO,
         NYON,
         LIST,
-        LIST_INSERT,
         TODO,
         DEADLINE,
         EVENT
