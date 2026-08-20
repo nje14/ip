@@ -1,6 +1,7 @@
 package nyonbot.command;
 
 import nyonbot.Logic.Result;
+import nyonbot.model.NyonException;
 
 public abstract class Command {
     protected String input;
@@ -13,6 +14,6 @@ public abstract class Command {
         this.input = input;
     }
 
-    public abstract Result execute() throws Exception;
+    public abstract Result execute() throws NyonException;
 
 }

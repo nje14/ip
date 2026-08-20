@@ -17,15 +17,26 @@ public class MarkCommand extends Command {
     public Result execute() throws NyonException {
         String taskName = this.input.substring("mark ".length()).strip();
         if (taskName.isBlank()) {
-            throw new NyonException("cannot mark without a description");
+            throw new NyonException("cannot mark without a description :(");
         }
-        for (Task task : list) {
-
-            if (task.isSameTask(taskName)) {
-                task.completeTask();
-                return new Result(String.format("Marked %s as completed", task));
+        int idx;
+        try {
+            idx = Integer.parseInt(taskName) - 1;
+            if (idx < 0 || idx >= list.size()) {
+                throw new NyonException("index out of bounds...");
             }
+            Task task = list.get(idx);
+            task.completeTask();
+            return new Result(String.format("Marked %s as completed", task));
+        } catch (NumberFormatException e) {
+            for (Task task : list) {
+                if (task.isSameTask(taskName)) {
+                    task.completeTask();
+                    return new Result(String.format("Marked %s as completed", task));
+                }
+            }
+            return new Result("couldn't find the task... did you spell it right?");
         }
-        return new Result("couldn't find the task... did you spell it right?");
+
     }
 }

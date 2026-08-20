@@ -21,7 +21,7 @@ public class ResourceLoader {
             }
             return new String(input.readAllBytes(),StandardCharsets.UTF_8);
         } catch (IOException e) {
-            throw new Error("Exception occured while reading from "+ filename + ": " + e);
+            throw new IllegalStateException("Exception occured while reading from "+ filename + ": " + e);
         }
     }
 }

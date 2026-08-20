@@ -20,7 +20,7 @@ public class DeadlineCommand extends Command {
         String deadlineCmd = this.input;
         int deadlineIndex = "deadline ".length();
         int deadLineByIndex = deadlineCmd.indexOf(" /by ");
-        if (deadLineByIndex != -1 && deadLineByIndex <= deadlineIndex + 1) {
+        if (deadLineByIndex != -1 && deadLineByIndex < deadlineIndex + 1) {
             throw new NyonException("cannot omit the description");
         }
         if (deadLineByIndex == -1) {

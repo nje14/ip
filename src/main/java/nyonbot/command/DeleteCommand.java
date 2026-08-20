@@ -1,6 +1,5 @@
 package nyonbot.command;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 
 import nyonbot.Logic.Result;
@@ -35,7 +34,7 @@ public class DeleteCommand extends Command {
             return new Result(String.format("I've removed %s from your list", toRemove));
         }
         int taskNumber = Integer.parseInt(taskName) - 1;
-        if (taskNumber > list.size()) {
+        if (taskNumber < 0 || taskNumber >= list.size()) {
             throw new NyonException("index out of bounds");
         }
         Task removed = list.remove(taskNumber);
