@@ -3,6 +3,7 @@ package nyonbot.command;
 public enum CommandType {
     EXIT("bye"),
     ECHO("echo"),
+    NYON("nyon"),
     LIST("list"),
     TODO("todo"),
     DEADLINE("deadline"),
