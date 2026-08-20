@@ -3,6 +3,7 @@ package nyonbot.command;
 import java.util.ArrayList;
 
 import nyonbot.Logic.Result;
+import nyonbot.model.NyonException;
 import nyonbot.model.Task;
 import nyonbot.model.ToDo;
 
@@ -13,11 +14,11 @@ public class TodoCommand extends Command {
         this.list = list;
     }
 
-    public Result execute() {
+    public Result execute() throws NyonException {
         String cmd = this.input;
         String[] todoCmd = cmd.split(" ", 2);
         if (todoCmd.length < 2) {
-            return new Result("cannot add a missing description :(");
+            throw new NyonException("cannot add a missing description");
         }
         Task todo = new ToDo(todoCmd[1]);
         list.add(todo);

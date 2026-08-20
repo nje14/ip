@@ -3,6 +3,7 @@ package nyonbot.command;
 import java.util.ArrayList;
 
 import nyonbot.Logic.Result;
+import nyonbot.model.NyonException;
 import nyonbot.model.Task;
 
 public class UnmarkCommand extends Command {
@@ -13,10 +14,10 @@ public class UnmarkCommand extends Command {
         this.list = list;
     }
 
-    public Result execute() {
+    public Result execute() throws NyonException {
         String taskName = this.input.substring("unmark ".length()).strip();
         if (taskName.isBlank()) {
-            return new Result("cannot unmark without a description :(");
+            throw new NyonException("cannot unmark without a description :(");
         }
         for (Task task : list) {
             if (task.isSameTask(taskName)) {

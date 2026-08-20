@@ -29,5 +29,5 @@
                         @@-++-@@@@-+++++++++++++++*+*--------++++++++++-.%@@@@   
                         @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-Hello! Welcome to the NyonBot
-What can I Nyon for you today?
+Nyon! (Hello! Welcome to the NyonBot)
+Nyon? (What can I Nyon for you today?)

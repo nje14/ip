@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import nyonbot.Logic.Result;
 import nyonbot.model.Deadline;
+import nyonbot.model.NyonException;
 import nyonbot.model.Task;
 
 public class DeadlineCommand extends Command {
@@ -15,18 +16,18 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public Result execute() {
+    public Result execute() throws NyonException {
         String deadlineCmd = this.input;
         int deadlineIndex = "deadline ".length();
         int deadLineByIndex = deadlineCmd.indexOf(" /by ");
-        if (deadLineByIndex <= deadlineIndex + 1) {
-            return new Result("cannot omit the description :(");
+        if (deadLineByIndex != -1 && deadLineByIndex <= deadlineIndex + 1) {
+            throw new NyonException("cannot omit the description");
         }
         if (deadLineByIndex == -1) {
-            return new Result("use /by to specify the deadline");
+            throw new NyonException("use /by to specify the deadline");
         }
         if (deadLineByIndex + " /by ".length() > deadlineCmd.length()) {
-            return new Result("cannot omit the deadline date");
+            throw new NyonException("cannot omit the deadline date");
         }
         Task deadline = new Deadline(deadlineCmd.substring(deadlineIndex, deadLineByIndex), deadlineCmd.substring(deadLineByIndex+" /by ".length()));
         list.add(deadline);

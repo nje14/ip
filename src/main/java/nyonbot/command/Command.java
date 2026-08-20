@@ -13,6 +13,6 @@ public abstract class Command {
         this.input = input;
     }
 
-    public abstract Result execute();
+    public abstract Result execute() throws Exception;
 
 }

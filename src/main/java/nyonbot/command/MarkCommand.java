@@ -3,6 +3,7 @@ package nyonbot.command;
 import java.util.ArrayList;
 
 import nyonbot.Logic.Result;
+import nyonbot.model.NyonException;
 import nyonbot.model.Task;
 
 public class MarkCommand extends Command {
@@ -13,10 +14,10 @@ public class MarkCommand extends Command {
         this.list = list;
     }
 
-    public Result execute() {
+    public Result execute() throws NyonException {
         String taskName = this.input.substring("mark ".length()).strip();
         if (taskName.isBlank()) {
-            return new Result("cannot mark without a description :(");
+            throw new NyonException("cannot mark without a description");
         }
         for (Task task : list) {
 

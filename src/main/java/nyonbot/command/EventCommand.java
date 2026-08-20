@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import nyonbot.Logic.Result;
 import nyonbot.model.Event;
+import nyonbot.model.NyonException;
 import nyonbot.model.Task;
 
 public class EventCommand extends Command {
@@ -13,28 +14,28 @@ public class EventCommand extends Command {
         this.list = list;
     }
 
-    public Result execute() {
+    public Result execute() throws NyonException {
         String eventCmd = this.input;
         int eventIndex = "event ".length();
         int eventFromIndex = eventCmd.indexOf(" /from ");
         int eventToIndex = eventCmd.indexOf(" /to ");
         if (eventFromIndex == -1) {
-            return new Result("use /from to specify the start time");
+            throw new NyonException("use /from to specify the starttime");
         }
         if (eventToIndex == -1) {
-            return new Result("use /to to specify the endtime");
+            throw new NyonException("use /to to specify the endtime");
         }
         if (eventIndex + 1 >= Math.min(eventFromIndex, eventToIndex)) {
-            return new Result("cannot omit the description");
+            throw new NyonException("cannot omit the description");
         }
         if (eventFromIndex + " /from ".length() > eventCmd.length()) {
-            return new Result("cannot omit the start time");
+            throw new NyonException("cannot omit the start time");
         }
         if (eventToIndex + " /to ".length() > eventCmd.length()) {
-            return new Result("cannot omit the end time");
+            throw new NyonException("cannot omit the end time");
         }
         if (eventFromIndex > eventToIndex) {
-            return new Result("usage: event <eventname> /from <starttime> /to <endtime>");
+            throw new NyonException("usage: event <eventname> /from <starttime> /to <endtime>");
         }
         Task event = new Event(eventCmd.substring(eventIndex, eventFromIndex), eventCmd.substring(eventFromIndex + " /from ".length(), eventToIndex), eventCmd.substring(eventToIndex + " /to ".length()));
         list.add(event);

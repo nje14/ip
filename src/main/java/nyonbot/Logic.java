@@ -36,7 +36,7 @@ public class Logic {
         return this.list;
     }
 
-    public Result execute(Command cmd) {
+    public Result execute(Command cmd) throws Exception{
         return cmd.execute();     
     }
 }
