@@ -14,13 +14,13 @@ public class MarkCommand extends Command {
     }
 
     public Result execute() {
-        String[] markCmd = this.input.split(" ", 3);
-        if (markCmd.length < 2) {
+        String taskName = this.input.substring("mark ".length()).strip();
+        if (taskName.isBlank()) {
             return new Result("cannot mark without a description :(");
         }
         for (Task task : list) {
 
-            if (task.isSameTask(markCmd[1])) {
+            if (task.isSameTask(taskName)) {
                 task.completeTask();
                 return new Result(String.format("Marked %s as completed", task));
             }

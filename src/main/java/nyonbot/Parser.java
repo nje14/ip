@@ -33,9 +33,8 @@ public class Parser {
             return new NoCommand();
         }
         CommandType type = CommandType.toCommandType(command[0]);
-        System.out.println(type);
         return switch (type) {
-            case null -> new NoCommand();
+            case UNKNOWN -> new NoCommand();
             case EXIT -> new ExitCommand(input);
             case ECHO -> new EchoCommand(input);
             case NYON -> new NyonCommand();

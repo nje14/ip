@@ -9,6 +9,6 @@ public class ExitCommand extends Command {
 
     @Override
     public Result execute() {
-        return new Result("nyon..." , true);
+        return new Result("" , true);
     }
 }

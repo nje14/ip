@@ -9,7 +9,8 @@ public enum CommandType {
     DEADLINE("deadline"),
     EVENT("event"),
     MARK("mark"),
-    UNMARK("unmark");
+    UNMARK("unmark"),
+    UNKNOWN("unknown");
 
     private final String keyword;
 
@@ -27,6 +28,6 @@ public enum CommandType {
                 return t;
             }
         }
-        return null;
+        return UNKNOWN;
     }
 }

@@ -14,12 +14,12 @@ public class UnmarkCommand extends Command {
     }
 
     public Result execute() {
-        String[] unmarkCmd = this.input.split(" ", 3);
-        if (unmarkCmd.length < 2) {
+        String taskName = this.input.substring("unmark ".length()).strip();
+        if (taskName.isBlank()) {
             return new Result("cannot unmark without a description :(");
         }
         for (Task task : list) {
-            if (task.isSameTask(unmarkCmd[1])) {
+            if (task.isSameTask(taskName)) {
                 task.uncompleteTask();
                 return new Result(String.format("Unmarked %s as completed", task));
             }

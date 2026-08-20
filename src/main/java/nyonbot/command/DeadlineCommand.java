@@ -19,11 +19,11 @@ public class DeadlineCommand extends Command {
         String deadlineCmd = this.input;
         int deadlineIndex = "deadline ".length();
         int deadLineByIndex = deadlineCmd.indexOf(" /by ");
-        if (deadLineByIndex == -1) {
-            return new Result("use /by to specify the deadline");
-        }
         if (deadLineByIndex <= deadlineIndex + 1) {
             return new Result("cannot omit the description :(");
+        }
+        if (deadLineByIndex == -1) {
+            return new Result("use /by to specify the deadline");
         }
         if (deadLineByIndex + " /by ".length() > deadlineCmd.length()) {
             return new Result("cannot omit the deadline date");

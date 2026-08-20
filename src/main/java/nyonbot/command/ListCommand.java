@@ -21,6 +21,9 @@ public class ListCommand extends Command {
             sb.append(String.format("%s. %s", ++idx, task));
             sb.append("\n");
         }
+        if (idx == 0) {
+            sb.append("No tasks nyon...");
+        }
         return new Result(new String(sb));
     }
 }
