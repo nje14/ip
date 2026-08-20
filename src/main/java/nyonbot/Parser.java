@@ -3,6 +3,7 @@ package nyonbot;
 import nyonbot.command.Command;
 import nyonbot.command.CommandType;
 import nyonbot.command.DeadlineCommand;
+import nyonbot.command.DeleteCommand;
 import nyonbot.command.EchoCommand;
 import nyonbot.command.EventCommand;
 import nyonbot.command.ExitCommand;
@@ -34,7 +35,6 @@ public class Parser {
         }
         CommandType type = CommandType.toCommandType(command[0]);
         return switch (type) {
-            case UNKNOWN -> new NoCommand();
             case EXIT -> new ExitCommand(input);
             case ECHO -> new EchoCommand(input);
             case NYON -> new NyonCommand();
@@ -44,7 +44,7 @@ public class Parser {
             case EVENT -> new EventCommand(input, Logic.getInstance().getList());
             case MARK -> new MarkCommand(input, Logic.getInstance().getList());
             case UNMARK -> new UnmarkCommand(input, Logic.getInstance().getList());
-
+            case DELETE -> new DeleteCommand(input, Logic.getInstance().getList());
             default -> throw new IllegalArgumentException("unrecognized command");
         };
     }

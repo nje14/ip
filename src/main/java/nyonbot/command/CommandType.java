@@ -10,7 +10,8 @@ public enum CommandType {
     EVENT("event"),
     MARK("mark"),
     UNMARK("unmark"),
-    UNKNOWN("unknown");
+    UNKNOWN("unknown"),
+    DELETE("delete");
 
     private final String keyword;
 
