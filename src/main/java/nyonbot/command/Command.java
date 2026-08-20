@@ -1,17 +1,18 @@
 package nyonbot.command;
 
+import nyonbot.Logic.Result;
 
+public abstract class Command {
+    protected String input;
 
-public record Command (Commands command, String message) {
-    public enum Commands {
-        EXIT,
-        ECHO,
-        NYON,
-        LIST,
-        TODO,
-        DEADLINE,
-        EVENT,
-        MARK,
-        UNMARK,
-    } 
+    public Command() {
+        this.input = "";
+    }
+
+    public Command(String input) {
+        this.input = input;
+    }
+
+    public abstract Result execute();
+
 }

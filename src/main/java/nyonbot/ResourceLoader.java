@@ -11,13 +11,13 @@ public class ResourceLoader {
     /// @return contents of `filename`
     /// @throws Error if read is interrupted or file cannot be found
     /// 
-    public static String readTextfile(String filename) {
+    public static String readTextFile(String filename) {
         if (filename.charAt(0) == '/') {
             filename = filename.substring(1);
         }
         try (InputStream input = NyonBot.class.getClassLoader().getResourceAsStream(filename)) {
             if (input == null) {
-                throw new Error("Could not load text from "+filename);
+                throw new IllegalStateException("Could not load text from "+filename);
             }
             return new String(input.readAllBytes(),StandardCharsets.UTF_8);
         } catch (IOException e) {

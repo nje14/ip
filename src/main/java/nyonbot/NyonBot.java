@@ -18,7 +18,7 @@ public class NyonBot {
             String userInput = ui.readCommand();
             Command cmd = parser.parse(userInput);
             Result res = logic.execute(cmd);
-            if (res.out() != null && res.out() != "") {
+            if (res.out() != null && res.out().isBlank()) {
                 ui.showOutput(res.out());
             }
             loop = !res.exit();

@@ -17,17 +17,17 @@ public class Ui {
     }
 
     public void welcome() {
-        String welcome = ResourceLoader.readTextfile("static/welcome.txt");
+        String welcome = ResourceLoader.readTextFile("static/welcome.txt");
         System.out.println(welcome);
     }
 
     public void goodbye() {
-        String out = ResourceLoader.readTextfile("static/goodbye.txt");
+        String out = ResourceLoader.readTextFile("static/goodbye.txt");
         System.out.println(out);
     }
 
     public void banner() {
-        String banner = ResourceLoader.readTextfile("static/ascii-banner.txt");
+        String banner = ResourceLoader.readTextFile("static/ascii-banner.txt");
         System.out.println(banner);
     }
 

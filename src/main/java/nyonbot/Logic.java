@@ -11,9 +11,9 @@ import nyonbot.model.ToDo;
 
 public class Logic {
 
-    public record Result(String out, String message, boolean exit) {
-        public Result(String out, String message) {
-            this(out, message, false);
+    public record Result(String out, boolean exit) {
+        public Result(String out) {
+            this(out, false);
         }
     }   
 
@@ -34,7 +34,11 @@ public class Logic {
     }
 
     public Result execute(Command cmd) {
-        switch (cmd.command()) {
+        return cmd.execute();     
+    }
+}
+/*
+switch (cmd.command()) {
             case Command.Commands.EXIT:
                 return new Result("", "exit", true);
             case Command.Commands.ECHO:
@@ -125,8 +129,6 @@ public class Logic {
                 }
                 return new Result("couldn't find the task... did you spell it right?", "err");
             default:
-                return new Result(null, "Unknown command");        
-        }
-        
-    }
-}
+                return new Result(null, "Unknown command");   
+
+*/
