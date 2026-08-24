@@ -25,7 +25,7 @@ public class NyonBot {
                     sb.append(")");
                     ui.showOutput(sb.toString());
                 }
-                loop = !res.exit();
+                loop = !res.shouldExit();
             } catch (Exception e) {
                 StringBuilder sb = new StringBuilder("Nyon... (");
                 sb.append(e.getMessage());

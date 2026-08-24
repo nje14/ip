@@ -13,6 +13,6 @@ public class EchoCommandTest {
         EchoCommand command = new EchoCommand("echo hello");
         Result result = command.execute();
         assertEquals("hello", result.out());
-        assertFalse(result.exit());
+        assertFalse(result.shouldExit());
     }
 }

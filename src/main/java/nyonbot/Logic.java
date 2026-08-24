@@ -10,7 +10,7 @@ import nyonbot.model.Task;
 
 public class Logic {
 
-    public record Result(String out, boolean exit) {
+    public record Result(String out, boolean shouldExit) {
         public Result(String out) {
             this(out, false);
         }
