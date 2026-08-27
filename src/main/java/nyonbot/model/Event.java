@@ -10,13 +10,18 @@ public class Event extends Task{
         this.endTime = end;
     }
 
+    public String[] getEventTime() {
+        String[] eventTime = {this.startTime, this.endTime};
+        return eventTime;
+    }
+
     @Override
     public String toString() {
         return String.format("[E][%s] %s (from: %s to: %s)",
-            this.done ? "X" : " ", 
-            this.taskName, 
-            this.startTime, 
-            this.endTime
+                this.isDone ? "X" : " ", 
+                this.taskName, 
+                this.startTime, 
+                this.endTime
         );
     }
 }
