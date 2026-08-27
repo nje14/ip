@@ -10,9 +10,12 @@ import nyonbot.model.Task;
 
 public class Logic {
 
-    public record Result(String out, boolean shouldExit) {
+    public record Result(String out, boolean shouldExit, boolean shouldWrite) {
         public Result(String out) {
-            this(out, false);
+            this(out, false, false);
+        }
+        public Result(String out, boolean shouldExit) {
+            this(out, shouldExit, false);
         }
     }   
 
@@ -34,6 +37,16 @@ public class Logic {
 
     public ArrayList<Task> getList() {
         return this.list;
+    }
+
+    public void loadList(ArrayList<Task> newList) {
+        list.clear();
+        if (newList == null) {
+            return;
+        }
+        for (Task task: newList) {
+            list.add(task);
+        }
     }
 
     public Result execute(Command cmd) throws Exception{

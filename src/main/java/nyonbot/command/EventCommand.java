@@ -39,6 +39,6 @@ public class EventCommand extends Command {
         }
         Task event = new Event(eventCmd.substring(eventIndex, eventFromIndex), eventCmd.substring(eventFromIndex + " /from ".length(), eventToIndex), eventCmd.substring(eventToIndex + " /to ".length()));
         list.add(event);
-        return new Result(String.format("I've added this task: \n%s\nThere are %s tasks in your list", event, list.size()));
+        return new Result(String.format("I've added this task: \n%s\nThere are %s tasks in your list", event, list.size()), false, true);
     }
 }
