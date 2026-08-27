@@ -1,15 +1,14 @@
 package nyonbot.storage;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
+import nyonbot.Parser;
 import nyonbot.model.Deadline;
 import nyonbot.model.Event;
 import nyonbot.model.Task;
@@ -48,7 +47,8 @@ public class Storage {
                         list.add(todo);
                         break;
                     case ("DEADLINE"):
-                        Deadline deadline = new Deadline(params[1], params[3]);
+                        LocalDateTime deadlineBy = Parser.parseDate(params[3]);
+                        Deadline deadline = new Deadline(params[1], deadlineBy);
                         if (params[2].equals("true")) {
                             deadline.completeTask();
                         }
@@ -75,7 +75,7 @@ public class Storage {
             return String.format("TODO|%s|%s", todo.getName(), todo.isDone());
         }
         if (task instanceof Deadline deadline) {            
-            return String.format("DEADLINE|%s|%s|%s", deadline.getName(), deadline.isDone(), deadline.getDeadline());
+            return String.format("DEADLINE|%s|%s|%s", deadline.getName(), deadline.isDone(), formatDate(deadline.getDeadline()));
         }
         if (task instanceof Event event) {
             String[] eventTime = event.getEventTime();
@@ -104,5 +104,10 @@ public class Storage {
         } catch (IOException e) {
             System.out.println(e.getMessage());    
         } 
+    }
+    
+    private String formatDate(LocalDateTime dateTime) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
+        return dateTime.format(dtf);
     }
 }

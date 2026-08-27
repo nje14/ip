@@ -1,14 +1,16 @@
 package nyonbot.model;
 
-public class Deadline extends Task{
-    String deadline;
+import java.time.LocalDateTime;
 
-    public Deadline(String taskName, String deadline) {
+public class Deadline extends Task{
+    LocalDateTime deadline;
+
+    public Deadline(String taskName, LocalDateTime deadline) {
         super(taskName);
         this.deadline = deadline;
     }
 
-    public String getDeadline() {
+    public LocalDateTime getDeadline() {
         return this.deadline;
     }
 

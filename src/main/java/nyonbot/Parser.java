@@ -1,5 +1,10 @@
 package nyonbot;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import nyonbot.command.Command;
 import nyonbot.command.CommandType;
 import nyonbot.command.DeadlineCommand;
@@ -47,5 +52,14 @@ public class Parser {
             case DELETE -> new DeleteCommand(input, Logic.getInstance().getList());
             default -> throw new IllegalArgumentException("unrecognized command");
         };
+    }
+
+    public static LocalDateTime parseDate(String date) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
+        try {
+            return LocalDateTime.parse(date, dtf);
+        } catch (DateTimeParseException e) {
+            return null;
+        }
     }
 }
