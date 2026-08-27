@@ -16,19 +16,22 @@ import nyonbot.model.Task;
 import nyonbot.model.ToDo;
 
 public class Storage {
-    private final Path filePath;
+    private final String filePath;
 
-    public Storage(Path filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    public List<Task> load() {
-        File file = new File(filePath.toString());
-        List<Task> list = new ArrayList<>();
+    public ArrayList<Task> load() {
+        File file = new File(filePath);
+        if (!file.exists()) {
+            return new ArrayList<>();
+        }
+        ArrayList<Task> list = new ArrayList<>();
         try (Scanner fileReader = new Scanner(file)) {
             while (fileReader.hasNextLine()) {
                 String line = fileReader.nextLine();
-                String[] params = line.split("|");
+                String[] params = line.split("\\|", -1);
                 switch (params[0]) {
                     case ("TASK"):
                         Task task = new Task(params[1]);
@@ -62,9 +65,9 @@ public class Storage {
             }
             fileReader.close();
         } catch (IOException e) {
-
+            System.out.println(e.getMessage());             
         }
-        return null;
+        return list;
     }
 
     private String taskParser(Task task) {
@@ -84,8 +87,11 @@ public class Storage {
         return "";
     }
 
-    public void save(List<Task> list) {
-        File saveFile = new File(filePath.toString());
+    public void save(ArrayList<Task> list) {
+        File saveFile = new File(filePath);
+        if (!saveFile.exists()) {
+            return;
+        }
         try (FileWriter fileWriter = new FileWriter(saveFile)) {
             StringBuilder sb = new StringBuilder();
             for (Task task: list) {
@@ -93,9 +99,10 @@ public class Storage {
                 sb.append("\n");
             }
             fileWriter.write(sb.toString());
+            
             fileWriter.close();
         } catch (IOException e) {
-                
+            System.out.println(e.getMessage());    
         } 
     }
 }
