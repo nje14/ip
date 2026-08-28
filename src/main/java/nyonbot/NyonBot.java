@@ -1,8 +1,9 @@
 package nyonbot;
 
+import java.io.IOException;
+
 import nyonbot.Logic.Result;
 import nyonbot.command.Command;
-import nyonbot.model.TaskList;
 import nyonbot.storage.Storage;
 
 public class NyonBot {
@@ -10,9 +11,13 @@ public class NyonBot {
         Ui ui = Ui.getInstance();
         Parser parser = Parser.getInstance();
         Logic logic = Logic.getInstance();
-        Storage storage = new Storage("src/main/java/nyonbot/data/nyonbot.txt");
-        
-        logic.loadList(storage.load());
+        Storage storage = new Storage("data/nyonbot.txt");
+        try {
+            logic.loadList(storage.load());
+        } catch (IOException e) {
+            ui.showOutput("couldn't load your list as "+e.getMessage());
+        }
+
         ui.welcome();
 
         boolean loop = true;
@@ -39,7 +44,12 @@ public class NyonBot {
             }
 
         }
-        storage.save(logic.getList());
+        try {
+            storage.save(logic.getList());
+        } catch (IOException e) {
+            ui.showOutput("couldn't save your list as "+e.getMessage());
+        }
+        
         ui.goodbye();
     }
 }

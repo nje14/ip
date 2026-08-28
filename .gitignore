@@ -21,3 +21,6 @@ text-ui-test/EXPECTED-UNIX.TXT
 
 # Java classfiles
 *.class
+
+# Java Archive Files
+*.jar

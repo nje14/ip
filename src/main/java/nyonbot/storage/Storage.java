@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
-
 import nyonbot.model.Deadline;
 import nyonbot.model.Event;
 import nyonbot.model.Task;
@@ -20,7 +19,7 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public TaskList load() {
+    public TaskList load() throws IOException {
         File file = new File(filePath);
         TaskList list = new TaskList();
         if (!file.exists()) {
@@ -54,7 +53,7 @@ public class Storage {
                         list.add(deadline);
                         break;
                     case ("EVENT"):
-                        Event event = new Event(params[1], 
+                        Event event = new Event(params[1],
                                 LocalDateTime.parse(params[3]),
                                 LocalDateTime.parse(params[4]));
                         if (params[2].equals("true")) {
@@ -65,8 +64,6 @@ public class Storage {
                 }
             }
             fileReader.close();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());             
         }
         return list;
     }
@@ -75,18 +72,18 @@ public class Storage {
         if (task instanceof ToDo todo) {
             return String.format("TODO|%s|%s", todo.getName(), todo.isDone());
         }
-        if (task instanceof Deadline deadline) {            
-            return String.format("DEADLINE|%s|%s|%s", 
-                    deadline.getName(), 
-                    deadline.isDone(), 
+        if (task instanceof Deadline deadline) {
+            return String.format("DEADLINE|%s|%s|%s",
+                    deadline.getName(),
+                    deadline.isDone(),
                     formatDate(deadline.getDeadline()));
         }
         if (task instanceof Event event) {
             LocalDateTime[] eventTime = event.getEventTime();
-            return String.format("EVENT|%s|%s|%s|%s", 
-                    event.getName(), 
-                    event.isDone(), 
-                    formatDate(eventTime[0]), 
+            return String.format("EVENT|%s|%s|%s|%s",
+                    event.getName(),
+                    event.isDone(),
+                    formatDate(eventTime[0]),
                     formatDate(eventTime[1]));
         }
         if (task instanceof Task) {
@@ -95,32 +92,29 @@ public class Storage {
         return "";
     }
 
-    public void save(TaskList list) {
+    public void save(TaskList list) throws IOException {
         File saveFile = new File(filePath);
+
         if (!saveFile.exists()) {
-            return;
+            saveFile.createNewFile();
         }
-       
-        try (FileWriter fileWriter = new FileWriter(saveFile)) {
-            StringBuilder sb = new StringBuilder();
-            for (Task task: list) {
-                sb.append(taskParser(task));
-                sb.append("\n");
-            }
-            fileWriter.write(sb.toString());
-            
-            fileWriter.close();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());    
-        } 
+        FileWriter fileWriter = new FileWriter(saveFile);
+        StringBuilder sb = new StringBuilder();
+        for (Task task : list) {
+            sb.append(taskParser(task));
+            sb.append("\n");
+        }
+        fileWriter.write(sb.toString());
+
+        fileWriter.close();
     }
-    
+
     private String formatDate(LocalDateTime dateTime) {
-        
+
         return dateTime.toString();
     }
 
-    public void wipe() {
+    public void wipe() throws IOException{
         save(new TaskList());
     }
 }
