@@ -6,11 +6,19 @@ import nyonbot.Logic;
 import nyonbot.Logic.Result;
 import nyonbot.storage.Storage;
 
+/**
+ * Deletes all tasks and clears the storage file
+ */
 public class WipeCommand extends Command {
+
+    /**
+     * Creates a new Wipe command
+     */
     public WipeCommand() {
         super();
     }
 
+    /** {@inheritDoc} */
     @Override
     public Result execute() {
         Logic.getInstance().getList().clear();

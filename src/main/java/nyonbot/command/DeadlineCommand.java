@@ -11,14 +11,24 @@ import nyonbot.model.NyonException;
 import nyonbot.model.Task;
 import nyonbot.model.TaskList;
 
+/**
+ * Adds a deadline event to the task list
+ */
 public class DeadlineCommand extends Command {
     private TaskList list;
 
+    /**
+     * Creates a deadline command with the associated raw input and TaskList
+     * 
+     * @param cmd the raw input
+     * @param list the TaskList to add the task to
+     */
     public DeadlineCommand(String cmd, TaskList list) {
         super(cmd);
         this.list = list;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Result execute() throws NyonException {
         String deadlineCmd = this.input;

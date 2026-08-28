@@ -19,6 +19,11 @@ import nyonbot.command.TodoCommand;
 import nyonbot.command.UnmarkCommand;
 import nyonbot.command.WipeCommand;
 
+/**
+ * Converts the command line input into executable commands
+ * 
+ * @author nje14
+ */
 public class Parser {    
     private static Parser instance = null;
     private Parser() {
@@ -31,8 +36,14 @@ public class Parser {
         }
         return instance;
     }
+
+    /**
+     * Parses a raw input into a command
+     * 
+     * @param input raw input
+     * @return the <code>Command</code> associated with this input
+     */
     public Command parse(String input) {
-        
         input = input.strip().trim();
         String[] command = input.split("\\s+", 2);
         if (command.length == 0)  {
@@ -55,6 +66,12 @@ public class Parser {
         };
     }
 
+    /**
+     * Parses a String date using the format {@code dd/MM/yyyy HHmm}
+     * 
+     * @param date date to be parsed
+     * @return the <code>LocalDateTime</cpde> associated with this date
+     */
     public static LocalDateTime parseDate(String date) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         try {

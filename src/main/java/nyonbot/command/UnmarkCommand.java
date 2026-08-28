@@ -6,14 +6,25 @@ import nyonbot.model.NyonException;
 import nyonbot.model.Task;
 import nyonbot.model.TaskList;
 
+/**
+ * Unmarks a task
+ */
 public class UnmarkCommand extends Command {
     TaskList list;
 
+    /**
+     * Creates an Unmark command with the given raw input and TaskList
+     * 
+     * @param input the raw command input
+     * @param list the TaskList to search
+     */
     public UnmarkCommand(String input, TaskList list) {
         super(input);
         this.list = list;
     }
 
+    /** {@inheritDoc} */
+    @Override
     public Result execute() throws NyonException {
         String taskName = this.input.substring("unmark ".length()).strip();
         if (taskName.isBlank()) {

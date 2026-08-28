@@ -14,13 +14,27 @@ import nyonbot.model.Task;
 import nyonbot.model.TaskList;
 import nyonbot.model.ToDo;
 
+/**
+ * Loads and saves tasks to a file using a delimiter-based text format
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     * Creates a storage object for the specified file path
+     * 
+     * @param filePath filepath of the save file
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the tasks from the savefile
+     * 
+     * @return A <code>TaskList</code> of the Tasks stored in the file
+     * @throws IOException if the file cannot be read
+     */
     public TaskList load() throws IOException {
         File file = new File(filePath);
         TaskList list = new TaskList();
@@ -70,6 +84,12 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Returns the storage representation of the task to be stored
+     * 
+     * @param task the <code>Task</code> to be stored
+     * @return the storage representation of the task
+     */
     private String taskParser(Task task) {
         if (task instanceof ToDo todo) {
             return String.format("TODO|%s|%s", todo.getName(), todo.isDone());
@@ -94,6 +114,13 @@ public class Storage {
         return "";
     }
 
+    /**
+     * Saves a list to the filepath of the Storage object.
+     * Will override contents.
+     * 
+     * @param list the list to be saved
+     * @throws IOException if file cannot be created, read or found
+     */
     public void save(TaskList list) throws IOException {
         File saveFile = new File(filePath);
 
@@ -116,10 +143,14 @@ public class Storage {
     }
 
     private String formatDate(LocalDateTime dateTime) {
-
         return dateTime.toString();
     }
 
+    /**
+     * Removes all tasks from the file
+     * 
+     * @throws IOException if the file cannot be read or written to
+     */
     public void wipe() throws IOException{
         save(new TaskList());
     }
