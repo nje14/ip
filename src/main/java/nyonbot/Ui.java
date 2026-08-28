@@ -45,7 +45,7 @@ public class Ui {
     }
 
     public static String showDate(LocalDateTime dateTime) {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
         return dateTime.format(dtf);
     }
 }

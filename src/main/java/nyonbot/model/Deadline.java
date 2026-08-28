@@ -2,6 +2,9 @@ package nyonbot.model;
 
 import java.time.LocalDateTime;
 
+import nyonbot.Parser;
+import nyonbot.Ui;
+
 public class Deadline extends Task{
     LocalDateTime deadline;
 
@@ -16,6 +19,6 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return String.format("[D][%s] %s (by: %s)", this.isDone ? "X" : " ", this.taskName, this.deadline);
+        return String.format("[D][%s] %s (by: %s)", this.isDone ? "X" : " ", this.taskName, Ui.showDate(this.deadline));
     }
 }

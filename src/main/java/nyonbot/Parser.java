@@ -1,6 +1,5 @@
 package nyonbot;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -55,7 +54,7 @@ public class Parser {
     }
 
     public static LocalDateTime parseDate(String date) {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         try {
             return LocalDateTime.parse(date, dtf);
         } catch (DateTimeParseException e) {
