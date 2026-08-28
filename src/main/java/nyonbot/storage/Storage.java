@@ -3,6 +3,8 @@ package nyonbot.storage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
@@ -96,6 +98,10 @@ public class Storage {
         File saveFile = new File(filePath);
 
         if (!saveFile.exists()) {
+            Path path = Path.of(filePath);
+            if (path.getParent() != null) {
+                Files.createDirectories(path.getParent());
+            }
             saveFile.createNewFile();
         }
         FileWriter fileWriter = new FileWriter(saveFile);
