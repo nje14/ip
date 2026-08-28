@@ -1,6 +1,5 @@
 package nyonbot.command;
 
-import java.util.ArrayList;
 
 import nyonbot.Logic.Result;
 import nyonbot.model.NyonException;

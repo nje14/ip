@@ -17,6 +17,7 @@ import nyonbot.command.NoCommand;
 import nyonbot.command.NyonCommand;
 import nyonbot.command.TodoCommand;
 import nyonbot.command.UnmarkCommand;
+import nyonbot.command.WipeCommand;
 
 public class Parser {    
     private static Parser instance = null;
@@ -49,6 +50,7 @@ public class Parser {
             case MARK -> new MarkCommand(input, Logic.getInstance().getList());
             case UNMARK -> new UnmarkCommand(input, Logic.getInstance().getList());
             case DELETE -> new DeleteCommand(input, Logic.getInstance().getList());
+            case WIPE -> new WipeCommand();
             default -> throw new IllegalArgumentException("unrecognized command");
         };
     }

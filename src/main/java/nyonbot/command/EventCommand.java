@@ -1,7 +1,6 @@
 package nyonbot.command;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 import nyonbot.Parser;
 import nyonbot.Logic.Result;

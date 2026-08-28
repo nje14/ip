@@ -100,6 +100,7 @@ public class Storage {
         if (!saveFile.exists()) {
             return;
         }
+       
         try (FileWriter fileWriter = new FileWriter(saveFile)) {
             StringBuilder sb = new StringBuilder();
             for (Task task: list) {
@@ -117,5 +118,9 @@ public class Storage {
     private String formatDate(LocalDateTime dateTime) {
         
         return dateTime.toString();
+    }
+
+    public void wipe() {
+        save(new TaskList());
     }
 }

@@ -11,8 +11,8 @@ public class NyonBot {
         Parser parser = Parser.getInstance();
         Logic logic = Logic.getInstance();
         Storage storage = new Storage("src/main/java/nyonbot/data/nyonbot.txt");
-        TaskList list = new TaskList();
         
+        logic.loadList(storage.load());
         ui.welcome();
 
         boolean loop = true;
@@ -39,7 +39,7 @@ public class NyonBot {
             }
 
         }
-        storage.save(list);
+        storage.save(logic.getList());
         ui.goodbye();
     }
 }
