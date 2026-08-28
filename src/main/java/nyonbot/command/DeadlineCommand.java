@@ -1,7 +1,10 @@
 package nyonbot.command;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import nyonbot.Parser;
 import nyonbot.Logic.Result;
 import nyonbot.model.Deadline;
 import nyonbot.model.NyonException;
@@ -29,7 +32,11 @@ public class DeadlineCommand extends Command {
         if (deadLineByIndex + " /by ".length() > deadlineCmd.length()) {
             throw new NyonException("cannot omit the deadline date");
         }
-        Task deadline = new Deadline(deadlineCmd.substring(deadlineIndex, deadLineByIndex), deadlineCmd.substring(deadLineByIndex+" /by ".length()));
+        LocalDateTime deadlineTime = Parser.parseDate(deadlineCmd.substring(deadLineByIndex+" /by ".length()));
+        if (deadlineTime == null) {
+            throw new NyonException("enter the time in the following format: dd/MM/yy HHmm");
+        }
+        Task deadline = new Deadline(deadlineCmd.substring(deadlineIndex, deadLineByIndex), deadlineTime);
         list.add(deadline);
         return new Result(String.format("I've added this task: \n%s\nThere are %s tasks in your list", deadline, list.size()));
     }

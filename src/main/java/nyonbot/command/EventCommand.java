@@ -1,7 +1,9 @@
 package nyonbot.command;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import nyonbot.Parser;
 import nyonbot.Logic.Result;
 import nyonbot.model.Event;
 import nyonbot.model.NyonException;
@@ -37,7 +39,16 @@ public class EventCommand extends Command {
         if (eventFromIndex > eventToIndex) {
             throw new NyonException("usage: event <eventname> /from <starttime> /to <endtime>");
         }
-        Task event = new Event(eventCmd.substring(eventIndex, eventFromIndex), eventCmd.substring(eventFromIndex + " /from ".length(), eventToIndex), eventCmd.substring(eventToIndex + " /to ".length()));
+        LocalDateTime startDate = Parser.parseDate(eventCmd.substring(eventFromIndex + " /from ".length(), eventToIndex));
+        LocalDateTime endDate = Parser.parseDate(eventCmd.substring(eventToIndex + " /to ".length()));
+        if (startDate == null || endDate == null) {
+            throw new NyonException("please enter startDate and endDate in the format dd/MM/yyyy HHmm");
+        }
+        Task event = new Event(
+                eventCmd.substring(eventIndex, eventFromIndex), 
+                startDate, 
+                endDate
+        );
         list.add(event);
         return new Result(String.format("I've added this task: \n%s\nThere are %s tasks in your list", event, list.size()), false, true);
     }

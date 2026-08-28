@@ -1,5 +1,7 @@
 package nyonbot;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Ui {
@@ -40,5 +42,10 @@ public class Ui {
 
     public void showOutput(String out) {
         System.out.println(out);
+    }
+
+    public static String showDate(LocalDateTime dateTime) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
+        return dateTime.format(dtf);
     }
 }

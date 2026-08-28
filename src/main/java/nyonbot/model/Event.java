@@ -1,17 +1,21 @@
 package nyonbot.model;
 
-public class Event extends Task{
-    String startTime;
-    String endTime;
+import java.time.LocalDateTime;
 
-    public Event(String taskName, String start, String end) {
+import nyonbot.Ui;
+
+public class Event extends Task{
+    LocalDateTime startTime;
+    LocalDateTime endTime;
+
+    public Event(String taskName, LocalDateTime start, LocalDateTime end) {
         super(taskName);
         this.startTime = start;
         this.endTime = end;
     }
 
-    public String[] getEventTime() {
-        String[] eventTime = {this.startTime, this.endTime};
+    public LocalDateTime[] getEventTime() {
+        LocalDateTime[] eventTime = {this.startTime, this.endTime};
         return eventTime;
     }
 
@@ -20,8 +24,8 @@ public class Event extends Task{
         return String.format("[E][%s] %s (from: %s to: %s)",
                 this.isDone ? "X" : " ", 
                 this.taskName, 
-                this.startTime, 
-                this.endTime
+                Ui.showDate(this.startTime), 
+                Ui.showDate(this.endTime)
         );
     }
 }

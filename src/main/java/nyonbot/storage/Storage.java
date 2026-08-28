@@ -1,14 +1,12 @@
 package nyonbot.storage;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
+
 
 import nyonbot.model.Deadline;
 import nyonbot.model.Event;
@@ -48,14 +46,17 @@ public class Storage {
                         list.add(todo);
                         break;
                     case ("DEADLINE"):
-                        Deadline deadline = new Deadline(params[1], params[3]);
+                        LocalDateTime deadlineBy = LocalDateTime.parse(params[3]);
+                        Deadline deadline = new Deadline(params[1], deadlineBy);
                         if (params[2].equals("true")) {
                             deadline.completeTask();
                         }
                         list.add(deadline);
                         break;
                     case ("EVENT"):
-                        Event event = new Event(params[1], params[3], params[4]);
+                        Event event = new Event(params[1], 
+                                LocalDateTime.parse(params[3]),
+                                LocalDateTime.parse(params[4]));
                         if (params[2].equals("true")) {
                             event.completeTask();
                         }
@@ -75,11 +76,18 @@ public class Storage {
             return String.format("TODO|%s|%s", todo.getName(), todo.isDone());
         }
         if (task instanceof Deadline deadline) {            
-            return String.format("DEADLINE|%s|%s|%s", deadline.getName(), deadline.isDone(), deadline.getDeadline());
+            return String.format("DEADLINE|%s|%s|%s", 
+                    deadline.getName(), 
+                    deadline.isDone(), 
+                    formatDate(deadline.getDeadline()));
         }
         if (task instanceof Event event) {
-            String[] eventTime = event.getEventTime();
-            return String.format("EVENT|%s|%s|%s|%s", event.getName(), event.isDone(), eventTime[0], eventTime[1]);
+            LocalDateTime[] eventTime = event.getEventTime();
+            return String.format("EVENT|%s|%s|%s|%s", 
+                    event.getName(), 
+                    event.isDone(), 
+                    formatDate(eventTime[0]), 
+                    formatDate(eventTime[1]));
         }
         if (task instanceof Task) {
             return String.format("TASK|%s|%s", task.getName(), task.isDone());
@@ -104,5 +112,10 @@ public class Storage {
         } catch (IOException e) {
             System.out.println(e.getMessage());    
         } 
+    }
+    
+    private String formatDate(LocalDateTime dateTime) {
+        
+        return dateTime.toString();
     }
 }
