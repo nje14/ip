@@ -2,7 +2,6 @@ package nyonbot.model;
 
 import java.time.LocalDateTime;
 
-import nyonbot.Parser;
 import nyonbot.Ui;
 
 public class Deadline extends Task{

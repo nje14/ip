@@ -1,19 +1,20 @@
 package nyonbot.command;
 
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+
 
 import nyonbot.Parser;
 import nyonbot.Logic.Result;
 import nyonbot.model.Deadline;
 import nyonbot.model.NyonException;
 import nyonbot.model.Task;
+import nyonbot.model.TaskList;
 
 public class DeadlineCommand extends Command {
-    private ArrayList<Task> list;
+    private TaskList list;
 
-    public DeadlineCommand(String cmd, ArrayList<Task> list) {
+    public DeadlineCommand(String cmd, TaskList list) {
         super(cmd);
         this.list = list;
     }

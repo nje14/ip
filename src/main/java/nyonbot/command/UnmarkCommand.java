@@ -1,15 +1,15 @@
 package nyonbot.command;
 
-import java.util.ArrayList;
 
 import nyonbot.Logic.Result;
 import nyonbot.model.NyonException;
 import nyonbot.model.Task;
+import nyonbot.model.TaskList;
 
 public class UnmarkCommand extends Command {
-    ArrayList<Task> list = new ArrayList<>();
+    TaskList list;
 
-    public UnmarkCommand(String input, ArrayList<Task> list) {
+    public UnmarkCommand(String input, TaskList list) {
         super(input);
         this.list = list;
     }
@@ -28,7 +28,7 @@ public class UnmarkCommand extends Command {
             Task task = list.remove(idx);
             return new Result(String.format("Unmarked %s as completed", task));
         } catch (NumberFormatException e) {
-            for (Task task : list) {
+            for (Task task: list) {
                 if (task.isSameTask(taskName)) {
                     task.uncompleteTask();
                     return new Result(String.format("Unmarked %s as completed", task));

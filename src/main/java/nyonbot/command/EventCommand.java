@@ -8,10 +8,11 @@ import nyonbot.Logic.Result;
 import nyonbot.model.Event;
 import nyonbot.model.NyonException;
 import nyonbot.model.Task;
+import nyonbot.model.TaskList;
 
 public class EventCommand extends Command {
-    ArrayList<Task> list = new ArrayList<>();
-    public EventCommand(String input, ArrayList<Task> list) {
+    TaskList list;
+    public EventCommand(String input, TaskList list) {
         super(input);
         this.list = list;
     }

@@ -1,14 +1,15 @@
 package nyonbot.command;
 
-import java.util.ArrayList;
+
 
 import nyonbot.Logic.Result;
 import nyonbot.model.Task;
+import nyonbot.model.TaskList;
 
 public class ListCommand extends Command {
-    private ArrayList<Task> list;
+    private TaskList list;
     
-    public ListCommand(String input, ArrayList<Task> list) {
+    public ListCommand(String input, TaskList list) {
         super(input);
         this.list = list;
     }

@@ -2,6 +2,7 @@ package nyonbot;
 
 import nyonbot.Logic.Result;
 import nyonbot.command.Command;
+import nyonbot.model.TaskList;
 import nyonbot.storage.Storage;
 
 public class NyonBot {
@@ -10,7 +11,8 @@ public class NyonBot {
         Parser parser = Parser.getInstance();
         Logic logic = Logic.getInstance();
         Storage storage = new Storage("src/main/java/nyonbot/data/nyonbot.txt");
-        logic.loadList(storage.load());
+        TaskList list = new TaskList();
+        
         ui.welcome();
 
         boolean loop = true;
@@ -37,7 +39,7 @@ public class NyonBot {
             }
 
         }
-        storage.save(logic.getList());
+        storage.save(list);
         ui.goodbye();
     }
 }

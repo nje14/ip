@@ -1,10 +1,9 @@
 package nyonbot;
 
-import java.util.ArrayList;
-
 import nyonbot.command.Command;
 
 import nyonbot.model.Task;
+import nyonbot.model.TaskList;
 
 
 
@@ -22,10 +21,10 @@ public class Logic {
 
 
     private static Logic instance = null;
-    private ArrayList<Task> list;
+    private TaskList list;
 
     private Logic() {
-        this.list = new ArrayList<>();
+        this.list = new TaskList();
     }
 
     public static synchronized Logic getInstance() {
@@ -35,11 +34,11 @@ public class Logic {
         return instance;
     }
 
-    public ArrayList<Task> getList() {
+    public TaskList getList() {
         return this.list;
     }
 
-    public void loadList(ArrayList<Task> newList) {
+    public void loadList(TaskList newList) {
         list.clear();
         if (newList == null) {
             return;

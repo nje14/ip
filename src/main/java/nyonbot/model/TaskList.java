@@ -1,9 +1,10 @@
 package nyonbot.model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class TaskList {
+public class TaskList implements Iterable<Task>{
     private final List<Task> tasks;
 
     public TaskList() {
@@ -14,11 +15,28 @@ public class TaskList {
         tasks.add(task);
     }
 
-    public void remove(int index) {
-        tasks.remove(index);
+    public Task remove(int index) {
+        return tasks.remove(index);
     }
 
-    public void remove(Task task) {
-        tasks.remove(task);
+    public boolean remove(Task task) {
+        return tasks.remove(task);
+    }
+
+    public Task get(int index) {
+        return tasks.get(index);
+    }
+
+    public void clear() {
+        tasks.clear();
+    }
+
+    public int size() {
+        return tasks.size();
+    }
+
+    @Override
+    public Iterator<Task> iterator() {
+        return tasks.iterator();
     }
 }

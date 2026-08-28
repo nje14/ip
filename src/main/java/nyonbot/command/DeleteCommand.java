@@ -5,11 +5,12 @@ import java.util.ArrayList;
 import nyonbot.Logic.Result;
 import nyonbot.model.NyonException;
 import nyonbot.model.Task;
+import nyonbot.model.TaskList;
 
 public class DeleteCommand extends Command {
-    ArrayList<Task> list;
+    TaskList list;
 
-    public DeleteCommand(String input, ArrayList<Task> list) {
+    public DeleteCommand(String input, TaskList list) {
         super(input);
         this.list = list;
     }
@@ -21,7 +22,7 @@ public class DeleteCommand extends Command {
             Integer.parseInt(taskName);
         } catch (NumberFormatException e) {
             Task toRemove = null;
-            for (Task task : list) {
+            for (Task task: list) {
                 if (task.isSameTask(taskName)) {
                     toRemove = task;
                     break;

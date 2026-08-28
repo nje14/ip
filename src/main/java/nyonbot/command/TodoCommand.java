@@ -1,15 +1,15 @@
 package nyonbot.command;
 
-import java.util.ArrayList;
 
 import nyonbot.Logic.Result;
 import nyonbot.model.NyonException;
 import nyonbot.model.Task;
+import nyonbot.model.TaskList;
 import nyonbot.model.ToDo;
 
 public class TodoCommand extends Command {
-    ArrayList<Task> list = new ArrayList<>();
-    public TodoCommand(String input, ArrayList<Task> list) {
+    TaskList list;
+    public TodoCommand(String input, TaskList list) {
         super(input);
         this.list = list;
     }

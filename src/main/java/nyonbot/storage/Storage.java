@@ -4,13 +4,13 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 
 import nyonbot.model.Deadline;
 import nyonbot.model.Event;
 import nyonbot.model.Task;
+import nyonbot.model.TaskList;
 import nyonbot.model.ToDo;
 
 public class Storage {
@@ -20,12 +20,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public ArrayList<Task> load() {
+    public TaskList load() {
         File file = new File(filePath);
+        TaskList list = new TaskList();
         if (!file.exists()) {
-            return new ArrayList<>();
+            return list;
         }
-        ArrayList<Task> list = new ArrayList<>();
         try (Scanner fileReader = new Scanner(file)) {
             while (fileReader.hasNextLine()) {
                 String line = fileReader.nextLine();
@@ -60,7 +60,7 @@ public class Storage {
                         if (params[2].equals("true")) {
                             event.completeTask();
                         }
-                        list.addLast(event);
+                        list.add(event);
                         break;
                 }
             }
@@ -95,7 +95,7 @@ public class Storage {
         return "";
     }
 
-    public void save(ArrayList<Task> list) {
+    public void save(TaskList list) {
         File saveFile = new File(filePath);
         if (!saveFile.exists()) {
             return;
