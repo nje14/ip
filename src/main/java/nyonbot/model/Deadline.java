@@ -7,7 +7,7 @@ import nyonbot.Ui;
 /**
  * Represents a deadline task
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     LocalDateTime deadline;
 
     /**

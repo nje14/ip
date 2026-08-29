@@ -5,7 +5,7 @@ package nyonbot.model;
  * 
  * NyonException
  */
-public class NyonException extends Exception{
+public class NyonException extends Exception {
     public NyonException(String s) {
         super(s);
     }

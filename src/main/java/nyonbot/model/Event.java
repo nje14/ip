@@ -7,7 +7,7 @@ import nyonbot.Ui;
 /**
  * Represents an event task with a start time and end time
  */
-public class Event extends Task{
+public class Event extends Task {
     LocalDateTime startTime;
     LocalDateTime endTime;
 
@@ -29,7 +29,7 @@ public class Event extends Task{
      * 
      * @return an array containing the start time and end time
      */
-    public LocalDateTime[] getEventTime() {
+    public LocalDateTime[] getEventTimes() {
         LocalDateTime[] eventTime = {this.startTime, this.endTime};
         return eventTime;
     }

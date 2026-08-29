@@ -5,7 +5,7 @@ import nyonbot.Logic.Result;
 /**
  * Echos the user input
  */
-public class EchoCommand extends Command{
+public class EchoCommand extends Command {
     public EchoCommand(String input) {
         super(input);
     }

@@ -101,7 +101,7 @@ public class Storage {
                     formatDate(deadline.getDeadline()));
         }
         if (task instanceof Event event) {
-            LocalDateTime[] eventTime = event.getEventTime();
+            LocalDateTime[] eventTime = event.getEventTimes();
             return String.format("EVENT|%s|%s|%s|%s",
                     event.getName(),
                     event.isDone(),
@@ -131,15 +131,15 @@ public class Storage {
             }
             saveFile.createNewFile();
         }
-        FileWriter fileWriter = new FileWriter(saveFile);
-        StringBuilder sb = new StringBuilder();
-        for (Task task : list) {
-            sb.append(taskParser(task));
-            sb.append("\n");
+        try (FileWriter fileWriter = new FileWriter(saveFile);) {
+            StringBuilder sb = new StringBuilder();
+            for (Task task : list) {
+                sb.append(taskParser(task));
+                sb.append("\n");
+            }
+            fileWriter.write(sb.toString());
+            fileWriter.close();
         }
-        fileWriter.write(sb.toString());
-
-        fileWriter.close();
     }
 
     private String formatDate(LocalDateTime dateTime) {
@@ -151,7 +151,7 @@ public class Storage {
      * 
      * @throws IOException if the file cannot be read or written to
      */
-    public void wipe() throws IOException{
+    public void wipe() throws IOException {
         save(new TaskList());
     }
 }
