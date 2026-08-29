@@ -9,6 +9,9 @@ import nyonbot.model.NyonException;
 import nyonbot.model.Task;
 import nyonbot.model.TaskList;
 
+/**
+ * Adds an event with a start time and end time
+ */
 public class EventCommand extends Command {
     TaskList list;
     public EventCommand(String input, TaskList list) {
@@ -16,6 +19,8 @@ public class EventCommand extends Command {
         this.list = list;
     }
 
+    /** {@inheritDoc} */
+    @Override
     public Result execute() throws NyonException {
         String eventCmd = this.input;
         int eventIndex = "event ".length();

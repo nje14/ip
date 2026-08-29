@@ -4,13 +4,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * Handles all resource loading for the NyonBot program
+ */
 public class ResourceLoader {
-    /// Reads a .txt file and returns its entire contents as one string
-    /// Uses `getClassLoader()` so omit the preceding `/`
-    /// @param filename `String` path to file; omit the preceding `/`
-    /// @return contents of `filename`
-    /// @throws Error if read is interrupted or file cannot be found
-    /// 
+    /** Reads a .txt file and returns its entire contents as one string
+     * 
+     * @param filename `String` path to file; omit the preceding `/`
+     * @return contents of `filename`
+     * @throws Error if read is interrupted or file cannot be found
+    **/ 
     public static String readTextFile(String filename) {
         if (filename.charAt(0) == '/') {
             filename = filename.substring(1);

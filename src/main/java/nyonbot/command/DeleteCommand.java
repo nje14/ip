@@ -6,14 +6,24 @@ import nyonbot.model.NyonException;
 import nyonbot.model.Task;
 import nyonbot.model.TaskList;
 
+/**
+ * Deletes a task from the provided task list
+ */
 public class DeleteCommand extends Command {
     TaskList list;
 
+    /**
+     * Creates a delete command with the given raw input and TaskList
+     * 
+     * @param input the raw input
+     * @param list the TaskList to delete from
+     */
     public DeleteCommand(String input, TaskList list) {
         super(input);
         this.list = list;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Result execute() throws NyonException {
         String taskName = this.input.substring("delete ".length()).strip();

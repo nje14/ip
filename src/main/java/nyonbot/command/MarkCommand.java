@@ -5,14 +5,24 @@ import nyonbot.model.NyonException;
 import nyonbot.model.Task;
 import nyonbot.model.TaskList;
 
+/**
+ * Marks a task as completed
+ */
 public class MarkCommand extends Command {
     TaskList list;
 
+    /**
+     * Creates a MarkCommand with the given raw input and TaskList to be checked
+     * 
+     * @param input raw command input
+     * @param list TaskList to be checked
+     */
     public MarkCommand(String input, TaskList list) {
         super(input);
         this.list = list;
     }
 
+    /** {@inheritDoc} */
     public Result execute() throws NyonException {
         String taskName = this.input.substring("mark ".length()).strip();
         if (taskName.isBlank()) {

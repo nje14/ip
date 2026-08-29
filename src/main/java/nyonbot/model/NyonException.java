@@ -1,7 +1,7 @@
 package nyonbot.model;
 
 /**
- * A checked exception implemented for the purposes
+ * A checked exception for internal use
  * 
  * NyonException
  */
