@@ -4,7 +4,6 @@ import nyonbot.Logic.Result;
 
 /**
  * Creates a NoCommand
- * @deprecated
  */
 public class NoCommand extends Command {
     /** {@inheritDoc} */
