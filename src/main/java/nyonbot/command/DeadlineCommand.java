@@ -23,21 +23,21 @@ public class DeadlineCommand extends Command {
     public Result execute() throws NyonException {
         String deadlineCmd = this.input;
         int deadlineIndex = "deadline ".length();
-        int deadLineByIndex = deadlineCmd.indexOf(" /by ");
-        if (deadLineByIndex != -1 && deadLineByIndex < deadlineIndex + 1) {
-            throw new NyonException("cannot omit the description");
+        int deadlineByIndex = deadlineCmd.indexOf(" /by ");
+        if (deadlineByIndex != -1 && deadlineByIndex < deadlineIndex + 1) {
+            throw new NyonException("deadlineByIndex omit the description");
         }
-        if (deadLineByIndex == -1) {
+        if (deadlineByIndex == -1) {
             throw new NyonException("use /by to specify the deadline");
         }
-        if (deadLineByIndex + " /by ".length() > deadlineCmd.length()) {
+        if (deadlineByIndex + " /by ".length() > deadlineCmd.length()) {
             throw new NyonException("cannot omit the deadline date");
         }
-        LocalDateTime deadlineTime = Parser.parseDate(deadlineCmd.substring(deadLineByIndex+" /by ".length()));
+        LocalDateTime deadlineTime = Parser.parseDate(deadlineCmd.substring(deadlineByIndex + " /by ".length()));
         if (deadlineTime == null) {
             throw new NyonException("enter the time in the following format: dd/MM/yy HHmm");
         }
-        Task deadline = new Deadline(deadlineCmd.substring(deadlineIndex, deadLineByIndex), deadlineTime);
+        Task deadline = new Deadline(deadlineCmd.substring(deadlineIndex, deadlineByIndex), deadlineTime);
         list.add(deadline);
         return new Result(String.format("I've added this task: \n%s\nThere are %s tasks in your list", deadline, list.size()));
     }

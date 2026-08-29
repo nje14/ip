@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import nyonbot.Ui;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     LocalDateTime deadline;
 
     public Deadline(String taskName, LocalDateTime deadline) {

@@ -5,8 +5,6 @@ import nyonbot.command.Command;
 import nyonbot.model.Task;
 import nyonbot.model.TaskList;
 
-
-
 public class Logic {
 
     public record Result(String out, boolean shouldExit, boolean shouldWrite) {
@@ -43,7 +41,7 @@ public class Logic {
         if (newList == null) {
             return;
         }
-        for (Task task: newList) {
+        for (Task task : newList) {
             list.add(task);
         }
     }

@@ -2,7 +2,7 @@ package nyonbot.command;
 
 import nyonbot.Logic.Result;
 
-public class EchoCommand extends Command{
+public class EchoCommand extends Command {
     public EchoCommand(String input) {
         super(input);
     }

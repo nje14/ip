@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import nyonbot.Ui;
 
-public class Event extends Task{
+public class Event extends Task {
     LocalDateTime startTime;
     LocalDateTime endTime;
 
@@ -14,7 +14,7 @@ public class Event extends Task{
         this.endTime = end;
     }
 
-    public LocalDateTime[] getEventTime() {
+    public LocalDateTime[] getEventTimes() {
         LocalDateTime[] eventTime = {this.startTime, this.endTime};
         return eventTime;
     }

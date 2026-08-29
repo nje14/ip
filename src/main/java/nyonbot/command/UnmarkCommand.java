@@ -29,7 +29,7 @@ public class UnmarkCommand extends Command {
             task.uncompleteTask();
             return new Result(String.format("Unmarked %s", task));
         } catch (NumberFormatException e) {
-            for (Task task: list) {
+            for (Task task : list) {
                 if (task.isSameTask(taskName)) {
                     task.uncompleteTask();
                     return new Result(String.format("Unmarked %s", task));
