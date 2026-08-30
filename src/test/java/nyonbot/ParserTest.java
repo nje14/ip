@@ -30,7 +30,28 @@ class ParserTest {
         assertInstanceOf(ListCommand.class, parser.parse("list"));
         assertInstanceOf(TodoCommand.class, parser.parse("todo read book"));
         assertInstanceOf(DeadlineCommand.class,
-                parser.parse("deadline submit report /by 31/12/2026 2359"));
+                parser.parse("deadline submit report --by 31/12/2026 2359"));
+    }
+
+    @Test
+    void parseArguments_commandWithFlags_returnsFlagMap() {
+        var arguments = parser.parseArguments(
+                "event project meeting --from 05/09/2026 0900 "
+                        + "--to 05/09/2026 1100");
+
+        assertEquals("event", arguments.get("command"));
+        assertEquals("project meeting", arguments.get("description"));
+        assertEquals("05/09/2026 0900", arguments.get("--from"));
+        assertEquals("05/09/2026 1100", arguments.get("--to"));
+    }
+
+    @Test
+    void parseArguments_flagsInDifferentOrder_preservesFlagValues() {
+        var arguments = parser.parseArguments(
+                "event meeting --to 05/09/2026 1100 --from 05/09/2026 0900");
+
+        assertEquals("05/09/2026 0900", arguments.get("--from"));
+        assertEquals("05/09/2026 1100", arguments.get("--to"));
     }
 
     @Test

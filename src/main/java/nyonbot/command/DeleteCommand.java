@@ -1,5 +1,6 @@
 package nyonbot.command;
 
+import java.util.HashMap;
 
 import nyonbot.Logic.Result;
 import nyonbot.model.NyonException;
@@ -13,20 +14,20 @@ public class DeleteCommand extends Command {
     TaskList list;
 
     /**
-     * Creates a delete command with the given raw input and TaskList
+     * Creates a delete command with parsed arguments and a TaskList.
      * 
-     * @param input the raw input
+     * @param arguments parsed command arguments
      * @param list the TaskList to delete from
      */
-    public DeleteCommand(String input, TaskList list) {
-        super(input);
+    public DeleteCommand(HashMap<String, String> arguments, TaskList list) {
+        super(arguments);
         this.list = list;
     }
 
     /** {@inheritDoc} */
     @Override
     public Result execute() throws NyonException {
-        String taskName = this.input.substring("delete ".length()).strip();
+        String taskName = arguments.getOrDefault(DESCRIPTION_KEY, "").strip();
         try {
             Integer.parseInt(taskName);
         } catch (NumberFormatException e) {

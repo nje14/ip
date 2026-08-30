@@ -1,5 +1,7 @@
 package nyonbot.command;
 
+import java.util.HashMap;
+
 import nyonbot.Logic.Result;
 import nyonbot.model.NyonException;
 
@@ -7,14 +9,17 @@ import nyonbot.model.NyonException;
  * Represents an executable user command
  */
 public abstract class Command {
-    protected String input;
+    public static final String COMMAND_KEY = "command";
+    public static final String DESCRIPTION_KEY = "description";
+
+    protected final HashMap<String, String> arguments;
 
     public Command() {
-        this.input = "";
+        this.arguments = new HashMap<>();
     }
 
-    public Command(String input) {
-        this.input = input;
+    public Command(HashMap<String, String> arguments) {
+        this.arguments = new HashMap<>(arguments);
     }
 
     /**

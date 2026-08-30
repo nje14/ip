@@ -1,6 +1,7 @@
 package nyonbot.command;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 
 import nyonbot.Parser;
 import nyonbot.Logic.Result;
@@ -14,47 +15,45 @@ import nyonbot.model.TaskList;
  */
 public class EventCommand extends Command {
     TaskList list;
-    public EventCommand(String input, TaskList list) {
-        super(input);
+    public EventCommand(HashMap<String, String> arguments, TaskList list) {
+        super(arguments);
         this.list = list;
     }
 
     /** {@inheritDoc} */
     @Override
     public Result execute() throws NyonException {
-        String eventCmd = this.input;
-        int eventIndex = "event ".length();
-        int eventFromIndex = eventCmd.indexOf(" /from ");
-        int eventToIndex = eventCmd.indexOf(" /to ");
-        if (eventFromIndex == -1) {
-            throw new NyonException("use /from to specify the starttime");
+        String description = arguments.get(DESCRIPTION_KEY);
+        String startValue = arguments.get("--from");
+        String endValue = arguments.get("--to");
+        if (!arguments.containsKey("--from")) {
+            throw new NyonException("use --from to specify the starttime");
         }
-        if (eventToIndex == -1) {
-            throw new NyonException("use /to to specify the endtime");
+        if (!arguments.containsKey("--to")) {
+            throw new NyonException("use --to to specify the endtime");
         }
-        if (eventIndex + 1 >= Math.min(eventFromIndex, eventToIndex)) {
+        if (description == null || description.isBlank()) {
             throw new NyonException("cannot omit the description");
         }
-        if (eventFromIndex + " /from ".length() > eventCmd.length()) {
+        if (startValue.isBlank()) {
             throw new NyonException("cannot omit the start time");
         }
-        if (eventToIndex + " /to ".length() > eventCmd.length()) {
+        if (endValue.isBlank()) {
             throw new NyonException("cannot omit the end time");
         }
-        if (eventFromIndex > eventToIndex) {
-            throw new NyonException("usage: event <eventname> /from <starttime> /to <endtime>");
-        }
-        LocalDateTime startDate = Parser.parseDate(eventCmd.substring(eventFromIndex + " /from ".length(), eventToIndex));
-        LocalDateTime endDate = Parser.parseDate(eventCmd.substring(eventToIndex + " /to ".length()));
+        LocalDateTime startDate = Parser.parseDate(startValue);
+        LocalDateTime endDate = Parser.parseDate(endValue);
         if (startDate == null || endDate == null) {
             throw new NyonException("please enter startDate and endDate in the format dd/MM/yyyy HHmm");
         }
         Task event = new Event(
-                eventCmd.substring(eventIndex, eventFromIndex), 
+                description,
                 startDate, 
                 endDate
         );
         list.add(event);
-        return new Result(String.format("I've added this task: \n%s\nThere are %s tasks in your list", event, list.size()), false, true);
+        return new Result(String.format(
+                "I've added this task: \n%s\nThere are %s tasks in your list",
+                event, list.size()), false, true);
     }
 }

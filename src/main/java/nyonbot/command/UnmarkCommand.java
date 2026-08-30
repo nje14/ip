@@ -1,5 +1,6 @@
 package nyonbot.command;
 
+import java.util.HashMap;
 
 import nyonbot.Logic.Result;
 import nyonbot.model.NyonException;
@@ -13,20 +14,20 @@ public class UnmarkCommand extends Command {
     TaskList list;
 
     /**
-     * Creates an Unmark command with the given raw input and TaskList
+     * Creates an Unmark command with parsed arguments and a TaskList.
      * 
-     * @param input the raw command input
+     * @param arguments parsed command arguments
      * @param list the TaskList to search
      */
-    public UnmarkCommand(String input, TaskList list) {
-        super(input);
+    public UnmarkCommand(HashMap<String, String> arguments, TaskList list) {
+        super(arguments);
         this.list = list;
     }
 
     /** {@inheritDoc} */
     @Override
     public Result execute() throws NyonException {
-        String taskName = this.input.substring("unmark ".length()).strip();
+        String taskName = arguments.getOrDefault(DESCRIPTION_KEY, "").strip();
         if (taskName.isBlank()) {
             throw new NyonException("cannot unmark without a description :(");
         }
