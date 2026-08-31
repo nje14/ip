@@ -4,14 +4,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.HashMap;
+
 import org.junit.jupiter.api.Test;
 
 import nyonbot.Logic.Result;
+import nyonbot.Parser;
 
 class SimpleCommandTest {
     @Test
     void echoCommand_message_returnsMessageOnly() {
-        Result result = new EchoCommand("echo hello world").execute();
+        Result result = new EchoCommand(arguments("echo hello world")).execute();
 
         assertEquals("hello world", result.out());
         assertFalse(result.shouldExit());
@@ -19,12 +22,12 @@ class SimpleCommandTest {
 
     @Test
     void echoCommand_withoutMessage_returnsKeyword() {
-        assertEquals("echo", new EchoCommand("echo").execute().out());
+        assertEquals("echo", new EchoCommand(arguments("echo")).execute().out());
     }
 
     @Test
     void exitCommand_execute_requestsExit() {
-        Result result = new ExitCommand("bye").execute();
+        Result result = new ExitCommand(arguments("bye")).execute();
 
         assertEquals("", result.out());
         assertTrue(result.shouldExit());
@@ -41,5 +44,9 @@ class SimpleCommandTest {
 
         assertTrue(output.contains("Nyon"));
         assertTrue(output.endsWith("\nNyon!"));
+    }
+
+    private static HashMap<String, String> arguments(String input) {
+        return Parser.getInstance().parseArguments(input);
     }
 }

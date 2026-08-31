@@ -1,5 +1,7 @@
 package nyonbot.command;
 
+import java.util.HashMap;
+
 import nyonbot.Logic.Result;
 import nyonbot.model.Task;
 import nyonbot.model.TaskList;
@@ -11,13 +13,13 @@ public class ListCommand extends Command {
     private TaskList list;
     
     /**
-     * Creates a new List command with the raw input and TaskList to be read
+     * Creates a List command with parsed arguments and a TaskList to read.
      * 
-     * @param input raw command input
+     * @param arguments parsed command arguments
      * @param list TaskList to read
      */
-    public ListCommand(String input, TaskList list) {
-        super(input);
+    public ListCommand(HashMap<String, String> arguments, TaskList list) {
+        super(arguments);
         this.list = list;
     }
 

@@ -1,19 +1,23 @@
 package nyonbot.command;
 
+import java.util.HashMap;
+
 import nyonbot.Logic.Result;
 
 /**
  * Echos the user input
  */
 public class EchoCommand extends Command {
-    public EchoCommand(String input) {
-        super(input);
+    public EchoCommand(HashMap<String, String> arguments) {
+        super(arguments);
     }
 
     /** {@inheritDoc} */
     @Override
     public Result execute() {
-        String[] out = this.input.split(" ", 2);
-        return new Result(out.length < 2 ? out[0] : out[1]);
+        String description = arguments.get(DESCRIPTION_KEY);
+        return new Result(description == null
+                ? arguments.getOrDefault(COMMAND_KEY, "")
+                : description);
     }
 }

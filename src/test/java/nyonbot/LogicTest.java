@@ -48,7 +48,8 @@ class LogicTest {
 
     @Test
     void execute_command_returnsCommandResult() throws Exception {
-        Result result = logic.execute(new EchoCommand("echo hello"));
+        Result result = logic.execute(new EchoCommand(
+                Parser.getInstance().parseArguments("echo hello")));
 
         assertEquals("hello", result.out());
         assertFalse(result.shouldExit());

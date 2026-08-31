@@ -1,5 +1,7 @@
 package nyonbot.command;
 
+import java.util.HashMap;
+
 import nyonbot.Logic.Result;
 
 /**
@@ -10,12 +12,12 @@ public class ExitCommand extends Command {
     /**
      * Creates an exit command.
      * <p>
-     * Input is required for consistency but is unused.
+     * Parsed arguments are required for consistency but are unused.
      * 
-     * @param input raw input associated with this command
+     * @param arguments parsed command arguments
      */
-    public ExitCommand(String input) {
-        super(input);
+    public ExitCommand(HashMap<String, String> arguments) {
+        super(arguments);
     }
 
     /** {@inheritDoc} */

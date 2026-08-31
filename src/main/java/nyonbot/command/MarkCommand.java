@@ -1,5 +1,7 @@
 package nyonbot.command;
 
+import java.util.HashMap;
+
 import nyonbot.Logic.Result;
 import nyonbot.model.NyonException;
 import nyonbot.model.Task;
@@ -12,19 +14,20 @@ public class MarkCommand extends Command {
     TaskList list;
 
     /**
-     * Creates a MarkCommand with the given raw input and TaskList to be checked
+     * Creates a MarkCommand with parsed arguments and a TaskList to check.
      * 
-     * @param input raw command input
+     * @param arguments parsed command arguments
      * @param list TaskList to be checked
      */
-    public MarkCommand(String input, TaskList list) {
-        super(input);
+    public MarkCommand(HashMap<String, String> arguments, TaskList list) {
+        super(arguments);
         this.list = list;
     }
 
     /** {@inheritDoc} */
+    @Override
     public Result execute() throws NyonException {
-        String taskName = this.input.substring("mark ".length()).strip();
+        String taskName = arguments.getOrDefault(DESCRIPTION_KEY, "").strip();
         if (taskName.isBlank()) {
             throw new NyonException("cannot mark without a description :(");
         }

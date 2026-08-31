@@ -2,6 +2,7 @@ package nyonbot.command;
 
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 
 
 import nyonbot.Parser;
@@ -18,37 +19,38 @@ public class DeadlineCommand extends Command {
     private TaskList list;
 
     /**
-     * Creates a deadline command with the associated raw input and TaskList
+     * Creates a deadline command with parsed arguments and a TaskList.
      * 
-     * @param cmd the raw input
+     * @param arguments parsed command arguments
      * @param list the TaskList to add the task to
      */
-    public DeadlineCommand(String cmd, TaskList list) {
-        super(cmd);
+    public DeadlineCommand(HashMap<String, String> arguments, TaskList list) {
+        super(arguments);
         this.list = list;
     }
 
     /** {@inheritDoc} */
     @Override
     public Result execute() throws NyonException {
-        String deadlineCmd = this.input;
-        int deadlineIndex = "deadline ".length();
-        int deadlineByIndex = deadlineCmd.indexOf(" /by ");
-        if (deadlineByIndex != -1 && deadlineByIndex < deadlineIndex + 1) {
-            throw new NyonException("deadlineByIndex omit the description");
+        String description = arguments.get(DESCRIPTION_KEY);
+        String deadlineValue = arguments.get("--by");
+        if (description == null || description.isBlank()) {
+            throw new NyonException("cannot omit the description");
         }
-        if (deadlineByIndex == -1) {
-            throw new NyonException("use /by to specify the deadline");
+        if (!arguments.containsKey("--by")) {
+            throw new NyonException("use --by to specify the deadline");
         }
-        if (deadlineByIndex + " /by ".length() > deadlineCmd.length()) {
+        if (deadlineValue.isBlank()) {
             throw new NyonException("cannot omit the deadline date");
         }
-        LocalDateTime deadlineTime = Parser.parseDate(deadlineCmd.substring(deadlineByIndex + " /by ".length()));
+        LocalDateTime deadlineTime = Parser.parseDate(deadlineValue);
         if (deadlineTime == null) {
             throw new NyonException("enter the time in the following format: dd/MM/yy HHmm");
         }
-        Task deadline = new Deadline(deadlineCmd.substring(deadlineIndex, deadlineByIndex), deadlineTime);
+        Task deadline = new Deadline(description, deadlineTime);
         list.add(deadline);
-        return new Result(String.format("I've added this task: \n%s\nThere are %s tasks in your list", deadline, list.size()));
+        return new Result(String.format(
+                "I've added this task: \n%s\nThere are %s tasks in your list",
+                deadline, list.size()));
     }
 }

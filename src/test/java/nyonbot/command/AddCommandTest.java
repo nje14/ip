@@ -6,11 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import nyonbot.Logic.Result;
+import nyonbot.Parser;
 import nyonbot.model.Deadline;
 import nyonbot.model.Event;
 import nyonbot.model.NyonException;
@@ -27,7 +29,7 @@ class AddCommandTest {
 
     @Test
     void todoCommand_validDescription_addsTodo() throws NyonException {
-        Result result = new TodoCommand("todo read a book", tasks).execute();
+        Result result = new TodoCommand(arguments("todo read a book"), tasks).execute();
 
         assertEquals(1, tasks.size());
         assertInstanceOf(ToDo.class, tasks.get(0));
@@ -38,13 +40,14 @@ class AddCommandTest {
     @Test
     void todoCommand_missingDescription_throwsNyonException() {
         assertThrows(NyonException.class,
-                () -> new TodoCommand("todo", tasks).execute());
+                () -> new TodoCommand(arguments("todo"), tasks).execute());
     }
 
     @Test
     void deadlineCommand_validInput_addsDeadline() throws NyonException {
         new DeadlineCommand(
-                "deadline submit report /by 31/12/2026 2359", tasks).execute();
+                arguments("deadline submit report --by 31/12/2026 2359"),
+                tasks).execute();
 
         Deadline deadline = assertInstanceOf(Deadline.class, tasks.get(0));
         assertEquals("submit report", deadline.getName());
@@ -55,20 +58,23 @@ class AddCommandTest {
     @Test
     void deadlineCommand_missingByMarker_throwsNyonException() {
         assertThrows(NyonException.class,
-                () -> new DeadlineCommand("deadline submit report", tasks).execute());
+                () -> new DeadlineCommand(
+                        arguments("deadline submit report"), tasks).execute());
     }
 
     @Test
     void deadlineCommand_invalidDate_throwsNyonException() {
         assertThrows(NyonException.class,
                 () -> new DeadlineCommand(
-                        "deadline submit report /by tomorrow", tasks).execute());
+                        arguments("deadline submit report --by tomorrow"),
+                        tasks).execute());
     }
 
     @Test
     void eventCommand_validInput_addsEventAndRequestsWrite() throws NyonException {
         Result result = new EventCommand(
-                "event lecture /from 05/09/2026 0900 /to 05/09/2026 1100",
+                arguments("event lecture --from 05/09/2026 0900 "
+                        + "--to 05/09/2026 1100"),
                 tasks).execute();
 
         Event event = assertInstanceOf(Event.class, tasks.get(0));
@@ -84,14 +90,21 @@ class AddCommandTest {
     void eventCommand_missingFromMarker_throwsNyonException() {
         assertThrows(NyonException.class,
                 () -> new EventCommand(
-                        "event lecture /to 05/09/2026 1100", tasks).execute());
+                        arguments("event lecture --to 05/09/2026 1100"),
+                        tasks).execute());
     }
 
     @Test
-    void eventCommand_markersInWrongOrder_throwsNyonException() {
-        assertThrows(NyonException.class,
-                () -> new EventCommand(
-                        "event lecture /to 05/09/2026 1100 /from 05/09/2026 0900",
-                        tasks).execute());
+    void eventCommand_flagsInDifferentOrder_addsEvent() throws NyonException {
+        new EventCommand(
+                arguments("event lecture --to 05/09/2026 1100 "
+                        + "--from 05/09/2026 0900"),
+                tasks).execute();
+
+        assertInstanceOf(Event.class, tasks.get(0));
+    }
+
+    private static HashMap<String, String> arguments(String input) {
+        return Parser.getInstance().parseArguments(input);
     }
 }
