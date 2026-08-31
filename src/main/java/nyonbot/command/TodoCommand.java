@@ -25,7 +25,8 @@ public class TodoCommand extends Command {
         this.list = list;
     }
 
-    /** {@inheritDocs} */
+    /** {@inheritDoc} */
+    @Override
     public Result execute() throws NyonException {
         String description = arguments.get(DESCRIPTION_KEY);
         if (description == null || description.isBlank()) {

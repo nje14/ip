@@ -127,7 +127,7 @@ public class Parser {
      * Parses a String date using the format {@code dd/MM/yyyy HHmm}
      * 
      * @param date date to be parsed
-     * @return the <code>LocalDateTime</cpde> associated with this date
+     * @return the <code>LocalDateTime</code> associated with this date
      */
     public static LocalDateTime parseDate(String date) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");

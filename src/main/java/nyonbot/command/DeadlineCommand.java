@@ -35,7 +35,7 @@ public class DeadlineCommand extends Command {
         String description = arguments.get(DESCRIPTION_KEY);
         String deadlineValue = arguments.get("--by");
         if (description == null || description.isBlank()) {
-            throw new NyonException("deadlineByIndex omit the description");
+            throw new NyonException("cannot omit the description");
         }
         if (!arguments.containsKey("--by")) {
             throw new NyonException("use --by to specify the deadline");

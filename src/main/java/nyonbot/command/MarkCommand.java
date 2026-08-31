@@ -25,6 +25,7 @@ public class MarkCommand extends Command {
     }
 
     /** {@inheritDoc} */
+    @Override
     public Result execute() throws NyonException {
         String taskName = arguments.getOrDefault(DESCRIPTION_KEY, "").strip();
         if (taskName.isBlank()) {
