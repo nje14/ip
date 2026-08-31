@@ -35,7 +35,7 @@ class SimpleCommandTest {
 
     @Test
     void noCommand_execute_returnsFallbackMessage() {
-        assertEquals("nyon...?", new NoCommand().execute().out());
+        assertEquals("what...?", new NoCommand().execute().out());
     }
 
     @Test

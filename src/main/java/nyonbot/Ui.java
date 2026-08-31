@@ -2,6 +2,7 @@ package nyonbot;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -74,7 +75,7 @@ public class Ui {
      * @return the formatted date string
      */
     public static String showDate(LocalDateTime dateTime) {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm", Locale.US);
         return dateTime.format(dtf);
     }
 }
