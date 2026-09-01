@@ -1,7 +1,7 @@
 .root {
     main-color: rgb(237, 255, 242);       /* Create a looked-up color called "main-color" within root. */
     -fx-background-color: main-color;
-    -fx-background-image: url("../images/Kawkaw_battle_idle_frame_1.png");
+    -fx-background-image: url("../images/KawKaw_battle_idle.png");
 }
 
 .text-field {
@@ -11,7 +11,7 @@
 
 .button {
     -fx-background-color: mediumspringgreen;
-    -fx-font: italic bold 16px "Arial";
+    -fx-font: bold 16px "Arial";
 }
 
 .button:hover {

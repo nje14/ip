@@ -1,9 +1,19 @@
-.label {
+
+.dialog-box {
     -fx-background-color: white;
-    -fx-border-color: #d55e00 #009e73 #cc79a7 #0072b2;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-background-radius: 16px;
+    -fx-border-radius: 16px;
+}
+
+.label {
+    -fx-background-color: linear-gradient(to bottom right, #00ffbf, #00ddff);
+    -fx-border-color: black;
     -fx-border-width: 2px;
     -fx-background-radius: 1em 1em 0 1em;
     -fx-border-radius: 1em 1em 0 1em;
+    -fx-text-fill: black;
 }
 
 .reply-label {
@@ -26,7 +36,7 @@
 #displayPicture {
     /* Shadow effect on image. */
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 5, 5);
-
+    
     /* Change size of image. */
     -fx-scale-x: 1;
     -fx-scale-y: 1;
