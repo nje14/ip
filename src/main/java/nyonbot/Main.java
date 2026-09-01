@@ -17,6 +17,18 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-       
+        try {
+            FXMLLoader fxmlLoader =new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            stage.setMinHeight(480);
+            stage.setMaxHeight(600);
+            fxmlLoader.<MainWindow>getController().setNyonBot(nyonBot);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

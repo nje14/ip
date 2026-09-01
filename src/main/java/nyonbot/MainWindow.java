@@ -3,7 +3,6 @@ package nyonbot;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -12,7 +11,7 @@ import javafx.scene.image.Image;
 /**
  * Controller class for the main GUI
  */
-public class MainWindow extends AnchorPane{
+public class MainWindow extends AnchorPane {
 
     @FXML
     private ScrollPane scrollPane;
@@ -23,8 +22,8 @@ public class MainWindow extends AnchorPane{
     
     private NyonBot nyonBot;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/static/KawKaw_battle_idle.png"));
-    private Image botImage = new Image(this.getClass().getResourceAsStream("/static/KawKaw_battle_spared.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/static/Kawkaw_battle_idle.png"));
+    private Image botImage = new Image(this.getClass().getResourceAsStream("/static/Kawkaw_battle_spared.png"));
 
     @FXML
     public void initialize() {
@@ -38,7 +37,16 @@ public class MainWindow extends AnchorPane{
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        
+        if (input.isBlank()) {
+            return;
+        }
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
+        String response = nyonBot.respond(input);
+        if (input.isBlank()) {
+            return;
+        }
+        dialogContainer.getChildren().add(DialogBox.getBotDialog(response, botImage));
+        userInput.clear();
     }
     
 }
