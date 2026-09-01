@@ -22,7 +22,7 @@ public class NyonBot {
 
     public String respond(String input) {
         try {
-            String userInput = ui.readCommand();
+            String userInput = input;
             Command cmd = parser.parse(userInput);
             Result res = logic.execute(cmd);
             if (res.out() != null && !res.out().isBlank()) {

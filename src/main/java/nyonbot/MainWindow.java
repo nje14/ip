@@ -42,7 +42,7 @@ public class MainWindow extends AnchorPane {
         }
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
         String response = nyonBot.respond(input);
-        if (input.isBlank()) {
+        if (response.isBlank()) {
             return;
         }
         dialogContainer.getChildren().add(DialogBox.getBotDialog(response, botImage));

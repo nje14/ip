@@ -33,7 +33,7 @@ java {
 }
 
 application {
-    mainClass = 'nyonbot.NyonBot'
+    mainClass = 'nyonbot.Launcher'
 }
 
 tasks.named('test') {
