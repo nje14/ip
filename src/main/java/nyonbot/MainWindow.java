@@ -1,5 +1,6 @@
 package nyonbot;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -24,6 +25,7 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/static/Kawkaw_battle_idle.png"));
     private Image botImage = new Image(this.getClass().getResourceAsStream("/static/Kawkaw_battle_spared.png"));
+    private Image errorImage = new Image(this.getClass().getResourceAsStream("/static/Kawkaw_battle_hurt.png"));
 
     @FXML
     public void initialize() {
@@ -40,12 +42,19 @@ public class MainWindow extends AnchorPane {
         if (input.isBlank()) {
             return;
         }
+        if (input.startsWith("bye")) {
+            Platform.exit();
+        }
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
         String response = nyonBot.respond(input);
         if (response.isBlank()) {
             return;
         }
-        dialogContainer.getChildren().add(DialogBox.getBotDialog(response, botImage));
+        if (response.startsWith("Nyon...")) {
+            dialogContainer.getChildren().add(DialogBox.getBotDialog(response, errorImage));
+        } else {
+            dialogContainer.getChildren().add(DialogBox.getBotDialog(response, botImage));
+        }
         userInput.clear();
     }
     
