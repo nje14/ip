@@ -7,6 +7,39 @@ import nyonbot.command.Command;
 import nyonbot.storage.Storage;
 
 public class NyonBot {
+    private Ui ui = Ui.getInstance();
+    private Parser parser = Parser.getInstance();
+    private Logic logic = Logic.getInstance();
+    private Storage storage = new Storage("data/nyonbot.txt");
+
+    public NyonBot() {
+        try {
+            logic.loadList(storage.load());
+        } catch (IOException e) {
+            ui.showOutput("couldn't load your list as " + e.getMessage());
+        }
+    }
+
+    public String respond(String input) {
+        try {
+            String userInput = input;
+            Command cmd = parser.parse(userInput);
+            Result res = logic.execute(cmd);
+            if (res.out() != null && !res.out().isBlank()) {
+                StringBuilder sb = new StringBuilder("Nyon! (");
+                sb.append(res.out());
+                sb.append(")");
+                return sb.toString();
+            }
+            return "";
+        } catch (Exception e) {
+            StringBuilder sb = new StringBuilder("Nyon... (");
+            sb.append(e.getMessage());
+            sb.append(")");
+            return sb.toString();
+        }
+    }
+
     public static void main(String[] args) {
         Ui ui = Ui.getInstance();
         Parser parser = Parser.getInstance();
@@ -15,7 +48,7 @@ public class NyonBot {
         try {
             logic.loadList(storage.load());
         } catch (IOException e) {
-            ui.showOutput("couldn't load your list as "+e.getMessage());
+            ui.showOutput("couldn't load your list as " + e.getMessage());
         }
 
         ui.welcome();
@@ -47,9 +80,9 @@ public class NyonBot {
         try {
             storage.save(logic.getList());
         } catch (IOException e) {
-            ui.showOutput("couldn't save your list as "+e.getMessage());
+            ui.showOutput("couldn't save your list as " + e.getMessage());
         }
-        
+
         ui.goodbye();
     }
 }
