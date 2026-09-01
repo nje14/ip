@@ -40,6 +40,15 @@ public class NyonBot {
         }
     }
 
+    public boolean onClose() {
+        try {
+            storage.save(logic.getList());
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
     public static void main(String[] args) {
         Ui ui = Ui.getInstance();
         Parser parser = Parser.getInstance();

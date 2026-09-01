@@ -1,6 +1,5 @@
 package nyonbot.command;
 
-import nyonbot.ResourceLoader;
 import nyonbot.Logic.Result;
 
 /**

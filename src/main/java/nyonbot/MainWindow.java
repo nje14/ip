@@ -43,7 +43,12 @@ public class MainWindow extends AnchorPane {
             return;
         }
         if (input.startsWith("bye")) {
-            Platform.exit();
+            if (!nyonBot.onClose()) {
+                dialogContainer.getChildren().add(DialogBox.getUserDialog(input, botImage));
+                dialogContainer.getChildren().add(DialogBox.getBotDialog("couldn't save your file", errorImage));
+            } else {
+                Platform.exit();
+            }
         }
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
         String response = nyonBot.respond(input);
