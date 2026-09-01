@@ -59,8 +59,9 @@ public class MainWindow extends AnchorPane {
             dialogContainer.getChildren().add(DialogBox.getBotDialog(response, errorImage));
         } else {
             dialogContainer.getChildren().add(DialogBox.getBotDialog(response, botImage));
+            userInput.clear();
         }
-        userInput.clear();
+        
     }
     
 }
