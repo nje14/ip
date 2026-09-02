@@ -1,13 +1,13 @@
-package nyonbot;
+package nyonbot.controller;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import nyonbot.NyonBot;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-
 
 /**
  * Controller class for the main GUI
@@ -20,7 +20,7 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    
+
     private NyonBot nyonBot;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/static/Kawkaw_battle_idle.png"));
@@ -61,7 +61,7 @@ public class MainWindow extends AnchorPane {
             dialogContainer.getChildren().add(DialogBox.getBotDialog(response, botImage));
             userInput.clear();
         }
-        
+
     }
-    
+
 }

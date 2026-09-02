@@ -8,23 +8,24 @@ import java.nio.charset.StandardCharsets;
  * Handles all resource loading for the NyonBot program
  */
 public class ResourceLoader {
-    /** Reads a .txt file and returns its entire contents as one string
+    /**
+     * Reads a .txt file and returns its entire contents as one string
      * 
      * @param filename `String` path to file; omit the preceding `/`
      * @return contents of `filename`
      * @throws Error if read is interrupted or file cannot be found
-    **/ 
+     **/
     public static String readTextFile(String filename) {
         if (filename.charAt(0) == '/') {
             filename = filename.substring(1);
         }
         try (InputStream input = NyonBot.class.getClassLoader().getResourceAsStream(filename)) {
             if (input == null) {
-                throw new IllegalStateException("Could not load text from "+filename);
+                throw new IllegalStateException("Could not load text from " + filename);
             }
-            return new String(input.readAllBytes(),StandardCharsets.UTF_8);
+            return new String(input.readAllBytes(), StandardCharsets.UTF_8);
         } catch (IOException e) {
-            throw new IllegalStateException("Exception occured while reading from "+ filename + ": " + e);
+            throw new IllegalStateException("Exception occured while reading from " + filename + ": " + e);
         }
     }
 }
