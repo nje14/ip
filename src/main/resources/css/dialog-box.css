@@ -1,24 +1,28 @@
 
 .dialog-box {
-    -fx-background-color: white;
-    -fx-border-color: black;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
     -fx-border-width: 2px;
     -fx-background-radius: 16px;
     -fx-border-radius: 16px;
+    -fx-padding: 8px
 }
 
-.label {
-    -fx-background-color: linear-gradient(to bottom right, #00ffbf, #00ddff);
+.dialog-label {
+    -fx-background-color: white;
     -fx-border-color: black;
     -fx-border-width: 2px;
     -fx-background-radius: 1em 1em 0 1em;
     -fx-border-radius: 1em 1em 0 1em;
     -fx-text-fill: black;
+    -fx-alignment: CENTER_RIGHT;
 }
 
 .reply-label {
     -fx-background-radius: 1em 1em 1em 0;
     -fx-border-radius: 1em 1em 1em 0;
+    -fx-alignment: CENTER_LEFT;
+    -fx-text-fill: black;
 }
 
 .add-label {
@@ -45,3 +49,7 @@
     -fx-rotate: 0;
 }
 
+
+.flipped-image {
+    -fx-scale-x: -1;
+}
