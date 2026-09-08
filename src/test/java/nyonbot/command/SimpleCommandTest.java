@@ -42,8 +42,8 @@ class SimpleCommandTest {
     void nyonCommand_execute_returnsBannerAndNyonMessage() {
         String output = new NyonCommand().execute().out();
 
-        assertTrue(output.contains("Nyon"));
-        assertTrue(output.endsWith("\nNyon!"));
+        assertTrue(output.contains("Yay"));
+        assertTrue(output.endsWith("\nYay!"));
     }
 
     private static HashMap<String, String> arguments(String input) {

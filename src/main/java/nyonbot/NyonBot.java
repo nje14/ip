@@ -38,6 +38,9 @@ public class NyonBot {
             Command cmd = parser.parse(userInput);
             Result res = logic.execute(cmd);
             if (res.out() != null && !res.out().isBlank()) {
+                if (res.shouldWrite()) {
+                    storage.save(logic.getList());
+                }
                 StringBuilder sb = new StringBuilder("Nyon! (");
                 sb.append(res.out());
                 sb.append(")");

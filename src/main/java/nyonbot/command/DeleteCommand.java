@@ -48,6 +48,6 @@ public class DeleteCommand extends Command {
             throw new NyonException("index out of bounds");
         }
         Task removed = list.remove(taskNumber);
-        return new Result(String.format("I've removed %s from your list", removed));
+        return new Result(String.format("I've removed %s from your list", removed), false, true);
     }
 }

@@ -49,6 +49,9 @@ public class DeadlineCommand extends Command {
         list.add(deadline);
         return new Result(String.format(
                 "I've added this task: \n%s\nThere are %s tasks in your list",
-                deadline, list.size()));
+                deadline, list.size()),
+            false,
+            true
+        );
     }
 }
