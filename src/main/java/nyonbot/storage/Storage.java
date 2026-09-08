@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 import nyonbot.model.Deadline;
@@ -43,44 +44,60 @@ public class Storage {
             while (fileReader.hasNextLine()) {
                 String line = fileReader.nextLine();
                 String[] params = line.split("\\|", -1);
-                switch (params[0]) {
-                    case ("TASK"):
-                        Task task = new Task(params[1]);
-                        if (params[2].equals("true")) {
-                            task.completeTask();
-                        }
-                        list.add(task);
-                        break;
-                    case ("TODO"):
-                        ToDo todo = new ToDo(params[1]);
-                        if (params[2].equals("true")) {
-                            todo.completeTask();
-                        }
-                        list.add(todo);
-                        break;
-                    case ("DEADLINE"):
-                        LocalDateTime deadlineBy = LocalDateTime.parse(params[3]);
-                        Deadline deadline = new Deadline(params[1], deadlineBy);
-                        if (params[2].equals("true")) {
-                            deadline.completeTask();
-                        }
-                        list.add(deadline);
-                        break;
-                    case ("EVENT"):
-                        Event event = new Event(params[1],
-                                LocalDateTime.parse(params[3]),
-                                LocalDateTime.parse(params[4]));
-                        if (params[2].equals("true")) {
-                            event.completeTask();
-                        }
-                        list.add(event);
-                        break;
-                    default:
-
+                try {
+                    switch (params[0]) {
+                        case ("TASK"):
+                            if (params.length != 3) {
+                                continue;
+                            }
+                            Task task = new Task(params[1]);
+                            updateCompletionStatus(task, params[2]);
+                            list.add(task);
+                            break;
+                        case ("TODO"):
+                            if (params.length != 3) {
+                                continue;
+                            }
+                            ToDo todo = new ToDo(params[1]);
+                            updateCompletionStatus(todo, params[2]);
+                            list.add(todo);
+                            break;
+                        case ("DEADLINE"):
+                            if (params.length != 4) {
+                                continue;
+                            }
+                            LocalDateTime deadlineBy = LocalDateTime.parse(params[3]);
+                            Deadline deadline = new Deadline(params[1], deadlineBy);
+                            updateCompletionStatus(deadline, params[2]);
+                            list.add(deadline);
+                            break;
+                        case ("EVENT"):
+                            if (params.length != 5) {
+                                continue;
+                            }
+                            Event event = new Event(params[1],
+                                    LocalDateTime.parse(params[3]),
+                                    LocalDateTime.parse(params[4]));
+                            updateCompletionStatus(event, params[2]);
+                            list.add(event);
+                            break;
+                        default:
+                            break;
+                    }
+                } catch (DateTimeParseException | IllegalArgumentException e) {
+                    continue;
                 }
             }
         }
         return list;
+    }
+
+    private void updateCompletionStatus(Task task, String status) {
+        if (status.equals("true")) {
+            task.completeTask();
+        } else if (!status.equals("false")) {
+            throw new IllegalArgumentException("invalid task completion status");
+        }
     }
 
     /**
