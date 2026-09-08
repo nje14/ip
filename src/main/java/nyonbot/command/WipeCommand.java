@@ -4,8 +4,7 @@ import java.io.IOException;
 
 import nyonbot.Logic;
 import nyonbot.Logic.Result;
-import nyonbot.storage.Storage;
-
+import nyonbot.storage.ListStorage;
 /**
  * Deletes all tasks and clears the storage file
  */
@@ -22,7 +21,7 @@ public class WipeCommand extends Command {
     @Override
     public Result execute() {
         Logic.getInstance().getList().clear();
-        Storage storage = new Storage("data/nyonbot.txt");
+        ListStorage storage = ListStorage.getInstance();
         try {
             storage.wipe();
         } catch (IOException e) {
