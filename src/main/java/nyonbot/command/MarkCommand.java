@@ -38,7 +38,7 @@ public class MarkCommand extends Command {
             }
             Task task = list.get(idx);
             task.completeTask();
-            return new Result(String.format("Marked %s as completed", task));
+            return new Result(String.format("Marked %s as completed", task), false, true);
         } catch (NumberFormatException e) {
             for (Task task : list) {
                 if (task.isSameTask(taskName)) {

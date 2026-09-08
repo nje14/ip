@@ -22,7 +22,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Inserts a new <code>Task></code> to the end of the list
-     * @param task
+     * @param task Task to add
      */
     public void add(Task task) {
         tasks.add(task);

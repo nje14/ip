@@ -35,6 +35,9 @@ public class TodoCommand extends Command {
         list.add(todo);
         return new Result(String.format(
                 "I've added this task:\n%s\nThere are %s tasks in your list",
-                todo, list.size()));
+                todo, list.size()),
+            false,
+            true
+        );
     }
 }

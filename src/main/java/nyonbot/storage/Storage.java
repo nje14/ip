@@ -79,7 +79,6 @@ public class Storage {
 
                 }
             }
-            fileReader.close();
         }
         return list;
     }
@@ -129,14 +128,13 @@ public class Storage {
             }
             saveFile.createNewFile();
         }
-        try (FileWriter fileWriter = new FileWriter(saveFile);) {
+        try (FileWriter fileWriter = new FileWriter(saveFile)) {
             StringBuilder sb = new StringBuilder();
             for (Task task : list) {
                 sb.append(taskParser(task));
                 sb.append("\n");
             }
             fileWriter.write(sb.toString());
-            fileWriter.close();
         }
     }
 

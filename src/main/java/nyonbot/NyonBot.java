@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import nyonbot.Logic.Result;
 import nyonbot.command.Command;
+import nyonbot.storage.ListStorage;
 import nyonbot.storage.Storage;
 
 /**
@@ -13,7 +14,7 @@ public class NyonBot {
     private Ui ui = Ui.getInstance();
     private Parser parser = Parser.getInstance();
     private Logic logic = Logic.getInstance();
-    private Storage storage = new Storage("data/nyonbot.txt");
+    private ListStorage storage = ListStorage.getInstance();
 
     /**
      * Creates a NyonBot instance
@@ -37,6 +38,9 @@ public class NyonBot {
             Command cmd = parser.parse(userInput);
             Result res = logic.execute(cmd);
             if (res.out() != null && !res.out().isBlank()) {
+                if (res.shouldWrite()) {
+                    storage.save(logic.getList());
+                }
                 StringBuilder sb = new StringBuilder("Nyon! (");
                 sb.append(res.out());
                 sb.append(")");

@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import nyonbot.controller.MainWindow;
 
 /**
- * A GUI for Duke using FXML.
+ * Main class for NyonBot
  */
 public class Main extends Application {
 

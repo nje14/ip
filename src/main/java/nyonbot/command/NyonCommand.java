@@ -11,7 +11,7 @@ public class NyonCommand extends Command {
     @Override
     public Result execute() {
         StringBuilder sb = new StringBuilder();
-        sb.append("\nNyon!");
+        sb.append("\nYay!");
         return new Result(sb.toString());
     }
 }

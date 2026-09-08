@@ -38,7 +38,7 @@ public class UnmarkCommand extends Command {
             }
             Task task = list.get(idx);
             task.uncompleteTask();
-            return new Result(String.format("Unmarked %s", task));
+            return new Result(String.format("Unmarked %s", task), false, true);
         } catch (NumberFormatException e) {
             for (Task task : list) {
                 if (task.isSameTask(taskName)) {
