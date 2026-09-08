@@ -43,7 +43,7 @@ public class MarkCommand extends Command {
             for (Task task : list) {
                 if (task.isSameTask(taskName)) {
                     task.completeTask();
-                    return new Result(String.format("Marked %s as completed", task));
+                    return new Result(String.format("Marked %s as completed", task, false, true));
                 }
             }
             return new Result("couldn't find the task... did you spell it right?");

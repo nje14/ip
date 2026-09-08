@@ -29,6 +29,7 @@ public class NyonBot {
 
     /**
      * Passes in an input to NyonBot
+     * 
      * @param input
      * @return String response
      */
@@ -57,6 +58,7 @@ public class NyonBot {
 
     /**
      * Invoked when NyonBot is closes; saves the current list
+     * 
      * @return true if successfully written to file, false otherwise
      */
     public boolean onClose() {
@@ -90,6 +92,9 @@ public class NyonBot {
                 Command cmd = parser.parse(userInput);
                 Result res = logic.execute(cmd);
                 if (res.out() != null && !res.out().isBlank()) {
+                    if (res.shouldWrite()) {
+                        storage.save(logic.getList());
+                    }
                     StringBuilder sb = new StringBuilder("Nyon! (");
                     sb.append(res.out());
                     sb.append(")");

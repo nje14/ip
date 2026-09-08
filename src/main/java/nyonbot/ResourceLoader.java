@@ -15,7 +15,10 @@ public class ResourceLoader {
      * @throws Error if read is interrupted or file cannot be found
      **/
     public static String readTextFile(String filename) {
-        if (filename.length() < 1 || filename.charAt(0) == '/') {
+        if (filename.length() < 2) {
+
+        }
+        if (filename.charAt(0) == '/') {
             filename = filename.substring(1);
         }
         try (InputStream input = NyonBot.class.getClassLoader().getResourceAsStream(filename)) {
