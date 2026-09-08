@@ -11,11 +11,10 @@ import nyonbot.model.TaskList;
  * Unmarks a task
  */
 public class UnmarkCommand extends Command {
-    TaskList list;
+    private TaskList list;
 
     /**
      * Creates an Unmark command with parsed arguments and a TaskList.
-     * 
      * @param arguments parsed command arguments
      * @param list the TaskList to search
      */

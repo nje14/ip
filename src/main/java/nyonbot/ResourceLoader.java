@@ -10,7 +10,6 @@ import java.nio.charset.StandardCharsets;
 public class ResourceLoader {
     /**
      * Reads a .txt file and returns its entire contents as one string
-     * 
      * @param filename `String` path to file; omit the preceding `/`
      * @return contents of `filename`
      * @throws Error if read is interrupted or file cannot be found

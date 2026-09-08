@@ -63,8 +63,7 @@ class ListAndFindCommandTest {
 
     @Test
     void findCommand_missingSearchString_throwsNyonException() {
-        assertThrows(NyonException.class,
-                () -> new FindCommand(arguments("find"), tasks).execute());
+        assertThrows(NyonException.class, () -> new FindCommand(arguments("find"), tasks).execute());
     }
 
     private static HashMap<String, String> arguments(String input) {

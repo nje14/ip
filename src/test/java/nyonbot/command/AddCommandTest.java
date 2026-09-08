@@ -39,8 +39,7 @@ class AddCommandTest {
 
     @Test
     void todoCommand_missingDescription_throwsNyonException() {
-        assertThrows(NyonException.class,
-                () -> new TodoCommand(arguments("todo"), tasks).execute());
+        assertThrows(NyonException.class, () -> new TodoCommand(arguments("todo"), tasks).execute());
     }
 
     @Test
@@ -57,17 +56,17 @@ class AddCommandTest {
 
     @Test
     void deadlineCommand_missingByMarker_throwsNyonException() {
-        assertThrows(NyonException.class,
-                () -> new DeadlineCommand(
-                        arguments("deadline submit report"), tasks).execute());
+        assertThrows(NyonException.class, () -> new DeadlineCommand(
+                arguments("deadline submit report"), tasks).execute()
+        );
     }
 
     @Test
     void deadlineCommand_invalidDate_throwsNyonException() {
-        assertThrows(NyonException.class,
-                () -> new DeadlineCommand(
-                        arguments("deadline submit report --by tomorrow"),
-                        tasks).execute());
+        assertThrows(NyonException.class, () -> new DeadlineCommand(
+                arguments("deadline submit report --by tomorrow"),
+                tasks).execute()
+        );
     }
 
     @Test
@@ -88,10 +87,9 @@ class AddCommandTest {
 
     @Test
     void eventCommand_missingFromMarker_throwsNyonException() {
-        assertThrows(NyonException.class,
-                () -> new EventCommand(
-                        arguments("event lecture --to 05/09/2026 1100"),
-                        tasks).execute());
+        assertThrows(NyonException.class, () -> new EventCommand(
+                arguments("event lecture --to 05/09/2026 1100"),
+                tasks).execute());
     }
 
     @Test

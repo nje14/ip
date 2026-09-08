@@ -30,7 +30,6 @@ public enum CommandType {
 
     /**
      * converts the string command to its enum type
-     * 
      * @param keyword command keyword to be parsed
      * @return the <code>CommandType</code> associated with this keyword
      */

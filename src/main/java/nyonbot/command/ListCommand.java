@@ -11,10 +11,8 @@ import nyonbot.model.TaskList;
  */
 public class ListCommand extends Command {
     private TaskList list;
-    
     /**
      * Creates a List command with parsed arguments and a TaskList to read.
-     * 
      * @param arguments parsed command arguments
      * @param list TaskList to read
      */

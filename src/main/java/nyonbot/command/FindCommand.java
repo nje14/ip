@@ -1,8 +1,8 @@
 package nyonbot.command;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 
 import nyonbot.Logic.Result;
@@ -18,7 +18,6 @@ public class FindCommand extends Command {
 
     /**
      * Creates a FindCommand with parsed arguments and a TaskList to search.
-     * 
      * @param arguments parsed command arguments
      * @param task the TaskList to search through
      */
@@ -29,7 +28,7 @@ public class FindCommand extends Command {
 
     /** {@inheritDoc} */
     @Override
-    public Result execute() throws NyonException{
+    public Result execute() throws NyonException {
         String searchInput = arguments.get(DESCRIPTION_KEY);
         if (searchInput == null || searchInput.isBlank()) {
             throw new NyonException("specify a search string");
@@ -49,4 +48,4 @@ public class FindCommand extends Command {
         }
         return new ListCommand(arguments, tasklist).execute();
     }
-}   
+}

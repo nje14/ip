@@ -8,7 +8,6 @@ import java.util.List;
  * Stores <code>Tasks</code> in insertion order.
  * <p>
  * Supports iteration and some basic <code>ArrayList</code> functions
- * 
  * @author nje14
  */
 public class TaskList implements Iterable<Task> {
@@ -23,7 +22,6 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Inserts a new <code>Task></code> to the end of the list
-     * 
      * @param task
      */
     public void add(Task task) {
@@ -32,7 +30,6 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Removes the <code>Task</code> at the specified index
-     * 
      * @param index zero-based index of the <code>Task</code>
      * @return the <code>Task</code> removed
      * @throws IndexOutOfBoundsException if index is outside of range
@@ -43,7 +40,6 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Removes the <code>Task</code> specified from the list
-     * 
      * @param task the <code>Task</code> to be removed
      * @return true iff the task was removed
      */
@@ -53,7 +49,6 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Returns the <code>Task</code> at the specified index
-     * 
      * @param index zero-based index to look up
      * @return the <code>Task</code> associated with that index
      */
@@ -70,7 +65,6 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Returns the size of the TaskList
-     * 
      * @return the current size of the TaskList
      */
     public int size() {

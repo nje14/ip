@@ -1,7 +1,6 @@
 package nyonbot;
 
 import nyonbot.command.Command;
-
 import nyonbot.model.Task;
 import nyonbot.model.TaskList;
 
@@ -10,6 +9,13 @@ import nyonbot.model.TaskList;
  */
 public class Logic {
 
+    /**
+     * Interal record class to store Results
+     * Mostly here for backward compatibility
+     * @param out
+     * @param shouldExit
+     * @param shouldWrite
+     */
     public record Result(String out, boolean shouldExit, boolean shouldWrite) {
         public Result(String out) {
             this(out, false, false);
@@ -17,9 +23,7 @@ public class Logic {
         public Result(String out, boolean shouldExit) {
             this(out, shouldExit, false);
         }
-    }   
-
-
+    }
 
     private static Logic instance = null;
     private TaskList list;
@@ -41,7 +45,6 @@ public class Logic {
 
     /**
      * Replaces the current TaskList with the input list
-     * 
      * @param newList new TaskList
      */
     public void loadList(TaskList newList) {
@@ -56,12 +59,11 @@ public class Logic {
 
     /**
      * Executes the given command
-     * 
      * @param cmd Command to be executed
      * @return Result of the Command
      * @throws Exception if an exception occurs during the execution
      */
-    public Result execute(Command cmd) throws Exception{
-        return cmd.execute();     
+    public Result execute(Command cmd) throws Exception {
+        return cmd.execute();
     }
 }

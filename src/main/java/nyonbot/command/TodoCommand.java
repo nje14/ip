@@ -12,11 +12,10 @@ import nyonbot.model.ToDo;
  * Creates a new Todo Task
  */
 public class TodoCommand extends Command {
-    TaskList list;
+    private TaskList list;
 
     /**
      * Creates a TodoCommand with parsed arguments and a TaskList.
-     * 
      * @param arguments parsed command arguments
      * @param list TaskList to add to
      */

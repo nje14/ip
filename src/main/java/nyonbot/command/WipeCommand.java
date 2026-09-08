@@ -28,7 +28,6 @@ public class WipeCommand extends Command {
         } catch (IOException e) {
             return new Result("couldn't wipe your storage;" + e.getMessage());
         }
-        
         return new Result("everything is gone now", false);
     }
 }

@@ -42,16 +42,13 @@ class TaskMutationCommandTest {
 
     @Test
     void markCommand_invalidIndex_throwsNyonException() {
-        assertThrows(NyonException.class,
-                () -> new MarkCommand(arguments("mark 0"), tasks).execute());
-        assertThrows(NyonException.class,
-                () -> new MarkCommand(arguments("mark 3"), tasks).execute());
+        assertThrows(NyonException.class, () -> new MarkCommand(arguments("mark 0"), tasks).execute());
+        assertThrows(NyonException.class, () -> new MarkCommand(arguments("mark 3"), tasks).execute());
     }
 
     @Test
     void markCommand_missingDescription_throwsNyonException() {
-        assertThrows(NyonException.class,
-                () -> new MarkCommand(arguments("mark "), tasks).execute());
+        assertThrows(NyonException.class, () -> new MarkCommand(arguments("mark "), tasks).execute());
     }
 
     @Test
@@ -74,8 +71,7 @@ class TaskMutationCommandTest {
 
     @Test
     void unmarkCommand_invalidIndex_throwsNyonException() {
-        assertThrows(NyonException.class,
-                () -> new UnmarkCommand(arguments("unmark 3"), tasks).execute());
+        assertThrows(NyonException.class, () -> new UnmarkCommand(arguments("unmark 3"), tasks).execute());
     }
 
     @Test
@@ -96,17 +92,15 @@ class TaskMutationCommandTest {
 
     @Test
     void deleteCommand_invalidIndex_throwsNyonException() {
-        assertThrows(NyonException.class,
-                () -> new DeleteCommand(arguments("delete 0"), tasks).execute());
-        assertThrows(NyonException.class,
-                () -> new DeleteCommand(arguments("delete 3"), tasks).execute());
+        assertThrows(NyonException.class, () -> new DeleteCommand(arguments("delete 0"), tasks).execute());
+        assertThrows(NyonException.class, () -> new DeleteCommand(arguments("delete 3"), tasks).execute());
     }
 
     @Test
     void deleteCommand_unknownName_throwsNyonException() {
-        assertThrows(NyonException.class,
-                () -> new DeleteCommand(
-                        arguments("delete missing task"), tasks).execute());
+        assertThrows(NyonException.class, () -> new DeleteCommand(
+            arguments("delete missing task"), tasks).execute()
+        );
     }
 
     private static HashMap<String, String> arguments(String input) {

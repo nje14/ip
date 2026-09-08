@@ -3,8 +3,8 @@ package nyonbot.command;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
-import nyonbot.Parser;
 import nyonbot.Logic.Result;
+import nyonbot.Parser;
 import nyonbot.model.Event;
 import nyonbot.model.NyonException;
 import nyonbot.model.Task;
@@ -14,7 +14,12 @@ import nyonbot.model.TaskList;
  * Adds an event with a start time and end time
  */
 public class EventCommand extends Command {
-    TaskList list;
+    private TaskList list;
+    /**
+     * Creates a new Event Command with parsed arguments and TaskList to read
+     * @param arguments parsed command arguments
+     * @param list list to read
+     */
     public EventCommand(HashMap<String, String> arguments, TaskList list) {
         super(arguments);
         this.list = list;
@@ -46,11 +51,7 @@ public class EventCommand extends Command {
         if (startDate == null || endDate == null) {
             throw new NyonException("please enter startDate and endDate in the format dd/MM/yyyy HHmm");
         }
-        Task event = new Event(
-                description,
-                startDate, 
-                endDate
-        );
+        Task event = new Event(description, startDate, endDate);
         list.add(event);
         return new Result(String.format(
                 "I've added this task: \n%s\nThere are %s tasks in your list",

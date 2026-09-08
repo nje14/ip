@@ -6,12 +6,18 @@ import nyonbot.Logic.Result;
 import nyonbot.command.Command;
 import nyonbot.storage.Storage;
 
+/**
+ * Main driver class for NyonBot
+ */
 public class NyonBot {
     private Ui ui = Ui.getInstance();
     private Parser parser = Parser.getInstance();
     private Logic logic = Logic.getInstance();
     private Storage storage = new Storage("data/nyonbot.txt");
 
+    /**
+     * Creates a NyonBot instance
+     */
     public NyonBot() {
         try {
             logic.loadList(storage.load());
@@ -20,6 +26,11 @@ public class NyonBot {
         }
     }
 
+    /**
+     * Passes in an input to NyonBot
+     * @param input
+     * @return String response
+     */
     public String respond(String input) {
         try {
             String userInput = input;
@@ -40,6 +51,10 @@ public class NyonBot {
         }
     }
 
+    /**
+     * Invoked when NyonBot is closes; saves the current list
+     * @return true if successfully written to file, false otherwise
+     */
     public boolean onClose() {
         try {
             storage.save(logic.getList());

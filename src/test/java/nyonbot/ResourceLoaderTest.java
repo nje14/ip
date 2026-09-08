@@ -18,7 +18,6 @@ class ResourceLoaderTest {
 
     @Test
     void readTextFile_missingResource_throwsIllegalStateException() {
-        assertThrows(IllegalStateException.class,
-                () -> ResourceLoader.readTextFile("static/missing.txt"));
+        assertThrows(IllegalStateException.class, () -> ResourceLoader.readTextFile("static/missing.txt"));
     }
 }

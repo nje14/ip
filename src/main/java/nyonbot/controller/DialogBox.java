@@ -17,7 +17,7 @@ import javafx.scene.layout.HBox;
 /**
  * Represents a dialog box for the NyonBot
  */
-public class DialogBox extends HBox{
+public class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML

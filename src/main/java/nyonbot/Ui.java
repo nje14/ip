@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 /**
  * Handles all input and output for the NyonBot application
- * Ui
  */
 public class Ui {
     private static Ui instance = null;
@@ -49,7 +48,6 @@ public class Ui {
 
     /**
      * Reads one command from the standard input
-     * 
      * @return the command entered by the user
      */
     public String readCommand() {
@@ -61,7 +59,6 @@ public class Ui {
 
     /**
      * Prints a message to the standard output
-     * 
      * @param out the message to be printed
      */
     public void showOutput(String out) {
@@ -70,7 +67,6 @@ public class Ui {
 
     /**
      * Formats a date to the display pattern {@code dd MMM yyyy HHmm}
-     * 
      * @param dateTime <code>DateTime</code> to be formatted
      * @return the formatted date string
      */

@@ -4,9 +4,8 @@ package nyonbot.command;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
-
-import nyonbot.Parser;
 import nyonbot.Logic.Result;
+import nyonbot.Parser;
 import nyonbot.model.Deadline;
 import nyonbot.model.NyonException;
 import nyonbot.model.Task;
@@ -20,7 +19,6 @@ public class DeadlineCommand extends Command {
 
     /**
      * Creates a deadline command with parsed arguments and a TaskList.
-     * 
      * @param arguments parsed command arguments
      * @param list the TaskList to add the task to
      */

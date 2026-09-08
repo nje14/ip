@@ -24,7 +24,6 @@ public abstract class Command {
 
     /**
      * Executes this command
-     * 
      * @return <code>Result</code> containing output and application control info
      * @throws NyonException if command input is invalid or otherwise raises issues
      */

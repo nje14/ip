@@ -22,7 +22,6 @@ public class Storage {
 
     /**
      * Creates a storage object for the specified file path
-     * 
      * @param filePath filepath of the save file
      */
     public Storage(String filePath) {
@@ -31,7 +30,6 @@ public class Storage {
 
     /**
      * Loads the tasks from the savefile
-     * 
      * @return A <code>TaskList</code> of the Tasks stored in the file
      * @throws IOException if the file cannot be read
      */
@@ -77,6 +75,8 @@ public class Storage {
                         }
                         list.add(event);
                         break;
+                    default:
+
                 }
             }
             fileReader.close();
@@ -86,7 +86,6 @@ public class Storage {
 
     /**
      * Returns the storage representation of the task to be stored
-     * 
      * @param task the <code>Task</code> to be stored
      * @return the storage representation of the task
      */
@@ -117,7 +116,6 @@ public class Storage {
     /**
      * Saves a list to the filepath of the Storage object.
      * Will override contents.
-     * 
      * @param list the list to be saved
      * @throws IOException if file cannot be created, read or found
      */
@@ -148,7 +146,6 @@ public class Storage {
 
     /**
      * Removes all tasks from the file
-     * 
      * @throws IOException if the file cannot be read or written to
      */
     public void wipe() throws IOException {

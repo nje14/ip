@@ -8,11 +8,10 @@ import nyonbot.Ui;
  * Represents a deadline task
  */
 public class Deadline extends Task {
-    LocalDateTime deadline;
+    private LocalDateTime deadline;
 
     /**
      * Creates a Deadline task with the associated name and deadline
-     * 
      * @param taskName
      * @param deadline
      */

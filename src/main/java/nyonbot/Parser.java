@@ -25,10 +25,9 @@ import nyonbot.command.WipeCommand;
 
 /**
  * Converts the command line input into executable commands
- * 
  * @author nje14
  */
-public class Parser {    
+public class Parser {
     private static final Pattern FLAG_PATTERN =
             Pattern.compile("(?<!\\S)(--[A-Za-z][A-Za-z0-9-]*)(?=\\s|$)");
 
@@ -46,7 +45,6 @@ public class Parser {
 
     /**
      * Parses a raw input into a command
-     * 
      * @param input raw input
      * @return the <code>Command</code> associated with this input
      */
@@ -77,7 +75,6 @@ public class Parser {
     /**
      * Parses command-line input into a command, positional description, and
      * flag-value pairs.
-     *
      * @param input raw command-line input
      * @return parsed arguments keyed by {@code command}, {@code description},
      *         or their literal flag such as {@code --by}
@@ -125,7 +122,6 @@ public class Parser {
 
     /**
      * Parses a String date using the format {@code dd/MM/yyyy HHmm}
-     * 
      * @param date date to be parsed
      * @return the <code>LocalDateTime</code> associated with this date
      */

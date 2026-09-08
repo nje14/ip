@@ -11,11 +11,10 @@ import nyonbot.model.TaskList;
  * Marks a task as completed
  */
 public class MarkCommand extends Command {
-    TaskList list;
+    private TaskList list;
 
     /**
      * Creates a MarkCommand with parsed arguments and a TaskList to check.
-     * 
      * @param arguments parsed command arguments
      * @param list TaskList to be checked
      */
