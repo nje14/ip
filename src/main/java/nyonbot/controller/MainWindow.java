@@ -48,6 +48,7 @@ public class MainWindow extends AnchorPane {
                 dialogContainer.getChildren().add(DialogBox.getBotDialog("couldn't save your file", errorImage));
             } else {
                 Platform.exit();
+                return;
             }
         }
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
