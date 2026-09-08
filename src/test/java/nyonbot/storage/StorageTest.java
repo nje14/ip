@@ -84,6 +84,50 @@ class StorageTest {
     }
 
     @Test
+    void save_afterTaskListChanges_persistsCurrentState() throws IOException {
+        Path saveFile = tempDir.resolve("tasks.txt");
+        Storage storage = new Storage(saveFile.toString());
+        TaskList tasks = new TaskList();
+        ToDo todo = new ToDo("finish report");
+        tasks.add(todo);
+        tasks.add(new Task("remove me"));
+        storage.save(tasks);
+
+        todo.completeTask();
+        tasks.remove(1);
+        tasks.add(new Task("added later"));
+        storage.save(tasks);
+
+        TaskList loaded = storage.load();
+        assertEquals(2, loaded.size());
+        assertEquals("finish report", loaded.get(0).getName());
+        assertTrue(loaded.get(0).isDone());
+        assertEquals("added later", loaded.get(1).getName());
+    }
+
+    @Test
+    void load_malformedRecords_skipsThemAndLoadsValidRecords() throws IOException {
+        Path saveFile = tempDir.resolve("tasks.txt");
+        Files.writeString(saveFile, String.join("\n",
+                "TODO|valid todo|true",
+                "DEADLINE|invalid date|false|not-a-date",
+                "EVENT|missing fields|false|2026-09-05T10:00",
+                "TASK|invalid status|not done",
+                "UNKNOWN|ignored|false",
+                "TASK|valid task|false"));
+        Storage storage = new Storage(saveFile.toString());
+
+        TaskList loaded = storage.load();
+
+        assertEquals(2, loaded.size());
+        assertInstanceOf(ToDo.class, loaded.get(0));
+        assertEquals("valid todo", loaded.get(0).getName());
+        assertTrue(loaded.get(0).isDone());
+        assertEquals("valid task", loaded.get(1).getName());
+        assertFalse(loaded.get(1).isDone());
+    }
+
+    @Test
     void wipe_existingFile_removesAllStoredTasks() throws IOException {
         Path saveFile = tempDir.resolve("tasks.txt");
         Storage storage = new Storage(saveFile.toString());
