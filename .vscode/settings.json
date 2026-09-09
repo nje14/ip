@@ -3,5 +3,6 @@
     "java.checkstyle.version": "11.0.0",
     "java.checkstyle.properties": {
         "config_loc": "${workspaceFolder}/config/checkstyle"
-    }
+    },
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
