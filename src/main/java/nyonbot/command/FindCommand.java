@@ -35,12 +35,14 @@ public class FindCommand extends Command {
             throw new NyonException("specify a search string");
         }
         String[] searchStrings = searchInput.split(" ");
-        Set<String> searchTerms = new HashSet<>(Arrays.asList(searchStrings));
         Set<Task> matchingTasks = new HashSet<>();
         for (Task task : list) {
-            for (String fragment: task.getName().split(" ")) {
-                if (searchTerms.contains(fragment)) {
-                    matchingTasks.add(task);
+            String[] fragments = task.getName().split(" ");
+            for (String searchTerm: searchStrings) {
+                for (String fragment: fragments) {
+                    if (fragment.indexOf(searchTerm) != -1) {
+                        matchingTasks.add(task);
+                    }
                 }
             }
         }
