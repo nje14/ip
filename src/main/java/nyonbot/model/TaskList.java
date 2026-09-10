@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Stores <code>Tasks</code> in insertion order.
@@ -85,5 +86,13 @@ public class TaskList implements Iterable<Task> {
     @Override
     public Iterator<Task> iterator() {
         return tasks.iterator();
+    }
+
+    /**
+     * Returns a Stream of this TaskList
+     * @return a Stream<Task> of the arraylist
+     */
+    public Stream<Task> stream() {
+        return tasks.stream();
     }
 }
