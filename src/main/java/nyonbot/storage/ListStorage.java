@@ -1,7 +1,7 @@
 package nyonbot.storage;
 
 /**
- * Creates a singleton list storage class for handling NyonBot's lists
+ * A singleton list storage class for handling NyonBot's lists
  */
 public class ListStorage extends Storage {
     private static ListStorage instance = null;
