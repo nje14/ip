@@ -1,6 +1,8 @@
 package nyonbot.command;
 
 import java.util.HashMap;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import nyonbot.Logic.Result;
 import nyonbot.model.Task;
@@ -11,10 +13,12 @@ import nyonbot.model.TaskList;
  */
 public class ListCommand extends Command {
     private TaskList list;
+
     /**
      * Creates a List command with parsed arguments and a TaskList to read.
+     * 
      * @param arguments parsed command arguments
-     * @param list TaskList to read
+     * @param list      TaskList to read
      */
     public ListCommand(HashMap<String, String> arguments, TaskList list) {
         super(arguments);
@@ -24,15 +28,16 @@ public class ListCommand extends Command {
     /** {@inheritDoc} */
     @Override
     public Result execute() {
-        StringBuilder sb = new StringBuilder("Here are your tasks:\n");
-        int idx = 0;
-        for (Task task : list) {
-            sb.append(String.format("%s. %s", ++idx, task));
-            sb.append("\n");
+        String output = IntStream.range(0, list.size())
+                .mapToObj(index -> formatTask(index, list.get(index)))
+                .collect(Collectors.joining(System.lineSeparator()));
+        if (output.isEmpty()) {
+            output = "No tasks nyon...";
         }
-        if (idx == 0) {
-            sb.append("No tasks nyon...");
-        }
-        return new Result(new String(sb));
+        return new Result(output);
+    }
+
+    private String formatTask(int index, Task task) {
+        return String.format("%d. %s", index + 1, task);
     }
 }
