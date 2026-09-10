@@ -16,7 +16,6 @@ public class ListCommand extends Command {
 
     /**
      * Creates a List command with parsed arguments and a TaskList to read.
-     * 
      * @param arguments parsed command arguments
      * @param list      TaskList to read
      */

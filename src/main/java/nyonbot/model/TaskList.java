@@ -90,7 +90,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Returns a Stream of this TaskList
-     * @return a Stream<Task> of the arraylist
+     * @return a Stream of the arraylist
      */
     public Stream<Task> stream() {
         return tasks.stream();
