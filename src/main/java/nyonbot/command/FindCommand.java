@@ -21,9 +21,9 @@ public class FindCommand extends Command {
      * @param arguments parsed command arguments
      * @param task the TaskList to search through
      */
-    public FindCommand(HashMap<String, String> arguments, TaskList task) {
+    public FindCommand(HashMap<String, String> arguments, TaskList tasks) {
         super(arguments);
-        this.list = task;
+        this.list = tasks;
     }
 
     /** {@inheritDoc} */
@@ -35,18 +35,20 @@ public class FindCommand extends Command {
             throw new NyonException("specify a search string");
         }
         String[] searchStrings = searchInput.split(" ");
-        Set<String> set = new HashSet<>(Arrays.asList(searchStrings));
-        TaskList tasklist = new TaskList();
+        Set<String> searchTerms = new HashSet<>(Arrays.asList(searchStrings));
+        Set<Task> matchingTasks = new HashSet<>();
         for (Task task : list) {
             for (String fragment: task.getName().split(" ")) {
-                if (set.contains(fragment)) {
-                    tasklist.add(task);
+                if (searchTerms.contains(fragment)) {
+                    matchingTasks.add(task);
                 }
             }
         }
-        if (tasklist.size() == 0) {
+        if (matchingTasks.size() == 0) {
             return new Result("couldn't find anything matching the search string...");
         }
-        return new ListCommand(arguments, tasklist).execute();
+        TaskList taskList = new TaskList();
+        taskList.addAll(matchingTasks);
+        return new ListCommand(arguments, taskList).execute();
     }
 }

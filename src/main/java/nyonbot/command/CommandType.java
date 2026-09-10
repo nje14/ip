@@ -15,7 +15,6 @@ public enum CommandType {
     UNMARK("unmark"),
     UNKNOWN("unknown"),
     DELETE("delete"),
-    WIPE("wipe"),
     FIND("find");
 
     private final String keyword;

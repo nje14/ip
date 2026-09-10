@@ -2,8 +2,10 @@ package nyonbot;
 
 import java.io.IOException;
 
+import javafx.application.Platform;
 import nyonbot.Logic.Result;
 import nyonbot.command.Command;
+import nyonbot.model.NyonException;
 import nyonbot.storage.ListStorage;
 import nyonbot.storage.Storage;
 
@@ -37,10 +39,18 @@ public class NyonBot {
             String userInput = input;
             Command cmd = parser.parse(userInput);
             Result res = logic.execute(cmd);
-            if (res.out() != null && !res.out().isBlank()) {
-                if (res.shouldWrite()) {
-                    storage.save(logic.getList());
+            if (res.shouldExit()) {
+                if (!this.onClose()) {
+                    throw new NyonException("couldn't close file");
                 }
+                Platform.exit();
+                return null;
+            }
+            if (res.shouldWrite()) {
+                storage.save(logic.getList());
+            }
+            if (res.out() != null && !res.out().isBlank()) {
+
                 StringBuilder sb = new StringBuilder("Nyon! (");
                 sb.append(res.out());
                 sb.append(")");
@@ -98,7 +108,6 @@ public class NyonBot {
                     sb.append(")");
                     ui.showOutput(sb.toString());
                 }
-
                 loop = !res.shouldExit();
             } catch (Exception e) {
                 StringBuilder sb = new StringBuilder("Nyon... (");

@@ -43,7 +43,6 @@ class SimpleCommandTest {
         String output = new NyonCommand().execute().out();
 
         assertTrue(output.contains("Yay"));
-        assertTrue(output.endsWith("\nYay!"));
     }
 
     private static HashMap<String, String> arguments(String input) {

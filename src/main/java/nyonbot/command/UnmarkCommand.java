@@ -43,7 +43,7 @@ public class UnmarkCommand extends Command {
             for (Task task : list) {
                 if (task.isSameTask(taskName)) {
                     task.uncompleteTask();
-                    return new Result(String.format("Unmarked %s", task));
+                    return new Result(String.format("Unmarked %s", task), false, true);
                 }
             }
             return new Result("couldn't find the task... did you spell it right?");
