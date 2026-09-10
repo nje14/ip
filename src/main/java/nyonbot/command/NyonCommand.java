@@ -10,8 +10,6 @@ public class NyonCommand extends Command {
     /** {@inheritDoc} */
     @Override
     public Result execute() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("\nYay!");
-        return new Result(sb.toString());
+        return new Result("Yay");
     }
 }

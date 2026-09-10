@@ -15,6 +15,8 @@ import nyonbot.controller.MainWindow;
 public class Main extends Application {
 
     private NyonBot nyonBot = new NyonBot();
+    private final int minHeight = 600;
+    private final int minWidth = 480;
 
     @Override
     public void start(Stage stage) {
@@ -23,8 +25,8 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            stage.setMinHeight(480);
-            stage.setMaxHeight(600);
+            stage.setMinHeight(minHeight);
+            stage.setMinWidth(minWidth);
             fxmlLoader.<MainWindow>getController().setNyonBot(nyonBot);
             stage.show();
 

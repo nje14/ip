@@ -31,7 +31,6 @@ public class NyonBot {
 
     /**
      * Passes in an input to NyonBot
-     * 
      * @param input
      * @return String response
      */
@@ -68,7 +67,6 @@ public class NyonBot {
 
     /**
      * Invoked when NyonBot is closes; saves the current list
-     * 
      * @return true if successfully written to file, false otherwise
      */
     public boolean onClose() {

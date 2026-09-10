@@ -21,7 +21,6 @@ import nyonbot.command.NoCommand;
 import nyonbot.command.NyonCommand;
 import nyonbot.command.TodoCommand;
 import nyonbot.command.UnmarkCommand;
-import nyonbot.command.WipeCommand;
 
 /**
  * Converts the command line input into executable commands
@@ -66,7 +65,6 @@ public class Parser {
             case MARK -> new MarkCommand(arguments, Logic.getInstance().getList());
             case UNMARK -> new UnmarkCommand(arguments, Logic.getInstance().getList());
             case DELETE -> new DeleteCommand(arguments, Logic.getInstance().getList());
-            case WIPE -> new WipeCommand();
             case FIND -> new FindCommand(arguments, Logic.getInstance().getList());
             default -> throw new IllegalArgumentException("unrecognized command");
         };
