@@ -52,6 +52,7 @@ public class Logic {
         if (newList == null) {
             return;
         }
+        assert(newList != null);
         for (Task task : newList) {
             list.add(task);
         }

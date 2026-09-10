@@ -29,6 +29,7 @@ public class FindCommand extends Command {
     /** {@inheritDoc} */
     @Override
     public Result execute() throws NyonException {
+        assert arguments != null;
         String searchInput = arguments.get(DESCRIPTION_KEY);
         if (searchInput == null || searchInput.isBlank()) {
             throw new NyonException("specify a search string");

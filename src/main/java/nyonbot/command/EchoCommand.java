@@ -15,7 +15,8 @@ public class EchoCommand extends Command {
     /** {@inheritDoc} */
     @Override
     public Result execute() {
-        String description = arguments.get(DESCRIPTION_KEY);
+        assert arguments != null;
+        String description = arguments.getOrDefault(DESCRIPTION_KEY, null);
         return new Result(description == null
                 ? arguments.getOrDefault(COMMAND_KEY, "")
                 : description);

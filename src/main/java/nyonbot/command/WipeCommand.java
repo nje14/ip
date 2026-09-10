@@ -20,10 +20,10 @@ public class WipeCommand extends Command {
     /** {@inheritDoc} */
     @Override
     public Result execute() {
-        Logic.getInstance().getList().clear();
         ListStorage storage = ListStorage.getInstance();
         try {
             storage.wipe();
+            Logic.getInstance().getList().clear();
         } catch (IOException e) {
             return new Result("couldn't wipe your storage;" + e.getMessage());
         }
