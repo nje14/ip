@@ -1,6 +1,7 @@
 package nyonbot.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -26,6 +27,15 @@ public class TaskList implements Iterable<Task> {
      */
     public void add(Task task) {
         tasks.add(task);
+    }
+
+    /**
+     * Adds all associated tasks to the TaskList
+     * @param taskCollection tasks to insert
+     * @return true if successsful
+     */
+    public boolean addAll(Collection<? extends Task> taskCollection) {
+        return tasks.addAll(taskCollection);
     }
 
     /**

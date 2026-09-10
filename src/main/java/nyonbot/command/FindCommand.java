@@ -36,17 +36,19 @@ public class FindCommand extends Command {
         }
         String[] searchStrings = searchInput.split(" ");
         Set<String> set = new HashSet<>(Arrays.asList(searchStrings));
-        TaskList tasklist = new TaskList();
+        Set<Task> tasks = new HashSet<>();
         for (Task task : list) {
             for (String fragment: task.getName().split(" ")) {
                 if (set.contains(fragment)) {
-                    tasklist.add(task);
+                    tasks.add(task);
                 }
             }
         }
-        if (tasklist.size() == 0) {
+        if (tasks.size() == 0) {
             return new Result("couldn't find anything matching the search string...");
         }
-        return new ListCommand(arguments, tasklist).execute();
+        TaskList taskList = new TaskList();
+        taskList.addAll(tasks);
+        return new ListCommand(arguments, taskList).execute();
     }
 }

@@ -1,5 +1,7 @@
 package nyonbot.controller;
 
+import java.io.IOException;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
@@ -37,23 +39,14 @@ public class MainWindow extends AnchorPane {
     }
 
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws IOException {
         String input = userInput.getText();
         if (input.isBlank()) {
             return;
         }
-        if (input.startsWith("bye")) {
-            if (!nyonBot.onClose()) {
-                dialogContainer.getChildren().add(DialogBox.getUserDialog(input, botImage));
-                dialogContainer.getChildren().add(DialogBox.getBotDialog("couldn't save your file", errorImage));
-            } else {
-                Platform.exit();
-                return;
-            }
-        }
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
         String response = nyonBot.respond(input);
-        if (response.isBlank()) {
+        if (response == null || response.isBlank()) {
             return;
         }
         if (response.startsWith("Nyon...")) {
