@@ -26,6 +26,7 @@ public class DeleteCommand extends Command {
     /** {@inheritDoc} */
     @Override
     public Result execute() throws NyonException {
+        assert arguments != null;
         String taskName = arguments.getOrDefault(DESCRIPTION_KEY, "").strip();
         try {
             Integer.parseInt(taskName);

@@ -85,13 +85,13 @@ public class Parser {
         if (normalizedInput.isBlank()) {
             return arguments;
         }
-
+        assert(!input.isEmpty());
         String[] commandParts = normalizedInput.split("\\s+", 2);
         arguments.put(Command.COMMAND_KEY, commandParts[0]);
         if (commandParts.length == 1) {
             return arguments;
         }
-
+        assert(commandParts.length > 1);
         String rawArguments = commandParts[1];
         Matcher matcher = FLAG_PATTERN.matcher(rawArguments);
         int firstFlagIndex = rawArguments.length();

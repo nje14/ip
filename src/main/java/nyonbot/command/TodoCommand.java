@@ -27,6 +27,7 @@ public class TodoCommand extends Command {
     /** {@inheritDoc} */
     @Override
     public Result execute() throws NyonException {
+        assert arguments != null;
         String description = arguments.get(DESCRIPTION_KEY);
         if (description == null || description.isBlank()) {
             throw new NyonException("cannot add a missing description");

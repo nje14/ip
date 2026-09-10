@@ -44,6 +44,7 @@ public class Storage {
             while (fileReader.hasNextLine()) {
                 String line = fileReader.nextLine();
                 String[] params = line.split("\\|", -1);
+                assert(params.length > 0);
                 try {
                     switch (params[0]) {
                         case ("TASK"):

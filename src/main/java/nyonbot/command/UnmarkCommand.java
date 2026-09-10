@@ -26,13 +26,13 @@ public class UnmarkCommand extends Command {
     /** {@inheritDoc} */
     @Override
     public Result execute() throws NyonException {
+        assert arguments != null;
         String taskName = arguments.getOrDefault(DESCRIPTION_KEY, "").strip();
         if (taskName.isBlank()) {
             throw new NyonException("cannot unmark without a description :(");
         }
-        int idx;
         try {
-            idx = Integer.parseInt(taskName) - 1;
+            int idx = Integer.parseInt(taskName) - 1;
             if (idx < 0 || idx >= list.size()) {
                 throw new NyonException("index out of bounds...");
             }

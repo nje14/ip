@@ -30,8 +30,9 @@ public class DeadlineCommand extends Command {
     /** {@inheritDoc} */
     @Override
     public Result execute() throws NyonException {
-        String description = arguments.get(DESCRIPTION_KEY);
-        String deadlineValue = arguments.get("--by");
+        assert arguments != null;
+        String description = arguments.getOrDefault(DESCRIPTION_KEY, null);
+        String deadlineValue = arguments.getOrDefault("--by", null);
         if (description == null || description.isBlank()) {
             throw new NyonException("cannot omit the description");
         }

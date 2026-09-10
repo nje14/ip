@@ -28,6 +28,7 @@ public class EventCommand extends Command {
     /** {@inheritDoc} */
     @Override
     public Result execute() throws NyonException {
+        assert arguments != null;
         String description = arguments.get(DESCRIPTION_KEY);
         String startValue = arguments.get("--from");
         String endValue = arguments.get("--to");
