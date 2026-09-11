@@ -7,7 +7,6 @@ import nyonbot.Logic.Result;
 import nyonbot.command.Command;
 import nyonbot.model.NyonException;
 import nyonbot.storage.ListStorage;
-import nyonbot.storage.Storage;
 
 /**
  * Main driver class for NyonBot
@@ -79,48 +78,22 @@ public class NyonBot {
     }
 
     public static void main(String[] args) {
+        NyonBot nyonBot = new NyonBot();
         Ui ui = Ui.getInstance();
-        Parser parser = Parser.getInstance();
-        Logic logic = Logic.getInstance();
-        Storage storage = new Storage("data/nyonbot.txt");
-        try {
-            logic.loadList(storage.load());
-        } catch (IOException e) {
-            ui.showOutput("couldn't load your list as " + e.getMessage());
-        }
 
         ui.welcome();
 
-        boolean loop = true;
-
-        while (loop) {
+        while (true) {
             System.out.println();
-            try {
-                String userInput = ui.readCommand();
-                Command cmd = parser.parse(userInput);
-                Result res = logic.execute(cmd);
-                if (res.out() != null && !res.out().isBlank()) {
-                    if (res.shouldWrite()) {
-                        storage.save(logic.getList());
-                    }
-                    StringBuilder sb = new StringBuilder("Nyon! (");
-                    sb.append(res.out());
-                    sb.append(")");
-                    ui.showOutput(sb.toString());
-                }
-                loop = !res.shouldExit();
-            } catch (Exception e) {
-                StringBuilder sb = new StringBuilder("Nyon... (");
-                sb.append(e.getMessage());
-                sb.append(")");
-                ui.showOutput(sb.toString());
-            }
 
-        }
-        try {
-            storage.save(logic.getList());
-        } catch (IOException e) {
-            ui.showOutput("couldn't save your list as " + e.getMessage());
+            String response = nyonBot.respond(ui.readCommand());
+
+            if (response == null) {
+                break;
+            }
+            if (!response.isBlank()) {
+                ui.showOutput(response);
+            }
         }
 
         ui.goodbye();

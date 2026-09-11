@@ -32,6 +32,8 @@ public class ListCommand extends Command {
                 .collect(Collectors.joining(System.lineSeparator()));
         if (output.isEmpty()) {
             output = "No tasks nyon...";
+        } else {
+            output = "\n" + output + "\n";
         }
         return new Result(output);
     }
