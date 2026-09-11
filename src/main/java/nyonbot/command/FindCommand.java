@@ -17,8 +17,9 @@ public class FindCommand extends Command {
 
     /**
      * Creates a FindCommand with parsed arguments and a TaskList to search.
+     * 
      * @param arguments parsed command arguments
-     * @param task the TaskList to search through
+     * @param task      the TaskList to search through
      */
     public FindCommand(HashMap<String, String> arguments, TaskList tasks) {
         super(arguments);
@@ -28,28 +29,34 @@ public class FindCommand extends Command {
     /** {@inheritDoc} */
     @Override
     public Result execute() throws NyonException {
-        assert arguments != null;
         String searchInput = arguments.get(DESCRIPTION_KEY);
         if (searchInput == null || searchInput.isBlank()) {
             throw new NyonException("specify a search string");
         }
-        String[] searchStrings = searchInput.split(" ");
-        Set<Task> matchingTasks = new HashSet<>();
+
+        String[] searchTerms = searchInput.trim().split("\\s+");
+        TaskList matchingTasks = new TaskList();
+
         for (Task task : list) {
-            String[] fragments = task.getName().split(" ");
-            for (String searchTerm: searchStrings) {
-                for (String fragment: fragments) {
-                    if (fragment.indexOf(searchTerm) != -1) {
-                        matchingTasks.add(task);
-                    }
-                }
+            if (matchesAnySearchTerm(task, searchTerms)) {
+                matchingTasks.add(task);
             }
         }
-        if (matchingTasks.size() == 0) {
+
+        if (matchingTasks.isEmpty()) {
             return new Result("couldn't find anything matching the search string...");
         }
-        TaskList taskList = new TaskList();
-        taskList.addAll(matchingTasks);
-        return new ListCommand(arguments, taskList).execute();
+        return new ListCommand(arguments, matchingTasks).execute();
+    }
+
+    private boolean matchesAnySearchTerm(Task task, String[] searchTerms) {
+        String taskName = task.getName();
+
+        for (String term : searchTerms) {
+            if (taskName.contains(term)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

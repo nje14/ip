@@ -95,4 +95,12 @@ public class TaskList implements Iterable<Task> {
     public Stream<Task> stream() {
         return tasks.stream();
     }
+
+    /**
+     * Returns true if the TaskList is empty
+     * @return true if the TaskList has no element
+     */
+    public boolean isEmpty() {
+        return tasks.isEmpty();
+    }
 }
