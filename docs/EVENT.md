@@ -24,5 +24,6 @@ There are 1 tasks in your list)
 
 ## Options
 `--from` Specifies the start date in dd/MM/yyyy HHmm format. Not optional
+
 `--to` Specifies the end date in dd/MM/yyyy HHmm format. Not optional
 
