@@ -21,6 +21,7 @@ import nyonbot.model.ToDo;
  */
 public class Storage {
     private final String filePath;
+    private int skippedRecordCount;
 
     /**
      * Creates a storage object for the specified file path.
@@ -41,6 +42,7 @@ public class Storage {
     public TaskList load() throws IOException {
         Path path = Path.of(filePath);
         TaskList list = new TaskList();
+        skippedRecordCount = 0;
         if (Files.notExists(path)) {
             return list;
         }
@@ -51,71 +53,77 @@ public class Storage {
         try (BufferedReader fileReader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
             String line;
             while ((line = fileReader.readLine()) != null) {
-                loadRecord(line, list);
+                if (!loadRecord(line, list)) {
+                    skippedRecordCount++;
+                }
             }
         }
         return list;
     }
 
-    private void loadRecord(String line, TaskList list) {
+    /**
+     * Returns the number of records skipped by the most recent load.
+     *
+     * @return number of skipped records
+     */
+    public int getSkippedRecordCount() {
+        return skippedRecordCount;
+    }
+
+    private boolean loadRecord(String line, TaskList list) {
         String[] params = line.split("\\|", -1);
         try {
-            switch (params[0]) {
-            case "TASK":
-                loadTask(params, list);
-                break;
-            case "TODO":
-                loadTodo(params, list);
-                break;
-            case "DEADLINE":
-                loadDeadline(params, list);
-                break;
-            case "EVENT":
-                loadEvent(params, list);
-                break;
-            default:
-                break;
-            }
+            return switch (params[0]) {
+            case "TASK" -> loadTask(params, list);
+            case "TODO" -> loadTodo(params, list);
+            case "DEADLINE" -> loadDeadline(params, list);
+            case "EVENT" -> loadEvent(params, list);
+            default -> false;
+            };
         } catch (DateTimeParseException | IllegalArgumentException e) {
-            // Ignore malformed records while retaining valid records in the file.
+            return false;
         }
     }
 
-    private void loadTask(String[] params, TaskList list) {
+    private boolean loadTask(String[] params, TaskList list) {
         if (params.length != 3) {
-            return;
+            return false;
         }
         Task task = new Task(params[1]);
         updateCompletionStatus(task, params[2]);
         list.add(task);
+        return true;
     }
 
-    private void loadTodo(String[] params, TaskList list) {
+    private boolean loadTodo(String[] params, TaskList list) {
         if (params.length != 3) {
-            return;
+            return false;
         }
         ToDo todo = new ToDo(params[1]);
         updateCompletionStatus(todo, params[2]);
         list.add(todo);
+        return true;
     }
 
-    private void loadDeadline(String[] params, TaskList list) {
+    private boolean loadDeadline(String[] params, TaskList list) {
         if (params.length != 4) {
-            return;
+            return false;
         }
         Deadline deadline = new Deadline(params[1], LocalDateTime.parse(params[3]));
         updateCompletionStatus(deadline, params[2]);
         list.add(deadline);
+        return true;
     }
 
-    private void loadEvent(String[] params, TaskList list) {
+    private boolean loadEvent(String[] params, TaskList list) {
         if (params.length != 5) {
-            return;
+            return false;
         }
         Event event = new Event(params[1],
                 LocalDateTime.parse(params[3]), LocalDateTime.parse(params[4]));
         updateCompletionStatus(event, params[2]);
         list.add(event);
+        return true;
     }
 
     private void updateCompletionStatus(Task task, String status) {
