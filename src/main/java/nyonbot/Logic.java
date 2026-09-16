@@ -1,25 +1,27 @@
 package nyonbot;
 
 import nyonbot.command.Command;
+import nyonbot.model.NyonException;
 import nyonbot.model.Task;
 import nyonbot.model.TaskList;
 
 /**
- * Stores the logic and handling of the NyonBot program
+ * Stores the logic and handling of the NyonBot program.
  */
 public class Logic {
 
     /**
-     * Internal record class to store Results
-     * Mostly here for backward compatibility
-     * @param out
-     * @param shouldExit
-     * @param shouldWrite
+     * Stores the result of executing a command.
+     *
+     * @param out text to display to the user
+     * @param shouldExit whether the application should close
+     * @param shouldWrite whether the task list should be saved
      */
     public record Result(String out, boolean shouldExit, boolean shouldWrite) {
         public Result(String out) {
             this(out, false, false);
         }
+
         public Result(String out, boolean shouldExit) {
             this(out, shouldExit, false);
         }
@@ -40,31 +42,33 @@ public class Logic {
     }
 
     public TaskList getList() {
-        return this.list;
+        return list;
     }
 
     /**
-     * Replaces the current TaskList with the input list
-     * @param newList new TaskList
+     * Replaces the current task list with the input list.
+     *
+     * @param newList task list to load, or {@code null} to clear the current list
      */
     public void loadList(TaskList newList) {
         list.clear();
         if (newList == null) {
             return;
         }
-        assert(newList != null);
+
         for (Task task : newList) {
             list.add(task);
         }
     }
 
     /**
-     * Executes the given command
-     * @param cmd Command to be executed
-     * @return Result of the Command
-     * @throws Exception if an exception occurs during the execution
+     * Executes the given command.
+     *
+     * @param command command to execute
+     * @return result of the command
+     * @throws NyonException if the command input is invalid
      */
-    public Result execute(Command cmd) throws Exception {
-        return cmd.execute();
+    public Result execute(Command command) throws NyonException {
+        return command.execute();
     }
 }
