@@ -6,37 +6,59 @@ import javafx.application.Platform;
 import nyonbot.Logic.Result;
 import nyonbot.command.Command;
 import nyonbot.model.NyonException;
+import nyonbot.model.TaskList;
 import nyonbot.storage.ListStorage;
 
 /**
- * Main driver class for NyonBot
+ * Main driver class for NyonBot.
  */
 public class NyonBot {
     private Ui ui = Ui.getInstance();
     private Parser parser = Parser.getInstance();
     private Logic logic = Logic.getInstance();
     private ListStorage storage = ListStorage.getInstance();
+    private String startupMessage = "";
 
     /**
-     * Creates a NyonBot instance
+     * Creates a NyonBot instance.
      */
     public NyonBot() {
         try {
-            logic.loadList(storage.load());
+            TaskList loadedTasks = storage.load();
+            logic.loadList(loadedTasks);
+            setMalformedRecordWarning();
         } catch (IOException e) {
-            ui.showOutput("couldn't load your list as " + e.getMessage());
+            startupMessage = "couldn't load your list as " + e.getMessage();
+        }
+    }
+
+    private void setMalformedRecordWarning() {
+        int skippedRecords = storage.getSkippedRecordCount();
+        if (skippedRecords > 0) {
+            startupMessage = String.format(
+                    "ignored %d malformed record%s in your save file",
+                    skippedRecords, skippedRecords == 1 ? "" : "s");
         }
     }
 
     /**
-     * Passes in an input to NyonBot
-     * @param input
-     * @return String response
+     * Returns a warning generated while the task list was loaded.
+     *
+     * @return startup warning, or an empty string when loading succeeded
+     */
+    public String getStartupMessage() {
+        return startupMessage;
+    }
+
+    /**
+     * Passes an input to NyonBot.
+     *
+     * @param input user input
+     * @return response string
      */
     public String respond(String input) {
         try {
-            String userInput = input;
-            Command cmd = parser.parse(userInput);
+            Command cmd = parser.parse(input);
             Result res = logic.execute(cmd);
             if (res.shouldExit()) {
                 if (!this.onClose()) {
@@ -49,23 +71,17 @@ public class NyonBot {
                 storage.save(logic.getList());
             }
             if (res.out() != null && !res.out().isBlank()) {
-
-                StringBuilder sb = new StringBuilder("Nyon! (");
-                sb.append(res.out());
-                sb.append(")");
-                return sb.toString();
+                return String.format("Nyon! (%s)", res.out());
             }
             return "";
         } catch (Exception e) {
-            StringBuilder sb = new StringBuilder("Nyon... (");
-            sb.append(e.getMessage());
-            sb.append(")");
-            return sb.toString();
+            return String.format("Nyon... (%s)", e.getMessage());
         }
     }
 
     /**
-     * Invoked when NyonBot is closes; saves the current list
+     * Invoked when NyonBot closes; saves the current list.
+     *
      * @return true if successfully written to file, false otherwise
      */
     public boolean onClose() {
@@ -82,6 +98,9 @@ public class NyonBot {
         Ui ui = Ui.getInstance();
 
         ui.welcome();
+        if (!nyonBot.getStartupMessage().isBlank()) {
+            ui.showOutput(nyonBot.getStartupMessage());
+        }
 
         while (true) {
             System.out.println();
