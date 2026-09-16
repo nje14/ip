@@ -20,7 +20,7 @@ public class EventCommand extends Command {
      * Creates an event command with parsed arguments and a task list.
      *
      * @param arguments parsed command arguments
-     * @param list task list to add the event to
+     * @param list      task list to add the event to
      */
     public EventCommand(HashMap<String, String> arguments, TaskList list) {
         super(arguments);
@@ -33,14 +33,14 @@ public class EventCommand extends Command {
         String description = arguments.get(DESCRIPTION_KEY);
         String startValue = arguments.get("--from");
         String endValue = arguments.get("--to");
+        if (description == null || description.isBlank()) {
+            throw new NyonException("cannot omit the description");
+        }
         if (!arguments.containsKey("--from")) {
             throw new NyonException("use --from to specify the start time");
         }
         if (!arguments.containsKey("--to")) {
             throw new NyonException("use --to to specify the end time");
-        }
-        if (description == null || description.isBlank()) {
-            throw new NyonException("cannot omit the description");
         }
         if (startValue.isBlank()) {
             throw new NyonException("cannot omit the start time");
