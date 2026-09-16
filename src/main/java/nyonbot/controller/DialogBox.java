@@ -15,7 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
- * Represents a dialog box for the NyonBot
+ * Represents one message shown in the conversation.
  */
 public class DialogBox extends HBox {
     @FXML
@@ -23,35 +23,73 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) throws IOException {
+    private DialogBox(String text, Image image) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
         fxmlLoader.setController(this);
         fxmlLoader.setRoot(this);
         fxmlLoader.load();
         dialog.setText(text);
-        displayPicture.setImage(img);
+        displayPicture.setImage(image);
     }
 
     /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     * Changes the message layout so that bot messages are aligned to the left.
+     * The image itself is not transformed; its orientation is determined by the image file.
      */
     private void flip() {
-        ObservableList<Node> components = FXCollections.observableArrayList(this.getChildren());
+        ObservableList<Node> components = FXCollections.observableArrayList(getChildren());
         Collections.reverse(components);
         getChildren().setAll(components);
         setAlignment(Pos.TOP_LEFT);
-        dialog.getStyleClass().add("reply-label");
-        displayPicture.getStyleClass().add("flipped-image");
+        dialog.getStyleClass().add("bot-label");
     }
 
-    public static DialogBox getUserDialog(String text, Image img) throws IOException {
-        return new DialogBox(text, img);
+    /**
+     * Applies the visual treatment for an error message.
+     */
+    private void showError() {
+        dialog.getStyleClass().add("error-label");
     }
 
-    public static DialogBox getBotDialog(String text, Image img) throws IOException {
-        var dialogBox = new DialogBox(text, img);
+    /**
+     * Creates a right-aligned dialog for a user message.
+     *
+     * @param text message entered by the user
+     * @param image image displayed alongside the message
+     * @return a dialog for the user message
+     * @throws IOException if the dialog FXML cannot be loaded
+     */
+    public static DialogBox getUserDialog(String text, Image image) throws IOException {
+        DialogBox dialogBox = new DialogBox(text, image);
+        dialogBox.dialog.getStyleClass().add("user-label");
+        return dialogBox;
+    }
+
+    /**
+     * Creates a left-aligned dialog for a normal bot response.
+     *
+     * @param text response produced by the bot
+     * @param image image displayed alongside the response
+     * @return a dialog for the bot response
+     * @throws IOException if the dialog FXML cannot be loaded
+     */
+    public static DialogBox getBotDialog(String text, Image image) throws IOException {
+        DialogBox dialogBox = new DialogBox(text, image);
         dialogBox.flip();
         return dialogBox;
     }
 
+    /**
+     * Creates a left-aligned dialog for a bot error response.
+     *
+     * @param text error response produced by the bot
+     * @param image image displayed alongside the response
+     * @return a dialog for the bot error response
+     * @throws IOException if the dialog FXML cannot be loaded
+     */
+    public static DialogBox getErrorDialog(String text, Image image) throws IOException {
+        DialogBox dialogBox = getBotDialog(text, image);
+        dialogBox.showError();
+        return dialogBox;
+    }
 }
