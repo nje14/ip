@@ -17,11 +17,10 @@
          xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Label fx:id="dialog"
-               maxWidth="1.7976931348623157E308"
                styleClass="dialog-label"
                text="Label"
                wrapText="true"
-               HBox.hgrow="ALWAYS">
+        >
             <padding>
                 <Insets bottom="9.0"
                         left="12.0"

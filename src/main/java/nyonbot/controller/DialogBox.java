@@ -28,6 +28,7 @@ public class DialogBox extends HBox {
         fxmlLoader.setController(this);
         fxmlLoader.setRoot(this);
         fxmlLoader.load();
+        dialog.maxWidthProperty().bind(widthProperty().multiply(0.7));
         dialog.setText(text);
         displayPicture.setImage(image);
     }
