@@ -64,7 +64,6 @@ public class MainWindow extends AnchorPane {
         }
 
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
-        
         String response = nyonBot.respond(input);
         if (response == null || response.isBlank()) {
             return;
