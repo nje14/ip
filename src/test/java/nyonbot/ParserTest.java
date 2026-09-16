@@ -3,6 +3,7 @@ package nyonbot;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
@@ -60,6 +61,19 @@ class ParserTest {
 
         assertEquals("05/09/2026 0900", arguments.get("--from"));
         assertEquals("05/09/2026 1100", arguments.get("--to"));
+    }
+
+    @Test
+    void parseArguments_repeatedFlag_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class,
+                () -> parser.parseArguments(
+                        "deadline report --by 31/12/2026 1200 --by 01/01/2027 1200"));
+    }
+
+    @Test
+    void parse_unsupportedFlag_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class,
+                () -> parser.parse("todo read book --by tomorrow"));
     }
 
     @Test
