@@ -1,10 +1,15 @@
 package nyonbot.model;
 
 /**
- * A checked exception for internal use
+ * Represents a checked exception caused by invalid NyonBot command input.
  */
 public class NyonException extends Exception {
-    public NyonException(String s) {
-        super(s);
+    /**
+     * Creates an exception with a user-facing message.
+     *
+     * @param message explanation of the invalid input
+     */
+    public NyonException(String message) {
+        super(message);
     }
 }
