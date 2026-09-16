@@ -2,6 +2,7 @@ package nyonbot.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
@@ -16,6 +17,13 @@ class TaskTest {
         assertEquals("read book", task.getName());
         assertFalse(task.isDone());
         assertEquals("[T][ ] read book", task.toString());
+    }
+
+    @Test
+    void task_unsafeStorageName_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new Task("a|b"));
+        assertThrows(IllegalArgumentException.class, () -> new Task("first\nsecond"));
+        assertThrows(IllegalArgumentException.class, () -> new Task(" "));
     }
 
     @Test
