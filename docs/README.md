@@ -1,30 +1,75 @@
-# Duke User Guide
+# NyonBot User Guide
 
-// Update the title above to match the actual product name
+![nyon](https://static.tvtropes.org/pmwiki/pub/images/kawkaw_battle_idle_1_400x280.png)
 
-// Product screenshot goes here
+![screenshot of ui](https://github.com/nje14/ip/tree/master/docs/Ui.png)
 
-// Product intro goes here
+NyonBot is a simple chatbot based off the _Duke_ greenfield Java project template
 
-## Adding deadlines
+NyonBot is based on the [KawKaw NPC from deltarune](https://deltarune.wiki/w/Kawkaw)
 
-// Describe the action and its outcome.
+## Quick start guide
 
-// Give examples of usage
+Download the latest release from [releases](https://github.com/nje14/ip/releases)
 
-Example: `keyword (optional arguments)`
+If there are no releases present:
 
-// A description of the expected outcome goes here
+1. Go to the latest [github action](https://github.com/nje14/ip/actions)
 
+2. Select the latest working workflow (should have a :tick: next to it)
+
+3. Click on artifacts
+
+4. Download `nyonbot-fat.jar`
+
+5. Optional: verify SHA-256
+
+Once downloaded, go to terminal / powershell and run
+```bash
+java -jar nyonbot-fat.jar
 ```
-expected output
-```
 
-## Feature ABC
+## Prerequisites
 
-// Feature details
+Requires:
 
+* Java 25 or later
 
-## Feature XYZ
+Thats it
 
-// Feature details
+## Important notes 
+
+**Strictly for non-commerical, internal use only**
+
+This software does not come with a `man`, `--version` or `--help`
+
+All commands are in GNU-style long/`--verbose` format
+
+All dates **MUST** be entered in the format dd/MM/yyyy HHmm
+
+## Features
+
+NyonBot supports the following features
+
+[Deadline docs](https://github.com/nje14/ip/tree/master/docs/DEADLINE.md)
+
+[Delete docs](https://github.com/nje14/ip/tree/master/docs/DELETE.md)
+
+[Echo docs](https://github.com/nje14/ip/tree/master/docs/ECHO.md)
+
+[Event docs](https://github.com/nje14/ip/tree/master/docs/EVENT.md)
+
+[Exit docs](https://github.com/nje14/ip/tree/master/docs/EXIT.md)
+
+[Find docs](https://github.com/nje14/ip/tree/master/docs/FIND.md)
+
+[List docs](https://github.com/nje14/ip/tree/master/docs/LIST.md)
+
+[Mark docs](https://github.com/nje14/ip/tree/master/docs/MARK.md)
+
+[Nyon docs](https://github.com/nje14/ip/tree/master/docs/NYON.md)
+
+[Todo docs](https://github.com/nje14/ip/tree/master/docs/TODO.md)
+
+[Unmark docs](https://github.com/nje14/ip/tree/master/docs/UNMARK.md)
+
