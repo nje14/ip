@@ -3,6 +3,7 @@ package nyonbot;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 
@@ -13,6 +14,7 @@ import nyonbot.command.DeadlineCommand;
 import nyonbot.command.EchoCommand;
 import nyonbot.command.ExitCommand;
 import nyonbot.command.ListCommand;
+import nyonbot.command.NoCommand;
 import nyonbot.command.TodoCommand;
 
 class ParserTest {
@@ -34,6 +36,12 @@ class ParserTest {
     }
 
     @Test
+    void parse_blankOrNullInput_returnsNoCommand() {
+        assertInstanceOf(NoCommand.class, parser.parse("   "));
+        assertInstanceOf(NoCommand.class, parser.parse(null));
+    }
+
+    @Test
     void parseArguments_commandWithFlags_returnsFlagMap() {
         var arguments = parser.parseArguments(
                 "event project meeting --from 05/09/2026 0900 "
@@ -52,6 +60,20 @@ class ParserTest {
 
         assertEquals("05/09/2026 0900", arguments.get("--from"));
         assertEquals("05/09/2026 1100", arguments.get("--to"));
+    }
+
+    @Test
+    void parseArguments_flagWithoutValue_storesEmptyValue() {
+        var arguments = parser.parseArguments("deadline submit report --by");
+
+        assertEquals("deadline", arguments.get("command"));
+        assertEquals("submit report", arguments.get("description"));
+        assertEquals("", arguments.get("--by"));
+    }
+
+    @Test
+    void parseArguments_nullInput_returnsEmptyMap() {
+        assertTrue(parser.parseArguments(null).isEmpty());
     }
 
     @Test

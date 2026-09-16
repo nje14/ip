@@ -26,6 +26,16 @@ class TaskListTest {
     }
 
     @Test
+    void addAll_nonEmptyCollection_addsTasksInCollectionOrder() {
+        TaskList tasks = new TaskList();
+        Task first = new Task("first");
+        Task second = new Task("second");
+
+        assertTrue(tasks.addAll(List.of(first, second)));
+        assertEquals(List.of(first, second), tasks.stream().toList());
+    }
+
+    @Test
     void removeByIndex_validIndex_removesAndReturnsTask() {
         TaskList tasks = new TaskList();
         Task task = new Task("task");
@@ -71,6 +81,18 @@ class TaskListTest {
 
         tasks.clear();
 
+        assertTrue(tasks.isEmpty());
         assertEquals(0, tasks.size());
+    }
+
+    @Test
+    void isEmpty_newAndPopulatedList_returnsExpectedState() {
+        TaskList tasks = new TaskList();
+
+        assertTrue(tasks.isEmpty());
+
+        tasks.add(new Task("task"));
+
+        assertFalse(tasks.isEmpty());
     }
 }
