@@ -1,13 +1,14 @@
 package nyonbot.storage;
 
-import java.io.File;
-import java.io.FileWriter;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.AtomicMoveNotSupportedException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 
 import nyonbot.model.Deadline;
 import nyonbot.model.Event;
@@ -16,13 +17,14 @@ import nyonbot.model.TaskList;
 import nyonbot.model.ToDo;
 
 /**
- * Loads and saves tasks to a file using a delimiter-based text format
+ * Loads and saves tasks to a file using a delimiter-based text format.
  */
 public class Storage {
     private final String filePath;
 
     /**
-     * Creates a storage object for the specified file path
+     * Creates a storage object for the specified file path.
+     *
      * @param filePath filepath of the save file
      */
     public Storage(String filePath) {
@@ -30,67 +32,90 @@ public class Storage {
     }
 
     /**
-     * Loads the tasks from the savefile
-     * @return A <code>TaskList</code> of the Tasks stored in the file
-     * @throws IOException if the file cannot be read
+     * Loads the tasks from the save file. Invalid records are skipped so that
+     * one malformed record does not prevent the remaining tasks from loading.
+     *
+     * @return a TaskList of the tasks stored in the file
+     * @throws IOException if the storage path cannot be read
      */
     public TaskList load() throws IOException {
-        File file = new File(filePath);
+        Path path = Path.of(filePath);
         TaskList list = new TaskList();
-        if (!file.exists()) {
+        if (Files.notExists(path)) {
             return list;
         }
-        try (Scanner fileReader = new Scanner(file)) {
-            while (fileReader.hasNextLine()) {
-                String line = fileReader.nextLine();
-                String[] params = line.split("\\|", -1);
-                assert(params.length > 0);
-                try {
-                    switch (params[0]) {
-                        case ("TASK"):
-                            if (params.length != 3) {
-                                continue;
-                            }
-                            Task task = new Task(params[1]);
-                            updateCompletionStatus(task, params[2]);
-                            list.add(task);
-                            break;
-                        case ("TODO"):
-                            if (params.length != 3) {
-                                continue;
-                            }
-                            ToDo todo = new ToDo(params[1]);
-                            updateCompletionStatus(todo, params[2]);
-                            list.add(todo);
-                            break;
-                        case ("DEADLINE"):
-                            if (params.length != 4) {
-                                continue;
-                            }
-                            LocalDateTime deadlineBy = LocalDateTime.parse(params[3]);
-                            Deadline deadline = new Deadline(params[1], deadlineBy);
-                            updateCompletionStatus(deadline, params[2]);
-                            list.add(deadline);
-                            break;
-                        case ("EVENT"):
-                            if (params.length != 5) {
-                                continue;
-                            }
-                            Event event = new Event(params[1],
-                                    LocalDateTime.parse(params[3]),
-                                    LocalDateTime.parse(params[4]));
-                            updateCompletionStatus(event, params[2]);
-                            list.add(event);
-                            break;
-                        default:
-                            break;
-                    }
-                } catch (DateTimeParseException | IllegalArgumentException e) {
-                    continue;
-                }
+        if (Files.isDirectory(path)) {
+            throw new IOException("storage path is a directory");
+        }
+
+        try (BufferedReader fileReader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
+            String line;
+            while ((line = fileReader.readLine()) != null) {
+                loadRecord(line, list);
             }
         }
         return list;
+    }
+
+    private void loadRecord(String line, TaskList list) {
+        String[] params = line.split("\\|", -1);
+        try {
+            switch (params[0]) {
+            case "TASK":
+                loadTask(params, list);
+                break;
+            case "TODO":
+                loadTodo(params, list);
+                break;
+            case "DEADLINE":
+                loadDeadline(params, list);
+                break;
+            case "EVENT":
+                loadEvent(params, list);
+                break;
+            default:
+                break;
+            }
+        } catch (DateTimeParseException | IllegalArgumentException e) {
+            // Ignore malformed records while retaining valid records in the file.
+        }
+    }
+
+    private void loadTask(String[] params, TaskList list) {
+        if (params.length != 3) {
+            return;
+        }
+        Task task = new Task(params[1]);
+        updateCompletionStatus(task, params[2]);
+        list.add(task);
+    }
+
+    private void loadTodo(String[] params, TaskList list) {
+        if (params.length != 3) {
+            return;
+        }
+        ToDo todo = new ToDo(params[1]);
+        updateCompletionStatus(todo, params[2]);
+        list.add(todo);
+    }
+
+    private void loadDeadline(String[] params, TaskList list) {
+        if (params.length != 4) {
+            return;
+        }
+        Deadline deadline = new Deadline(params[1], LocalDateTime.parse(params[3]));
+        updateCompletionStatus(deadline, params[2]);
+        list.add(deadline);
+    }
+
+    private void loadEvent(String[] params, TaskList list) {
+        if (params.length != 5) {
+            return;
+        }
+        Event event = new Event(params[1],
+                LocalDateTime.parse(params[3]), LocalDateTime.parse(params[4]));
+        updateCompletionStatus(event, params[2]);
+        list.add(event);
     }
 
     private void updateCompletionStatus(Task task, String status) {
@@ -102,8 +127,9 @@ public class Storage {
     }
 
     /**
-     * Returns the storage representation of the task to be stored
-     * @param task the <code>Task</code> to be stored
+     * Returns the storage representation of the task to be stored.
+     *
+     * @param task the task to be stored
      * @return the storage representation of the task
      */
     private String taskParser(Task task) {
@@ -114,55 +140,63 @@ public class Storage {
             return String.format("DEADLINE|%s|%s|%s",
                     deadline.getName(),
                     deadline.isDone(),
-                    formatDate(deadline.getDeadline()));
+                    deadline.getDeadline());
         }
         if (task instanceof Event event) {
             LocalDateTime[] eventTime = event.getEventTimes();
             return String.format("EVENT|%s|%s|%s|%s",
                     event.getName(),
                     event.isDone(),
-                    formatDate(eventTime[0]),
-                    formatDate(eventTime[1]));
+                    eventTime[0],
+                    eventTime[1]);
         }
-        if (task instanceof Task) {
-            return String.format("TASK|%s|%s", task.getName(), task.isDone());
-        }
-        return "";
+        return String.format("TASK|%s|%s", task.getName(), task.isDone());
     }
 
     /**
      * Saves a list to the filepath of the Storage object.
-     * Will override contents.
+     *
      * @param list the list to be saved
-     * @throws IOException if file cannot be created, read or found
+     * @throws IOException if the file cannot be created or written
      */
     public void save(TaskList list) throws IOException {
-        File saveFile = new File(filePath);
-
-        if (!saveFile.exists()) {
-            Path path = Path.of(filePath);
-            if (path.getParent() != null) {
-                Files.createDirectories(path.getParent());
-            }
-            saveFile.createNewFile();
+        Path path = Path.of(filePath);
+        Path parent = path.toAbsolutePath().getParent();
+        if (Files.exists(path) && Files.isDirectory(path)) {
+            throw new IOException("storage path is a directory");
         }
-        try (FileWriter fileWriter = new FileWriter(saveFile)) {
-            StringBuilder sb = new StringBuilder();
-            for (Task task : list) {
-                sb.append(taskParser(task));
-                sb.append("\n");
-            }
-            fileWriter.write(sb.toString());
+        Files.createDirectories(parent);
+
+        Path temporaryFile = Files.createTempFile(parent, path.getFileName().toString(), ".tmp");
+        try {
+            Files.writeString(temporaryFile, formatTasks(list), StandardCharsets.UTF_8);
+            replaceStorageFile(temporaryFile, path);
+        } finally {
+            Files.deleteIfExists(temporaryFile);
         }
     }
 
-    private String formatDate(LocalDateTime dateTime) {
-        return dateTime.toString();
+    private String formatTasks(TaskList list) {
+        StringBuilder output = new StringBuilder();
+        for (Task task : list) {
+            output.append(taskParser(task)).append(System.lineSeparator());
+        }
+        return output.toString();
+    }
+
+    private void replaceStorageFile(Path temporaryFile, Path path) throws IOException {
+        try {
+            Files.move(temporaryFile, path, StandardCopyOption.ATOMIC_MOVE,
+                    StandardCopyOption.REPLACE_EXISTING);
+        } catch (AtomicMoveNotSupportedException e) {
+            Files.move(temporaryFile, path, StandardCopyOption.REPLACE_EXISTING);
+        }
     }
 
     /**
-     * Removes all tasks from the file
-     * @throws IOException if the file cannot be read or written to
+     * Removes all tasks from the file.
+     *
+     * @throws IOException if the file cannot be written
      */
     public void wipe() throws IOException {
         save(new TaskList());
