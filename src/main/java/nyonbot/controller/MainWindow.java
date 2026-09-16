@@ -60,9 +60,19 @@ public class MainWindow extends AnchorPane {
      * Associates this view with the chatbot that processes user commands.
      *
      * @param nyonBot chatbot instance used by this window
+     * @throws IOException if the startup warning dialog cannot be loaded
      */
-    public void setNyonBot(NyonBot nyonBot) {
+    public void setNyonBot(NyonBot nyonBot) throws IOException {
         this.nyonBot = nyonBot;
+        showStartupMessage();
+    }
+
+    private void showStartupMessage() throws IOException {
+        String startupMessage = nyonBot.getStartupMessage();
+        if (!startupMessage.isBlank()) {
+            String response = String.format("Nyon... (%s)", startupMessage);
+            dialogContainer.getChildren().add(DialogBox.getErrorDialog(response, errorImage));
+        }
     }
 
     /**
