@@ -51,25 +51,25 @@ All dates **MUST** be entered in the format dd/MM/yyyy HHmm
 
 NyonBot supports the following features
 
-[Deadline docs](https://github.com/nje14/ip/tree/master/docs/DEADLINE.md)
+[Deadline docs](https://nje14.github.io/ip/DEADLINE)
 
-[Delete docs](https://github.com/nje14/ip/tree/master/docs/DELETE.md)
+[Delete docs](https://nje14.github.io/ip/DELETE)
 
-[Echo docs](https://github.com/nje14/ip/tree/master/docs/ECHO.md)
+[Echo docs](https://nje14.github.io/ip/ECHO)
 
-[Event docs](https://github.com/nje14/ip/tree/master/docs/EVENT.md)
+[Event docs](https://nje14.github.io/ip/EVENT)
 
-[Exit docs](https://github.com/nje14/ip/tree/master/docs/EXIT.md)
+[Exit docs](https://nje14.github.io/ip/EXIT)
 
-[Find docs](https://github.com/nje14/ip/tree/master/docs/FIND.md)
+[Find docs](https://nje14.github.io/ip/FIND)
 
-[List docs](https://github.com/nje14/ip/tree/master/docs/LIST.md)
+[List docs](https://nje14.github.io/ip/LIST)
 
-[Mark docs](https://github.com/nje14/ip/tree/master/docs/MARK.md)
+[Mark docs](https://nje14.github.io/ip/MARK)
 
-[Nyon docs](https://github.com/nje14/ip/tree/master/docs/NYON.md)
+[Nyon docs](https://nje14.github.io/ip/NYON)
 
-[Todo docs](https://github.com/nje14/ip/tree/master/docs/TODO.md)
+[Todo docs](https://nje14.github.io/ip/TODO)
 
-[Unmark docs](https://github.com/nje14/ip/tree/master/docs/UNMARK.md)
+[Unmark docs](https://nje14.github.io/ip/UNMARK)
 
