@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import nyonbot.NyonBot;
 
 /**
@@ -30,6 +31,14 @@ public class MainWindow extends AnchorPane {
             getClass().getResourceAsStream("/static/Kawkaw_battle_spared.png"));
     private final Image errorImage = new Image(
             getClass().getResourceAsStream("/static/Kawkaw_battle_hurt.png"));
+
+    static {
+        Font.loadFont(
+            MainWindow.class.getResourceAsStream("/fonts/big-shot.ttf"
+            ),
+            14
+        );
+    }
 
     /**
      * Configures the dynamic layout after the FXML fields are available.

@@ -28,6 +28,7 @@ public class Main extends Application {
             stage.setMinHeight(minHeight);
             stage.setMinWidth(minWidth);
             fxmlLoader.<MainWindow>getController().setNyonBot(nyonBot);
+            stage.setTitle("Nyonbot");
             stage.show();
 
         } catch (IOException e) {
