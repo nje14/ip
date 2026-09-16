@@ -29,7 +29,7 @@ public class MarkCommand extends Command {
         assert arguments != null;
         String taskName = arguments.getOrDefault(DESCRIPTION_KEY, "").strip();
         if (taskName.isBlank()) {
-            throw new NyonException("cannot mark without a description :(");
+            throw new NyonException("cannot mark without a description");
         }
         try {
             int idx = Integer.parseInt(taskName) - 1;
