@@ -55,18 +55,27 @@ class AddCommandTest {
     }
 
     @Test
+    void deadlineCommand_missingDescription_throwsNyonException() {
+        assertThrows(NyonException.class, () -> new DeadlineCommand(
+                arguments("deadline --by 31/12/2026 2359"), tasks).execute());
+    }
+
+    @Test
     void deadlineCommand_missingByMarker_throwsNyonException() {
         assertThrows(NyonException.class, () -> new DeadlineCommand(
-                arguments("deadline submit report"), tasks).execute()
-        );
+                arguments("deadline submit report"), tasks).execute());
+    }
+
+    @Test
+    void deadlineCommand_emptyByValue_throwsNyonException() {
+        assertThrows(NyonException.class, () -> new DeadlineCommand(
+                arguments("deadline submit report --by"), tasks).execute());
     }
 
     @Test
     void deadlineCommand_invalidDate_throwsNyonException() {
         assertThrows(NyonException.class, () -> new DeadlineCommand(
-                arguments("deadline submit report --by tomorrow"),
-                tasks).execute()
-        );
+                arguments("deadline submit report --by tomorrow"), tasks).execute());
     }
 
     @Test
@@ -88,7 +97,40 @@ class AddCommandTest {
     @Test
     void eventCommand_missingFromMarker_throwsNyonException() {
         assertThrows(NyonException.class, () -> new EventCommand(
-                arguments("event lecture --to 05/09/2026 1100"),
+                arguments("event lecture --to 05/09/2026 1100"), tasks).execute());
+    }
+
+    @Test
+    void eventCommand_missingToMarker_throwsNyonException() {
+        assertThrows(NyonException.class, () -> new EventCommand(
+                arguments("event lecture --from 05/09/2026 0900"), tasks).execute());
+    }
+
+    @Test
+    void eventCommand_missingDescription_throwsNyonException() {
+        assertThrows(NyonException.class, () -> new EventCommand(
+                arguments("event --from 05/09/2026 0900 --to 05/09/2026 1100"),
+                tasks).execute());
+    }
+
+    @Test
+    void eventCommand_emptyStartTime_throwsNyonException() {
+        assertThrows(NyonException.class, () -> new EventCommand(
+                arguments("event lecture --from --to 05/09/2026 1100"), tasks).execute());
+    }
+
+    @Test
+    void eventCommand_invalidDate_throwsNyonException() {
+        assertThrows(NyonException.class, () -> new EventCommand(
+                arguments("event lecture --from tomorrow --to 05/09/2026 1100"),
+                tasks).execute());
+    }
+
+    @Test
+    void eventCommand_endBeforeStart_throwsNyonException() {
+        assertThrows(NyonException.class, () -> new EventCommand(
+                arguments("event lecture --from 05/09/2026 1100 "
+                        + "--to 05/09/2026 0900"),
                 tasks).execute());
     }
 
