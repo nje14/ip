@@ -65,15 +65,17 @@ class ParserTest {
 
     @Test
     void parseArguments_repeatedFlag_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class,
-                () -> parser.parseArguments(
-                        "deadline report --by 31/12/2026 1200 --by 01/01/2027 1200"));
+        assertThrows(
+            IllegalArgumentException.class, ( //thanks checkstyle.xml from me giving issues with lambdas
+            ) -> parser.parseArguments("deadline report --by 31/12/2026 1200 --by 01/01/2027 1200")
+        );
     }
 
     @Test
     void parse_unsupportedFlag_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class,
-                () -> parser.parse("todo read book --by tomorrow"));
+        assertThrows(
+            IllegalArgumentException.class, () -> parser.parse("todo read book --by tomorrow")
+        );
     }
 
     @Test
