@@ -2,7 +2,7 @@
 
 ![nyon](https://static.tvtropes.org/pmwiki/pub/images/kawkaw_battle_idle_1_400x280.png)
 
-![screenshot of ui](https://github.com/nje14/ip/blob/master/docs/Ui.png)
+![screenshot of ui](https://nje14.github.io/ip/Ui.png)
 
 NyonBot is a simple chatbot based off the _Duke_ greenfield Java project template
 
