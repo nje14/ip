@@ -153,6 +153,7 @@ class StorageTest {
         assertTrue(loaded.get(0).isDone());
         assertEquals("valid task", loaded.get(1).getName());
         assertFalse(loaded.get(1).isDone());
+        assertEquals(5, storage.getSkippedRecordCount());
     }
 
     @Test
