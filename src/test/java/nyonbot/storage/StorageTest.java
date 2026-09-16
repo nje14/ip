@@ -3,6 +3,7 @@ package nyonbot.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
@@ -28,6 +29,13 @@ class StorageTest {
         Storage storage = new Storage(tempDir.resolve("missing.txt").toString());
 
         assertEquals(0, storage.load().size());
+    }
+
+    @Test
+    void load_directoryPath_throwsIoException() throws IOException {
+        Storage storage = new Storage(tempDir.toString());
+
+        assertThrows(IOException.class, storage::load);
     }
 
     @Test
@@ -106,6 +114,25 @@ class StorageTest {
     }
 
     @Test
+    void save_usesUtf8_preservesNonAsciiTaskName() throws IOException {
+        Path saveFile = tempDir.resolve("tasks.txt");
+        Storage storage = new Storage(saveFile.toString());
+        TaskList tasks = new TaskList();
+        tasks.add(new Task("買牛奶"));
+
+        storage.save(tasks);
+
+        assertEquals("買牛奶", storage.load().get(0).getName());
+    }
+
+    @Test
+    void save_directoryPath_throwsIoException() throws IOException {
+        Storage storage = new Storage(tempDir.toString());
+
+        assertThrows(IOException.class, () -> storage.save(new TaskList()));
+    }
+
+    @Test
     void load_malformedRecords_skipsThemAndLoadsValidRecords() throws IOException {
         Path saveFile = tempDir.resolve("tasks.txt");
         Files.writeString(saveFile, String.join("\n",
@@ -113,6 +140,7 @@ class StorageTest {
                 "DEADLINE|invalid date|false|not-a-date",
                 "EVENT|missing fields|false|2026-09-05T10:00",
                 "TASK|invalid status|not done",
+                "TASK||false",
                 "UNKNOWN|ignored|false",
                 "TASK|valid task|false"));
         Storage storage = new Storage(saveFile.toString());
@@ -125,6 +153,7 @@ class StorageTest {
         assertTrue(loaded.get(0).isDone());
         assertEquals("valid task", loaded.get(1).getName());
         assertFalse(loaded.get(1).isDone());
+        assertEquals(5, storage.getSkippedRecordCount());
     }
 
     @Test

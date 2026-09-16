@@ -1,8 +1,8 @@
 package nyonbot.controller;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Collections;
-import java.util.Objects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,13 +21,8 @@ import javafx.scene.media.AudioClip;
  */
 public class DialogBox extends HBox {
 
-    private static final AudioClip happySound = new AudioClip(
-            Objects.requireNonNull(
-                    DialogBox.class.getResource("/sounds/Kawkaw_voiceclip_happy_1.wav")).toExternalForm());
-
-    private static final AudioClip sadSound = new AudioClip(
-            Objects.requireNonNull(
-                    DialogBox.class.getResource("/sounds/Kawkaw_voiceclip_sad_1.wav")).toExternalForm());
+    private static final AudioClip happySound = loadSound("/sounds/Kawkaw_voiceclip_happy_1.wav");
+    private static final AudioClip sadSound = loadSound("/sounds/Kawkaw_voiceclip_sad_1.wav");
 
     @FXML
     private Label dialog;
@@ -42,6 +37,20 @@ public class DialogBox extends HBox {
         dialog.maxWidthProperty().bind(widthProperty().multiply(0.7));
         dialog.setText(text);
         displayPicture.setImage(image);
+    }
+
+    private static AudioClip loadSound(String resourcePath) {
+        URL resource = DialogBox.class.getResource(resourcePath);
+        if (resource == null) {
+            return null;
+        }
+        return new AudioClip(resource.toExternalForm());
+    }
+
+    private static void playSound(AudioClip sound) {
+        if (sound != null) {
+            sound.play(0.25);
+        }
     }
 
     /**
@@ -67,7 +76,7 @@ public class DialogBox extends HBox {
     /**
      * Creates a right-aligned dialog for a user message.
      *
-     * @param text  message entered by the user
+     * @param text message entered by the user
      * @param image image displayed alongside the message
      * @return a dialog for the user message
      * @throws IOException if the dialog FXML cannot be loaded
@@ -81,7 +90,7 @@ public class DialogBox extends HBox {
     /**
      * Creates a left-aligned dialog for a normal bot response.
      *
-     * @param text  response produced by the bot
+     * @param text response produced by the bot
      * @param image image displayed alongside the response
      * @return a dialog for the bot response
      * @throws IOException if the dialog FXML cannot be loaded
@@ -89,14 +98,14 @@ public class DialogBox extends HBox {
     public static DialogBox getBotDialog(String text, Image image) throws IOException {
         DialogBox dialogBox = new DialogBox(text, image);
         dialogBox.flip();
-        happySound.play(0.25);
+        playSound(happySound);
         return dialogBox;
     }
 
     /**
      * Creates a left-aligned dialog for a bot error response.
      *
-     * @param text  error response produced by the bot
+     * @param text error response produced by the bot
      * @param image image displayed alongside the response
      * @return a dialog for the bot error response
      * @throws IOException if the dialog FXML cannot be loaded
@@ -105,7 +114,7 @@ public class DialogBox extends HBox {
         DialogBox dialogBox = new DialogBox(text, image);
         dialogBox.flip();
         dialogBox.showError();
-        sadSound.play(0.25);
+        playSound(sadSound);
         return dialogBox;
     }
 }

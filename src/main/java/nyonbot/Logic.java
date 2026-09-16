@@ -10,7 +10,7 @@ import nyonbot.model.TaskList;
 public class Logic {
 
     /**
-     * Interal record class to store Results
+     * Internal record class to store Results
      * Mostly here for backward compatibility
      * @param out
      * @param shouldExit
