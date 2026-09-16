@@ -52,8 +52,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         dialogContainer.setFillWidth(true);
-        dialogContainer.heightProperty().addListener(
-                (observable, oldHeight, newHeight) -> scrollToBottom());
+        dialogContainer.heightProperty().addListener((observable, oldHeight, newHeight) -> scrollToBottom());
     }
 
     /**

@@ -74,11 +74,11 @@ public class Storage {
         String[] params = line.split("\\|", -1);
         try {
             return switch (params[0]) {
-            case "TASK" -> loadTask(params, list);
-            case "TODO" -> loadTodo(params, list);
-            case "DEADLINE" -> loadDeadline(params, list);
-            case "EVENT" -> loadEvent(params, list);
-            default -> false;
+                case "TASK" -> loadTask(params, list);
+                case "TODO" -> loadTodo(params, list);
+                case "DEADLINE" -> loadDeadline(params, list);
+                case "EVENT" -> loadEvent(params, list);
+                default -> false;
             };
         } catch (DateTimeParseException | IllegalArgumentException e) {
             return false;

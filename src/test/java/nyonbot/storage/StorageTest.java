@@ -32,7 +32,7 @@ class StorageTest {
     }
 
     @Test
-    void load_directoryPath_throwsIOException() throws IOException {
+    void load_directoryPath_throwsIoException() throws IOException {
         Storage storage = new Storage(tempDir.toString());
 
         assertThrows(IOException.class, storage::load);
@@ -126,7 +126,7 @@ class StorageTest {
     }
 
     @Test
-    void save_directoryPath_throwsIOException() throws IOException {
+    void save_directoryPath_throwsIoException() throws IOException {
         Storage storage = new Storage(tempDir.toString());
 
         assertThrows(IOException.class, () -> storage.save(new TaskList()));

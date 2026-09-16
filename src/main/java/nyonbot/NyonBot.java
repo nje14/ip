@@ -13,7 +13,6 @@ import nyonbot.storage.ListStorage;
  * Main driver class for NyonBot.
  */
 public class NyonBot {
-    private Ui ui = Ui.getInstance();
     private Parser parser = Parser.getInstance();
     private Logic logic = Logic.getInstance();
     private ListStorage storage = ListStorage.getInstance();
