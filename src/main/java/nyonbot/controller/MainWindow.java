@@ -1,6 +1,7 @@
 package nyonbot.controller;
 
 import java.io.IOException;
+import java.net.URL;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -25,19 +26,24 @@ public class MainWindow extends AnchorPane {
 
     private NyonBot nyonBot;
 
-    private final Image userImage = new Image(
-            getClass().getResourceAsStream("/static/Kawkaw_battle_idle.png"));
-    private final Image botImage = new Image(
-            getClass().getResourceAsStream("/static/Kawkaw_battle_spared.png"));
-    private final Image errorImage = new Image(
-            getClass().getResourceAsStream("/static/Kawkaw_battle_hurt.png"));
+    private final Image userImage = loadImage("/static/Kawkaw_battle_idle.png");
+    private final Image botImage = loadImage("/static/Kawkaw_battle_spared.png");
+    private final Image errorImage = loadImage("/static/Kawkaw_battle_hurt.png");
 
     static {
-        Font.loadFont(
-            MainWindow.class.getResourceAsStream("/fonts/big-shot.ttf"
-            ),
-            14
-        );
+        loadApplicationFont("/fonts/big-shot.ttf");
+    }
+
+    private static void loadApplicationFont(String resourcePath) {
+        URL resource = MainWindow.class.getResource(resourcePath);
+        if (resource != null) {
+            Font.loadFont(resource.toExternalForm(), 14);
+        }
+    }
+
+    private Image loadImage(String resourcePath) {
+        URL resource = getClass().getResource(resourcePath);
+        return resource == null ? null : new Image(resource.toExternalForm());
     }
 
     /**
@@ -46,9 +52,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         dialogContainer.setFillWidth(true);
-        dialogContainer
-                .heightProperty()
-                .addListener((observable, oldHeight, newHeight) -> scrollToBottom());
+        dialogContainer.heightProperty().addListener(
+                (observable, oldHeight, newHeight) -> scrollToBottom());
     }
 
     /**
