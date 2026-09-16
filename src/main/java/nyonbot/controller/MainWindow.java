@@ -37,6 +37,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         dialogContainer.setFillWidth(true);
+        dialogContainer
+                .heightProperty()
+                .addListener((observable, oldHeight, newHeight) -> scrollToBottom());
     }
 
     /**
@@ -61,8 +64,7 @@ public class MainWindow extends AnchorPane {
         }
 
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
-        scrollToBottom();
-
+        
         String response = nyonBot.respond(input);
         if (response == null || response.isBlank()) {
             return;
@@ -74,8 +76,6 @@ public class MainWindow extends AnchorPane {
             dialogContainer.getChildren().add(DialogBox.getBotDialog(response, botImage));
             userInput.clear();
         }
-
-        scrollToBottom();
         userInput.requestFocus();
     }
 
@@ -84,6 +84,6 @@ public class MainWindow extends AnchorPane {
     }
 
     private void scrollToBottom() {
-        Platform.runLater(() -> scrollPane.setVvalue(1.0));
+        Platform.runLater(() -> scrollPane.setVvalue(scrollPane.getVmax()));
     }
 }
