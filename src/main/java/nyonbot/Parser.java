@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,7 +24,8 @@ import nyonbot.command.TodoCommand;
 import nyonbot.command.UnmarkCommand;
 
 /**
- * Converts the command line input into executable commands
+ * Converts command-line input into executable commands.
+ *
  * @author nje14
  */
 public class Parser {
@@ -31,8 +33,8 @@ public class Parser {
             Pattern.compile("(?<!\\S)(--[A-Za-z][A-Za-z0-9-]*)(?=\\s|$)");
 
     private static Parser instance = null;
-    private Parser() {
 
+    private Parser() {
     }
 
     public static synchronized Parser getInstance() {
@@ -43,9 +45,11 @@ public class Parser {
     }
 
     /**
-     * Parses a raw input into a command
+     * Parses raw input into a command.
+     *
      * @param input raw input
-     * @return the <code>Command</code> associated with this input
+     * @return command associated with this input
+     * @throws IllegalArgumentException if the command contains invalid flags
      */
     public Command parse(String input) {
         HashMap<String, String> arguments = parseArguments(input);
@@ -53,7 +57,9 @@ public class Parser {
         if (command == null || command.isBlank()) {
             return new NoCommand();
         }
+
         CommandType type = CommandType.toCommandType(command);
+        validateFlags(type, arguments);
         return switch (type) {
             case EXIT -> new ExitCommand(arguments);
             case ECHO -> new EchoCommand(arguments);
@@ -70,12 +76,32 @@ public class Parser {
         };
     }
 
+    private void validateFlags(CommandType type, HashMap<String, String> arguments) {
+        Set<String> allowedFlags = getAllowedFlags(type);
+        for (String key : arguments.keySet()) {
+            if (key.startsWith("--") && !allowedFlags.contains(key)) {
+                throw new IllegalArgumentException(
+                        String.format("%s does not support the %s flag", type.keyword(), key));
+            }
+        }
+    }
+
+    private Set<String> getAllowedFlags(CommandType type) {
+        return switch (type) {
+            case DEADLINE -> Set.of("--by");
+            case EVENT -> Set.of("--from", "--to");
+            default -> Set.of();
+        };
+    }
+
     /**
      * Parses command-line input into a command, positional description, and
      * flag-value pairs.
+     *
      * @param input raw command-line input
      * @return parsed arguments keyed by {@code command}, {@code description},
      *         or their literal flag such as {@code --by}
+     * @throws IllegalArgumentException if a flag is specified more than once
      */
     public HashMap<String, String> parseArguments(String input) {
         HashMap<String, String> arguments = new HashMap<>();
@@ -83,13 +109,13 @@ public class Parser {
         if (normalizedInput.isBlank()) {
             return arguments;
         }
-        assert(!input.isEmpty());
+
         String[] commandParts = normalizedInput.split("\\s+", 2);
         arguments.put(Command.COMMAND_KEY, commandParts[0]);
         if (commandParts.length == 1) {
             return arguments;
         }
-        assert(commandParts.length > 1);
+
         String rawArguments = commandParts[1];
         Matcher matcher = FLAG_PATTERN.matcher(rawArguments);
         int firstFlagIndex = rawArguments.length();
@@ -97,13 +123,15 @@ public class Parser {
         String previousFlag = null;
 
         while (matcher.find()) {
+            String currentFlag = matcher.group(1);
+            ensureFlagIsUnique(arguments, currentFlag, previousFlag);
             if (previousFlag == null) {
                 firstFlagIndex = matcher.start();
             } else {
                 arguments.put(previousFlag,
                         rawArguments.substring(previousFlagValueIndex, matcher.start()).strip());
             }
-            previousFlag = matcher.group(1);
+            previousFlag = currentFlag;
             previousFlagValueIndex = matcher.end();
         }
 
@@ -118,15 +146,24 @@ public class Parser {
         return arguments;
     }
 
+    private void ensureFlagIsUnique(HashMap<String, String> arguments,
+            String currentFlag, String previousFlag) {
+        if (currentFlag.equals(previousFlag) || arguments.containsKey(currentFlag)) {
+            throw new IllegalArgumentException(
+                    String.format("the %s flag was specified more than once", currentFlag));
+        }
+    }
+
     /**
-     * Parses a String date using the format {@code dd/MM/yyyy HHmm}
+     * Parses a string date using the format {@code dd/MM/yyyy HHmm}.
+     *
      * @param date date to be parsed
-     * @return the <code>LocalDateTime</code> associated with this date
+     * @return parsed date, or {@code null} when the input does not match the format
      */
     public static LocalDateTime parseDate(String date) {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         try {
-            return LocalDateTime.parse(date, dtf);
+            return LocalDateTime.parse(date, formatter);
         } catch (DateTimeParseException e) {
             return null;
         }
