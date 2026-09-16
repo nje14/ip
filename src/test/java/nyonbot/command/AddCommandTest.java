@@ -135,6 +135,14 @@ class AddCommandTest {
     }
 
     @Test
+    void eventCommand_sameStartAndEnd_throwsNyonException() {
+        assertThrows(NyonException.class, () -> new EventCommand(
+                arguments("event lecture --from 05/09/2026 0900 "
+                        + "--to 05/09/2026 0900"),
+                tasks).execute());
+    }
+
+    @Test
     void eventCommand_flagsInDifferentOrder_addsEvent() throws NyonException {
         new EventCommand(
                 arguments("event lecture --to 05/09/2026 1100 "
