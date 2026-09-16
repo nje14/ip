@@ -20,22 +20,19 @@ import javafx.scene.media.AudioClip;
  * Represents one message shown in the conversation.
  */
 public class DialogBox extends HBox {
+
+    private static final AudioClip happySound = new AudioClip(
+            Objects.requireNonNull(
+                    DialogBox.class.getResource("/sounds/Kawkaw_voiceclip_happy_1.wav")).toExternalForm());
+
+    private static final AudioClip sadSound = new AudioClip(
+            Objects.requireNonNull(
+                    DialogBox.class.getResource("/sounds/Kawkaw_voiceclip_sad_1.wav")).toExternalForm());
+
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
-
-    private static final AudioClip happySound = new AudioClip(
-        Objects.requireNonNull(
-            DialogBox.class.getResource("/sounds/Kawkaw_voiceclip_happy_1.wav")
-        ).toExternalForm()
-    );
-
-    private static final AudioClip sadSound = new AudioClip(
-        Objects.requireNonNull(
-            DialogBox.class.getResource("/sounds/Kawkaw_voiceclip_sad_1.wav")
-        ).toExternalForm()
-    );
 
     private DialogBox(String text, Image image) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -49,7 +46,8 @@ public class DialogBox extends HBox {
 
     /**
      * Changes the message layout so that bot messages are aligned to the left.
-     * The image itself is not transformed; its orientation is determined by the image file.
+     * The image itself is not transformed; its orientation is determined by the
+     * image file.
      */
     private void flip() {
         ObservableList<Node> components = FXCollections.observableArrayList(getChildren());
@@ -69,7 +67,7 @@ public class DialogBox extends HBox {
     /**
      * Creates a right-aligned dialog for a user message.
      *
-     * @param text message entered by the user
+     * @param text  message entered by the user
      * @param image image displayed alongside the message
      * @return a dialog for the user message
      * @throws IOException if the dialog FXML cannot be loaded
@@ -83,7 +81,7 @@ public class DialogBox extends HBox {
     /**
      * Creates a left-aligned dialog for a normal bot response.
      *
-     * @param text response produced by the bot
+     * @param text  response produced by the bot
      * @param image image displayed alongside the response
      * @return a dialog for the bot response
      * @throws IOException if the dialog FXML cannot be loaded
@@ -98,7 +96,7 @@ public class DialogBox extends HBox {
     /**
      * Creates a left-aligned dialog for a bot error response.
      *
-     * @param text error response produced by the bot
+     * @param text  error response produced by the bot
      * @param image image displayed alongside the response
      * @return a dialog for the bot error response
      * @throws IOException if the dialog FXML cannot be loaded
