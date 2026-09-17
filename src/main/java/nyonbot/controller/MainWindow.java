@@ -106,8 +106,7 @@ public class MainWindow extends AnchorPane {
             Image manImage = loadImage("/static/man.png");
             dialogContainer.getChildren().add(DialogBox.getBotDialog(response, manImage));
             userInput.clear();
-        }
-        else if (isErrorResponse(response)) {
+        } else if (isErrorResponse(response)) {
             dialogContainer.getChildren().add(DialogBox.getErrorDialog(response, errorImage));
         } else {
             dialogContainer.getChildren().add(DialogBox.getBotDialog(response, botImage));
