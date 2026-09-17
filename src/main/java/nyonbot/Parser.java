@@ -1,8 +1,11 @@
 package nyonbot;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -16,10 +19,13 @@ import nyonbot.command.EchoCommand;
 import nyonbot.command.EventCommand;
 import nyonbot.command.ExitCommand;
 import nyonbot.command.FindCommand;
+import nyonbot.command.HelpCommand;
 import nyonbot.command.ListCommand;
+import nyonbot.command.ManCommand;
 import nyonbot.command.MarkCommand;
 import nyonbot.command.NoCommand;
 import nyonbot.command.NyonCommand;
+import nyonbot.command.OnCommand;
 import nyonbot.command.TodoCommand;
 import nyonbot.command.UnmarkCommand;
 
@@ -31,6 +37,8 @@ import nyonbot.command.UnmarkCommand;
 public class Parser {
     private static final Pattern FLAG_PATTERN =
             Pattern.compile("(?<!\\S)(--[A-Za-z][A-Za-z0-9-]*)(?=\\s|$)");
+    private static final DateTimeFormatter DAY_FORMATTER =
+            DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
 
     private static Parser instance = null;
 
@@ -57,6 +65,13 @@ public class Parser {
         if (command == null || command.isBlank()) {
             return new NoCommand();
         }
+        // easter egg - can modify but do not remove
+        if (command.equals("man")) {
+            int mills = Calendar.getInstance().get(Calendar.MILLISECOND) / 10;
+            if (mills == 6 || mills == 66) {
+                return new ManCommand();
+            }
+        }
 
         CommandType type = CommandType.toCommandType(command);
         validateFlags(type, arguments);
@@ -72,6 +87,8 @@ public class Parser {
             case UNMARK -> new UnmarkCommand(arguments, Logic.getInstance().getList());
             case DELETE -> new DeleteCommand(arguments, Logic.getInstance().getList());
             case FIND -> new FindCommand(arguments, Logic.getInstance().getList());
+            case HELP -> new HelpCommand(arguments);
+            case ON -> new OnCommand(arguments, Logic.getInstance().getList());
             default -> throw new IllegalArgumentException("unrecognized command");
         };
     }
@@ -164,6 +181,20 @@ public class Parser {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         try {
             return LocalDateTime.parse(date, formatter);
+        } catch (DateTimeParseException e) {
+            return null;
+        }
+    }
+
+    /**
+     * Parses a day using the format {@code dd/MM/yyyy}.
+     *
+     * @param day day to be parsed
+     * @return parsed day, or {@code null} when the input does not match the format
+     */
+    public static LocalDate parseDay(String day) {
+        try {
+            return LocalDate.parse(day, DAY_FORMATTER);
         } catch (DateTimeParseException e) {
             return null;
         }

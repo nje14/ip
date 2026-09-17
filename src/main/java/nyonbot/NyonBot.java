@@ -17,6 +17,7 @@ public class NyonBot {
     private Logic logic = Logic.getInstance();
     private ListStorage storage = ListStorage.getInstance();
     private String startupMessage = "";
+    private final String greeting = "Welcome to NyonBot! Type `help` to get started";
 
     /**
      * Creates a NyonBot instance.
@@ -50,6 +51,15 @@ public class NyonBot {
     }
 
     /**
+     * Returns the greeting to be presented on startup
+     *
+     * @return greeting message
+     */
+    public String getGreeting() {
+        return greeting;
+    }
+
+    /**
      * Passes an input to NyonBot.
      *
      * @param input user input
@@ -69,6 +79,9 @@ public class NyonBot {
             if (res.shouldWrite()) {
                 storage.save(logic.getList());
             }
+            if (res.funValue() == 66 || res.funValue() == -1) {
+                return res.out();
+            }
             if (res.out() != null && !res.out().isBlank()) {
                 return String.format("Nyon! (%s)", res.out());
             }
@@ -79,7 +92,7 @@ public class NyonBot {
     }
 
     /**
-     * Invoked when NyonBot closes; saves the current list.
+     * Saves the current list and closes NyonBot
      *
      * @return true if successfully written to file, false otherwise
      */

@@ -1,11 +1,9 @@
 package nyonbot.command;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 /**
- * An enum class that stores the mappings between command types and its string command
+ * Stores the canonical name and aliases for each supported command.
  */
 public enum CommandType {
     EXIT("bye", "exit"),
@@ -17,31 +15,52 @@ public enum CommandType {
     EVENT("event"),
     MARK("mark"),
     UNMARK("unmark"),
-    UNKNOWN("unknown"),
     DELETE("delete", "del", "rm"),
-    FIND("find", "grep");
+    FIND("find", "grep"),
+    HELP("help", "?", "man"),
+    ON("on"),
+    UNKNOWN("unknown");
 
     private final String mainKeyword;
-    private final Set<String> keyword;
+    private final List<String> keywords;
 
     CommandType(String... keywords) {
-        this.mainKeyword = keywords.length > 0 ? keywords[0] : null;
-        this.keyword = new HashSet<>(Arrays.asList(keywords));
-    }
-
-    public String keyword() {
-        return this.mainKeyword;
+        this.mainKeyword = keywords[0];
+        this.keywords = List.of(keywords);
     }
 
     /**
-     * converts the string command to its enum type
-     * @param keyword command keyword to be parsed
-     * @return the <code>CommandType</code> associated with this keyword
+     * Returns the primary user-facing command name.
+     *
+     * @return canonical command keyword
+     */
+    public String keyword() {
+        return mainKeyword;
+    }
+
+    /**
+     * Returns the canonical command keyword and its aliases.
+     *
+     * @return immutable command keyword list
+     */
+    public List<String> keywords() {
+        return keywords;
+    }
+
+    private boolean matches(String input) {
+        return keywords.stream().anyMatch(keyword -> keyword.equalsIgnoreCase(input));
+    }
+
+    /**
+     * Converts a command keyword or alias to its command type.
+     *
+     * @param keyword command keyword to parse
+     * @return corresponding command type, or {@link #UNKNOWN} when not recognized
      */
     public static CommandType toCommandType(String keyword) {
-        for (CommandType t: values()) {
-            if (t.keyword.contains(keyword.toLowerCase())) {
-                return t;
+        for (CommandType type : values()) {
+            if (type.matches(keyword)) {
+                return type;
             }
         }
         return UNKNOWN;

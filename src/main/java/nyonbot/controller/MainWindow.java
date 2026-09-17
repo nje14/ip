@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import nyonbot.NyonBot;
+import nyonbot.command.ManCommand;
 
 /**
  * Controls the main application window.
@@ -59,10 +60,11 @@ public class MainWindow extends AnchorPane {
      * Associates this view with the chatbot that processes user commands.
      *
      * @param nyonBot chatbot instance used by this window
-     * @throws IOException if the startup warning dialog cannot be loaded
+     * @throws IOException if the startup warning dialog or greeting dialog cannot be loaded
      */
     public void setNyonBot(NyonBot nyonBot) throws IOException {
         this.nyonBot = nyonBot;
+        showGreeting();
         showStartupMessage();
     }
 
@@ -71,6 +73,13 @@ public class MainWindow extends AnchorPane {
         if (!startupMessage.isBlank()) {
             String response = String.format("Nyon... (%s)", startupMessage);
             dialogContainer.getChildren().add(DialogBox.getErrorDialog(response, errorImage));
+        }
+    }
+
+    private void showGreeting() throws IOException {
+        String greetingMessage = nyonBot.getGreeting();
+        if (!greetingMessage.isBlank()) {
+            dialogContainer.getChildren().add(DialogBox.getBotDialog(greetingMessage, botImage));
         }
     }
 
@@ -92,7 +101,12 @@ public class MainWindow extends AnchorPane {
             return;
         }
 
-        if (isErrorResponse(response)) {
+        //easter egg check - do not remove
+        if (response == ManCommand.MANTEXT) {
+            Image manImage = loadImage("/static/man.png");
+            dialogContainer.getChildren().add(DialogBox.getBotDialog(response, manImage));
+            userInput.clear();
+        } else if (isErrorResponse(response)) {
             dialogContainer.getChildren().add(DialogBox.getErrorDialog(response, errorImage));
         } else {
             dialogContainer.getChildren().add(DialogBox.getBotDialog(response, botImage));

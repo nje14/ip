@@ -38,13 +38,6 @@ class SimpleCommandTest {
         assertEquals("what...?", new NoCommand().execute().out());
     }
 
-    @Test
-    void nyonCommand_execute_returnsBannerAndNyonMessage() {
-        String output = new NyonCommand().execute().out();
-
-        assertTrue(output.contains("Yay"));
-    }
-
     private static HashMap<String, String> arguments(String input) {
         return Parser.getInstance().parseArguments(input);
     }

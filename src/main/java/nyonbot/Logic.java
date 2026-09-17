@@ -17,15 +17,20 @@ public class Logic {
      * @param shouldExit whether the application should close
      * @param shouldWrite whether the task list should be saved
      */
-    public record Result(String out, boolean shouldExit, boolean shouldWrite) {
+    public record Result(String out, boolean shouldExit, boolean shouldWrite, int funValue) {
         public Result(String out) {
-            this(out, false, false);
+            this(out, false, false, 0);
         }
 
         public Result(String out, boolean shouldExit) {
-            this(out, shouldExit, false);
+            this(out, shouldExit, false, 0);
+        }
+
+        public Result(String out, boolean shouldExit, boolean shouldWrite) {
+            this(out, shouldExit, shouldWrite, 0);
         }
     }
+
 
     private static Logic instance = null;
     private TaskList list;

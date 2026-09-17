@@ -66,7 +66,7 @@ class ParserTest {
     @Test
     void parseArguments_repeatedFlag_throwsIllegalArgumentException() {
         assertThrows(
-            IllegalArgumentException.class, ( //thanks checkstyle.xml from me giving issues with lambdas
+            IllegalArgumentException.class, (//thanks checkstyle.xml from me giving issues with lambdas
             ) -> parser.parseArguments("deadline report --by 31/12/2026 1200 --by 01/01/2027 1200")
         );
     }

@@ -16,7 +16,7 @@ If there are no releases present:
 
 1. Go to the latest [github action](https://github.com/nje14/ip/actions)
 
-2. Select the latest working workflow (should have a :tick: next to it)
+2. Select the latest working workflow (should have a :white_check_mark: next to it)
 
 3. Click on artifacts
 
@@ -41,7 +41,7 @@ Thats it
 
 **Strictly for non-commerical, internal use only**
 
-This software does not come with a `man`, `--version` or `--help`
+This software comes with a `help`/`man`
 
 All commands are in GNU-style long/`--verbose` format
 
@@ -63,11 +63,15 @@ NyonBot supports the following features
 
 [Find docs](https://nje14.github.io/ip/FIND)
 
+[Help docs](https://nje14.github.io/ip/HELP)
+
 [List docs](https://nje14.github.io/ip/LIST)
 
 [Mark docs](https://nje14.github.io/ip/MARK)
 
 [Nyon docs](https://nje14.github.io/ip/NYON)
+
+[On docs](https://nje14.github.io/ip/ON)
 
 [Todo docs](https://nje14.github.io/ip/TODO)
 
