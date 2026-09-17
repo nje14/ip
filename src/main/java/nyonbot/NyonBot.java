@@ -89,7 +89,7 @@ public class NyonBot {
     }
 
     /**
-     * Invoked when NyonBot closes; saves the current list.
+     * Saves the current list and closes NyonBot
      *
      * @return true if successfully written to file, false otherwise
      */
