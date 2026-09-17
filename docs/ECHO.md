@@ -17,3 +17,7 @@ Expected output:
 ```
 Nyon! (sleep)
 ```
+
+## Aliases
+
+`cat`

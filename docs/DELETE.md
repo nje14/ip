@@ -25,3 +25,7 @@ deletes the task at index 1, as specified by [list](https://github.com/nje14/ip/
 
 Expected output:
 Similar to above
+
+## Aliases
+
+`del`, `rm`

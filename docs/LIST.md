@@ -20,3 +20,7 @@ Nyon! (
 3. [T][ ] read book
 )
 ```
+
+## Aliases
+
+`ls`

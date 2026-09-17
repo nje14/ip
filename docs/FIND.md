@@ -32,3 +32,7 @@ Nyon! (
 2. [T][ ] read book
 )
 ```
+
+## Aliases
+
+`grep`
