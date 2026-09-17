@@ -178,7 +178,8 @@ public class Parser {
      * @return parsed date, or {@code null} when the input does not match the format
      */
     public static LocalDateTime parseDate(String date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu HHmm")
+            .withResolverStyle(ResolverStyle.STRICT);
         try {
             return LocalDateTime.parse(date, formatter);
         } catch (DateTimeParseException e) {
