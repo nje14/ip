@@ -18,6 +18,8 @@ Expected output:
 Nyon! (I've removed [T][ ] sleep from your list)
 ```
 
+---
+
 ```
 delete 1
 ```

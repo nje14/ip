@@ -1,53 +1,89 @@
-# NyonBot
+# NyonBot User Guide
+
+![nyon](https://static.tvtropes.org/pmwiki/pub/images/kawkaw_battle_idle_1_400x280.png)
+
+![screenshot of ui](https://nje14.github.io/ip/Ui.png)
 
 NyonBot is a simple chatbot based off the _Duke_ greenfield Java project template
 
 NyonBot is based on the [KawKaw NPC from deltarune](https://deltarune.wiki/w/Kawkaw)
 
-## Setting up in Intellij
+## Quick start guide
 
-Prerequisites: JDK 25, update Intellij to the most recent version.
+Download the latest release from [releases](https://github.com/nje14/ip/releases)
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 25** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-1. After that, locate the `src/main/java/NyonBot.java` file, right-click it, and choose `Run NyonBot.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-             *****                                                               
-             -+%@#..                                                             
-             -+@@@@*..                                                           
-             =+@@@@@@+.                                                          
-             .-#=@@@@@=..                                                        
-   .--.        -=@@@@@@@-..                                                      
-   .-*@@ ..    .-+-@@@@@@@:                                                      
-     --=@@@@     -.@@@@@@@@@  @@@@@@@@@@@@@@                                     
-     .-*@@@@@@ ..- :.@@@@@@@@@.--------=+@@@@@@@@@                               
-       --=@@@@@@@* -.@@@@@@@ .---------=*=---+**=@@@@@@                          
-       .-#@@@@@@@@@@@@@@@@..@@@@@@@@@@@@:=*******=-**+-@@@@@@                    
-         -:*@@@@@@@@@@@@@@@@          @@@@##+**********----@@@@@                 
-         .-+:*@@@@@@@@-:@@    @@@@@@@:  @@=*%%%%%*+*+******--*+#@@@@@@@@         
-           .:*@@@@@*=-@@    @@@@    @@@: :@@*####%%%%%@+*****++=-: =@@           
-             @@#=++*#+@@    @@        @@ +@%*##%%%%%%##%%####=*++%@@             
-             @@#+####+@@    @@       .@. -@%*#%*+***+##*+@@@@@@@@@               
-             @@%@%#%%*%@+@      .       %#@####*******+#*@@@@@@@@@@@             
-               @@#***%#=@@#@          @@@@+#%*****+####%#**+++##%%#@@@@@@@@@     
-               @@#+****+%#@@@@@@@@@@@@@@####%*+##%%%%#####%+**++*++*#*=@@@@@     
-               @@#+****+#***@@@@@@@@@%***#######%****%#######+**+++=-=-%@@       
-               @@#+***%%%%###################%%%%***+%########%#%#+%@@@@@@       
-               @@*=***%%++%%###############%%#*******%###########@@@@@@@         
-               @@*+**-++#%++@%%%%%%%######%*=++******%########%%++=-:@@@@@       
-               @@@@*-@@@*%+*******+*%######%%%%*+***+%#######%+******+--:@@@@@   
-                 @@*-@@@*#%@+*******%##########%%%%%%####%%##=***********=--.@@@@
-                 @@@@@@@*###%%+*****%################%%%%++%#%%%+**+-------+=@@@@
-                 @@@  @@*#####**+*+*%##########%%%%%@+*****@%###%%#@@@@@@@@@@@   
-                      @@==###+@@=*%%##########%++++++******++%#####*++-@@@@@     
-                        @@-++-@@@@-+++++++++++++++*+*--------++++++++++-.%@@@@   
-                        @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+If there are no releases present:
 
-   ```
+1. Go to the latest [github action](https://github.com/nje14/ip/actions)
 
-**Warning:** Keep the `src\main\java` folder as the root folder for Java files (i.e., don't rename those folders or move Java files to another folder outside of this folder path), as this is the default location some tools (e.g., Gradle) expect to find Java files.
+2. Select the latest working workflow (should have a :white_check_mark: next to it)
+
+3. Click on artifacts
+
+4. Download `nyonbot-fat.jar`
+
+5. Optional: verify SHA-256
+
+Once downloaded, go to terminal / powershell and run
+```bash
+java -jar nyonbot-fat.jar
+```
+
+## Prerequisites
+
+Requires:
+
+* Java 25 or later
+
+Thats it
+
+## Important notes 
+
+**Strictly for non-commerical, internal use only**
+
+This software comes with a `help`/`man`
+
+All commands are in GNU-style long/`--verbose` format
+
+All dates **MUST** be entered in the format dd/MM/yyyy HHmm
+
+## Features
+
+NyonBot supports the following features
+
+[Deadline docs](https://nje14.github.io/ip/DEADLINE)
+
+[Delete docs](https://nje14.github.io/ip/DELETE)
+
+[Echo docs](https://nje14.github.io/ip/ECHO)
+
+[Event docs](https://nje14.github.io/ip/EVENT)
+
+[Exit docs](https://nje14.github.io/ip/EXIT)
+
+[Find docs](https://nje14.github.io/ip/FIND)
+
+[Help docs](https://nje14.github.io/ip/HELP)
+
+[List docs](https://nje14.github.io/ip/LIST)
+
+[Mark docs](https://nje14.github.io/ip/MARK)
+
+[Nyon docs](https://nje14.github.io/ip/NYON)
+
+[On docs](https://nje14.github.io/ip/ON)
+
+[Todo docs](https://nje14.github.io/ip/TODO)
+
+[Unmark docs](https://nje14.github.io/ip/UNMARK)
+
+## Attribution
+
+MainWindow and DialogBox was adapted from the [se-education JavaFX tutorial](https://se-education.org/guides/tutorials/javaFx.html)
+
+Parts of the code were created with assistance from NUS ChatGPT
+
+Images and sounds were taken from the [deltarune wiki](https://deltarune.wiki)
+
+Big Shot font taken from https://www.dafont.com/big-shot.font
+

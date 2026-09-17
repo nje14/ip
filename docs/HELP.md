@@ -23,6 +23,8 @@ nyon - show a Nyon message
 ...
 ```
 
+---
+
 ```
 help event
 ```

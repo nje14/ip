@@ -18,6 +18,8 @@ Expected output:
 Nyon! (Marked [E][X] sleep (from: 01 Jan 1900 0000 to: 01 Jan 1900 0800) as completed)
 ```
 
+---
+
 ```
 mark 1
 ```
