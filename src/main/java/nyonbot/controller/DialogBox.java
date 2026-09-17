@@ -75,7 +75,7 @@ public class DialogBox extends HBox {
         ObservableList<Node> components = FXCollections.observableArrayList(getChildren());
         Collections.reverse(components);
         getChildren().setAll(components);
-        setAlignment(Pos.TOP_LEFT);
+        setAlignment(Pos.BOTTOM_LEFT);
         dialog.getStyleClass().add("bot-label");
     }
 

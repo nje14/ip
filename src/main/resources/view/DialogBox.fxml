@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-<fx:root alignment="CENTER_RIGHT"
+<fx:root alignment="BOTTOM_RIGHT"
          fillHeight="true"
          maxWidth="1.7976931348623157E308"
          spacing="8.0"
