@@ -65,10 +65,10 @@ public class Parser {
         if (command == null || command.isBlank()) {
             return new NoCommand();
         }
-        // easter egg - do not remove
+        // easter egg - can modify but do not remove
         if (command.equals("man")) {
             int mills = Calendar.getInstance().get(Calendar.MILLISECOND) / 10;
-            if (mills == 0 || mills == 66) {
+            if (mills == 6 || mills == 66) {
                 return new ManCommand();
             }
         }

@@ -16,7 +16,7 @@ If there are no releases present:
 
 1. Go to the latest [github action](https://github.com/nje14/ip/actions)
 
-2. Select the latest working workflow (should have a :tick: next to it)
+2. Select the latest working workflow (should have a :white_check_mark: next to it)
 
 3. Click on artifacts
 
@@ -41,7 +41,7 @@ Thats it
 
 **Strictly for non-commerical, internal use only**
 
-This software does not come with a `man`, `--version` or `--help`
+This software comes with a `help`/`man`
 
 All commands are in GNU-style long/`--verbose` format
 
