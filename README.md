@@ -22,8 +22,6 @@ If there are no releases present:
 
 4. Download `nyonbot-fat.jar`
 
-5. Optional: verify SHA-256
-
 Once downloaded, go to terminal / powershell and run
 ```bash
 java -jar nyonbot-fat.jar
@@ -35,15 +33,13 @@ Requires:
 
 * Java 25 or later
 
-Thats it
+That's it
 
 ## Important notes 
 
-**Strictly for non-commerical, internal use only**
+**Strictly for non-commercial, internal use only**
 
 This software comes with a `help`/`man`
-
-All commands are in GNU-style long/`--verbose` format
 
 All dates **MUST** be entered in the format dd/MM/yyyy HHmm
 

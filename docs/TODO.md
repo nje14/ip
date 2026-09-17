@@ -1,6 +1,6 @@
 # todo
 
-Adds a ToDo to NyonBot
+Creates and adds a ToDo to NyonBot
 
 ## Synopsis
 

@@ -1,6 +1,6 @@
 # on
 
-Finds all tasks that occurs on the specified date
+Finds all tasks that occur on the specified date
 
 ## Synopsis
 

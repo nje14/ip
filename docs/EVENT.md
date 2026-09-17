@@ -1,6 +1,6 @@
 # event
 
-Adds a event to NyonBot with a specified start date and end date
+Creates and adds an event to NyonBot with a specified start date and end date
 
 ## Synopsis
 

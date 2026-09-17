@@ -1,6 +1,6 @@
 # deadline
 
-Adds a deadline to NyonBot with a specified date
+Creates and adds a deadline to NyonBot with a specified date
 
 ## Synopsis
 

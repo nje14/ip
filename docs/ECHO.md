@@ -1,6 +1,6 @@
 # echo
 
-Echos user input
+repeats user input
 
 ## Synopsis
 
