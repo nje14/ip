@@ -63,11 +63,15 @@ NyonBot supports the following features
 
 [Find docs](https://nje14.github.io/ip/FIND)
 
+[Help docs](https://nje14.github.io/ip/HELP)
+
 [List docs](https://nje14.github.io/ip/LIST)
 
 [Mark docs](https://nje14.github.io/ip/MARK)
 
 [Nyon docs](https://nje14.github.io/ip/NYON)
+
+[On docs](https://nje14.github.io/ip/ON)
 
 [Todo docs](https://nje14.github.io/ip/TODO)
 

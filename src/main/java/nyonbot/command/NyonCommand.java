@@ -10,6 +10,6 @@ public class NyonCommand extends Command {
     /** {@inheritDoc} */
     @Override
     public Result execute() {
-        return new Result("Yay");
+        return new Result("Nyon!", false, false, -1);
     }
 }

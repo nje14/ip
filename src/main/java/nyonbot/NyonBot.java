@@ -79,6 +79,9 @@ public class NyonBot {
             if (res.shouldWrite()) {
                 storage.save(logic.getList());
             }
+            if (res.funValue() == 66 || res.funValue() == -1) {
+                return res.out();
+            }
             if (res.out() != null && !res.out().isBlank()) {
                 return String.format("Nyon! (%s)", res.out());
             }

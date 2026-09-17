@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import nyonbot.NyonBot;
+import nyonbot.command.ManCommand;
 
 /**
  * Controls the main application window.
@@ -100,7 +101,13 @@ public class MainWindow extends AnchorPane {
             return;
         }
 
-        if (isErrorResponse(response)) {
+        //easter egg check - do not remove
+        if (response == ManCommand.MANTEXT) {
+            Image manImage = loadImage("/static/man.png");
+            dialogContainer.getChildren().add(DialogBox.getBotDialog(response, manImage));
+            userInput.clear();
+        }
+        else if (isErrorResponse(response)) {
             dialogContainer.getChildren().add(DialogBox.getErrorDialog(response, errorImage));
         } else {
             dialogContainer.getChildren().add(DialogBox.getBotDialog(response, botImage));

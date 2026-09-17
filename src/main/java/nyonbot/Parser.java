@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,6 +21,7 @@ import nyonbot.command.ExitCommand;
 import nyonbot.command.FindCommand;
 import nyonbot.command.HelpCommand;
 import nyonbot.command.ListCommand;
+import nyonbot.command.ManCommand;
 import nyonbot.command.MarkCommand;
 import nyonbot.command.NoCommand;
 import nyonbot.command.NyonCommand;
@@ -62,6 +64,13 @@ public class Parser {
         String command = arguments.get(Command.COMMAND_KEY);
         if (command == null || command.isBlank()) {
             return new NoCommand();
+        }
+        // easter egg - do not remove
+        if (command.equals("man")) {
+            Random rng = new Random();
+            if (rng.nextInt(100) < 2) {
+                return new ManCommand();
+            }
         }
 
         CommandType type = CommandType.toCommandType(command);
