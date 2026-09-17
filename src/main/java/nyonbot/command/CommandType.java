@@ -1,30 +1,36 @@
 package nyonbot.command;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * An enum class that stores the mappings between command types and its string command
  */
 public enum CommandType {
-    EXIT("bye"),
-    ECHO("echo"),
+    EXIT("bye", "exit"),
+    ECHO("echo", "cat"),
     NYON("nyon"),
-    LIST("list"),
+    LIST("list", "ls"),
     TODO("todo"),
     DEADLINE("deadline"),
     EVENT("event"),
     MARK("mark"),
     UNMARK("unmark"),
     UNKNOWN("unknown"),
-    DELETE("delete"),
-    FIND("find");
+    DELETE("delete", "del", "rm"),
+    FIND("find", "grep");
 
-    private final String keyword;
+    private final String mainKeyword;
+    private final Set<String> keyword;
 
-    CommandType(String keyword) {
-        this.keyword = keyword;
+    CommandType(String... keywords) {
+        this.mainKeyword = keywords.length > 0 ? keywords[0] : null;
+        this.keyword = new HashSet<>(Arrays.asList(keywords));
     }
 
     public String keyword() {
-        return this.keyword;
+        return this.mainKeyword;
     }
 
     /**
@@ -34,7 +40,7 @@ public enum CommandType {
      */
     public static CommandType toCommandType(String keyword) {
         for (CommandType t: values()) {
-            if (t.keyword.equalsIgnoreCase(keyword)) {
+            if (t.keyword.contains(keyword.toLowerCase())) {
                 return t;
             }
         }
