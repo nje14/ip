@@ -17,6 +17,7 @@ public class NyonBot {
     private Logic logic = Logic.getInstance();
     private ListStorage storage = ListStorage.getInstance();
     private String startupMessage = "";
+    private final String greeting = "Welcome to NyonBot! Type `help` to get started";
 
     /**
      * Creates a NyonBot instance.
@@ -47,6 +48,15 @@ public class NyonBot {
      */
     public String getStartupMessage() {
         return startupMessage;
+    }
+
+    /**
+     * Returns the greeting to be presented on startup
+     *
+     * @return greeting message
+     */
+    public String getGreeting() {
+        return greeting;
     }
 
     /**
