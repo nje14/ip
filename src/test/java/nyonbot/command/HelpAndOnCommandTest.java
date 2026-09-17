@@ -1,5 +1,6 @@
 package nyonbot.command;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -75,9 +76,9 @@ class HelpAndOnCommandTest {
 
         assertTrue(result.out().contains("submit report"));
         assertTrue(result.out().contains("conference"));
-        assertTrue(!result.out().contains("later deadline"));
-        assertTrue(!result.out().contains("undated task"));
-        assertTrue(!result.out().contains("past event"));
+        assertFalse(result.out().contains("later deadline"));
+        assertFalse(result.out().contains("undated task"));
+        assertFalse(result.out().contains("past event"));
     }
 
     @Test
