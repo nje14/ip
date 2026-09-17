@@ -45,7 +45,7 @@ public class DeadlineCommand extends Command {
         LocalDateTime deadlineTime = Parser.parseDate(deadlineValue);
         if (deadlineTime == null) {
             throw new NyonException(
-                    "enter the time in the following format: dd/MM/yyyy HHmm");
+                    "couldn't read your date\nenter the time in the following format: dd/MM/yyyy HHmm");
         }
 
         Task deadline = new Deadline(description, deadlineTime);

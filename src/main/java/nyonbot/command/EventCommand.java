@@ -53,7 +53,8 @@ public class EventCommand extends Command {
         LocalDateTime endDate = Parser.parseDate(endValue);
         if (startDate == null || endDate == null) {
             throw new NyonException(
-                    "please enter start and end times in the format dd/MM/yyyy HHmm");
+                    "couldn't read your start date / end date\n"
+                    + "please enter start and end times in the format dd/MM/yyyy HHmm");
         }
         if (!startDate.isBefore(endDate)) {
             throw new NyonException("start time must be before end time");

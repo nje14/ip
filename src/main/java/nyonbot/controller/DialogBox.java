@@ -15,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.media.AudioClip;
+import javafx.scene.media.MediaException;
 
 /**
  * Represents one message shown in the conversation.
@@ -41,10 +42,22 @@ public class DialogBox extends HBox {
 
     private static AudioClip loadSound(String resourcePath) {
         URL resource = DialogBox.class.getResource(resourcePath);
+
         if (resource == null) {
+            System.err.println("Sound file missing: " + resourcePath);
             return null;
         }
-        return new AudioClip(resource.toExternalForm());
+
+        try {
+            return new AudioClip(resource.toExternalForm());
+        } catch (MediaException e) {
+            System.err.printf("Sound disabled (%s): %s%n",
+                    e.getType(), e.getMessage());
+            return null;
+        } catch (IllegalArgumentException e) {
+            System.err.println("Invalid sound URL: " + resourcePath);
+            return null;
+        }
     }
 
     private static void playSound(AudioClip sound) {
@@ -76,7 +89,7 @@ public class DialogBox extends HBox {
     /**
      * Creates a right-aligned dialog for a user message.
      *
-     * @param text message entered by the user
+     * @param text  message entered by the user
      * @param image image displayed alongside the message
      * @return a dialog for the user message
      * @throws IOException if the dialog FXML cannot be loaded
@@ -90,7 +103,7 @@ public class DialogBox extends HBox {
     /**
      * Creates a left-aligned dialog for a normal bot response.
      *
-     * @param text response produced by the bot
+     * @param text  response produced by the bot
      * @param image image displayed alongside the response
      * @return a dialog for the bot response
      * @throws IOException if the dialog FXML cannot be loaded
@@ -105,7 +118,7 @@ public class DialogBox extends HBox {
     /**
      * Creates a left-aligned dialog for a bot error response.
      *
-     * @param text error response produced by the bot
+     * @param text  error response produced by the bot
      * @param image image displayed alongside the response
      * @return a dialog for the bot error response
      * @throws IOException if the dialog FXML cannot be loaded
