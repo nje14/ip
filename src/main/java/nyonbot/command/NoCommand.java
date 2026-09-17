@@ -3,7 +3,7 @@ package nyonbot.command;
 import nyonbot.Logic.Result;
 
 /**
- * Creates a NoCommand
+ * Creates a NoCommand.
  */
 public class NoCommand extends Command {
 

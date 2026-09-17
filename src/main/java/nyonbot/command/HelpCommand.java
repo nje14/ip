@@ -12,7 +12,7 @@ public class HelpCommand extends Command {
     /**
      * Creates a help command with parsed arguments.
      *
-     * @param arguments parsed command arguments
+     * @param arguments parsed command arguments.
      */
     public HelpCommand(HashMap<String, String> arguments) {
         super(arguments);

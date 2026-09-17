@@ -26,7 +26,7 @@ public class Storage {
     /**
      * Creates a storage object for the specified file path.
      *
-     * @param filePath filepath of the save file
+     * @param filePath filepath of the save file.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -36,8 +36,8 @@ public class Storage {
      * Loads the tasks from the save file. Invalid records are skipped so that
      * one malformed record does not prevent the remaining tasks from loading.
      *
-     * @return a TaskList of the tasks stored in the file
-     * @throws IOException if the storage path cannot be read
+     * @return a TaskList of the tasks stored in the file.
+     * @throws IOException if the storage path cannot be read.
      */
     public TaskList load() throws IOException {
         Path path = Path.of(filePath);
@@ -64,7 +64,7 @@ public class Storage {
     /**
      * Returns the number of records skipped by the most recent load.
      *
-     * @return number of skipped records
+     * @return number of skipped records.
      */
     public int getSkippedRecordCount() {
         return skippedRecordCount;
@@ -119,8 +119,13 @@ public class Storage {
         if (params.length != 5) {
             return false;
         }
+        LocalDateTime startTime = LocalDateTime.parse(params[3]);
+        LocalDateTime endTime = LocalDateTime.parse(params[4]);
+        if (!startTime.isBefore(endTime)) {
+            return false;
+        }
         Event event = new Event(params[1],
-                LocalDateTime.parse(params[3]), LocalDateTime.parse(params[4]));
+            startTime, endTime);
         updateCompletionStatus(event, params[2]);
         list.add(event);
         return true;
@@ -137,8 +142,8 @@ public class Storage {
     /**
      * Returns the storage representation of the task to be stored.
      *
-     * @param task the task to be stored
-     * @return the storage representation of the task
+     * @param task the task to be stored.
+     * @return the storage representation of the task.
      */
     private String taskParser(Task task) {
         if (task instanceof ToDo todo) {
@@ -164,8 +169,8 @@ public class Storage {
     /**
      * Saves a list to the filepath of the Storage object.
      *
-     * @param list the list to be saved
-     * @throws IOException if the file cannot be created or written
+     * @param list the list to be saved.
+     * @throws IOException if the file cannot be created or written.
      */
     public void save(TaskList list) throws IOException {
         Path path = Path.of(filePath);
@@ -204,7 +209,7 @@ public class Storage {
     /**
      * Removes all tasks from the file.
      *
-     * @throws IOException if the file cannot be written
+     * @throws IOException if the file cannot be written.
      */
     public void wipe() throws IOException {
         save(new TaskList());

@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import nyonbot.controller.MainWindow;
 
 /**
- * Main class for NyonBot
+ * Creates and launches the GUI for NyonBot.
  */
 public class Main extends Application {
 

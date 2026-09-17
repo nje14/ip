@@ -8,15 +8,15 @@ import nyonbot.model.Task;
 import nyonbot.model.TaskList;
 
 /**
- * Finds and returns all tasks matching an input keyword(s)
+ * Finds and returns all tasks matching an input keyword(s).
  */
 public class FindCommand extends Command {
     private TaskList list;
 
     /**
      * Creates a FindCommand with parsed arguments and a TaskList to search.
-     * @param arguments parsed command arguments
-     * @param task      the TaskList to search through
+     * @param arguments parsed command arguments.
+     * @param task      the TaskList to search through.
      */
     public FindCommand(HashMap<String, String> arguments, TaskList tasks) {
         super(arguments);

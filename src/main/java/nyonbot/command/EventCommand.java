@@ -19,8 +19,8 @@ public class EventCommand extends Command {
     /**
      * Creates an event command with parsed arguments and a task list.
      *
-     * @param arguments parsed command arguments
-     * @param list      task list to add the event to
+     * @param arguments parsed command arguments.
+     * @param list      task list to add the event to.
      */
     public EventCommand(HashMap<String, String> arguments, TaskList list) {
         super(arguments);

@@ -55,9 +55,9 @@ public class Parser {
     /**
      * Parses raw input into a command.
      *
-     * @param input raw input
-     * @return command associated with this input
-     * @throws IllegalArgumentException if the command contains invalid flags
+     * @param input raw input.
+     * @return command associated with this input.
+     * @throws IllegalArgumentException if the command contains invalid flags.
      */
     public Command parse(String input) {
         HashMap<String, String> arguments = parseArguments(input);
@@ -65,7 +65,7 @@ public class Parser {
         if (command == null || command.isBlank()) {
             return new NoCommand();
         }
-        // easter egg - can modify but do not remove
+        // easter egg check
         if (command.equals("man")) {
             int mills = Calendar.getInstance().get(Calendar.MILLISECOND) / 10;
             if (mills == 6 || mills == 66) {
@@ -115,10 +115,10 @@ public class Parser {
      * Parses command-line input into a command, positional description, and
      * flag-value pairs.
      *
-     * @param input raw command-line input
+     * @param input raw command-line input.
      * @return parsed arguments keyed by {@code command}, {@code description},
-     *         or their literal flag such as {@code --by}
-     * @throws IllegalArgumentException if a flag is specified more than once
+     *         or their literal flag such as {@code --by}.
+     * @throws IllegalArgumentException if a flag is specified more than once.
      */
     public HashMap<String, String> parseArguments(String input) {
         HashMap<String, String> arguments = new HashMap<>();
@@ -174,8 +174,8 @@ public class Parser {
     /**
      * Parses a string date using the format {@code dd/MM/yyyy HHmm}.
      *
-     * @param date date to be parsed
-     * @return parsed date, or {@code null} when the input does not match the format
+     * @param date date to be parsed.
+     * @return parsed date, or {@code null} when the input does not match the format.
      */
     public static LocalDateTime parseDate(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu HHmm")
@@ -190,8 +190,8 @@ public class Parser {
     /**
      * Parses a day using the format {@code dd/MM/yyyy}.
      *
-     * @param day day to be parsed
-     * @return parsed day, or {@code null} when the input does not match the format
+     * @param day day to be parsed.
+     * @return parsed day, or {@code null} when the input does not match the format.
      */
     public static LocalDate parseDay(String day) {
         try {

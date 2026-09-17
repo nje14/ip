@@ -8,15 +8,16 @@ import nyonbot.model.Task;
 import nyonbot.model.TaskList;
 
 /**
- * Marks a task as completed
+ * Marks a task as completed.
  */
 public class MarkCommand extends Command {
     private TaskList list;
 
     /**
      * Creates a MarkCommand with parsed arguments and a TaskList to check.
-     * @param arguments parsed command arguments
-     * @param list TaskList to be checked
+     *
+     * @param arguments parsed command arguments.
+     * @param list TaskList to be checked.
      */
     public MarkCommand(HashMap<String, String> arguments, TaskList list) {
         super(arguments);

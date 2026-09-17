@@ -9,15 +9,16 @@ import nyonbot.model.Task;
 import nyonbot.model.TaskList;
 
 /**
- * Lists all tasks in the tasklist
+ * Lists all tasks in the tasklist.
  */
 public class ListCommand extends Command {
     private TaskList list;
 
     /**
      * Creates a List command with parsed arguments and a TaskList to read.
-     * @param arguments parsed command arguments
-     * @param list      TaskList to read
+     *
+     * @param arguments parsed command arguments.
+     * @param list      TaskList to read.
      */
     public ListCommand(HashMap<String, String> arguments, TaskList list) {
         super(arguments);

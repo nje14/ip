@@ -16,8 +16,8 @@ public class DeleteCommand extends Command {
     /**
      * Creates a delete command with parsed arguments and a TaskList.
      *
-     * @param arguments parsed command arguments
-     * @param list the TaskList to delete from
+     * @param arguments parsed command arguments.
+     * @param list the TaskList to delete from.
      */
     public DeleteCommand(HashMap<String, String> arguments, TaskList list) {
         super(arguments);

@@ -12,8 +12,8 @@ public class Task {
     /**
      * Creates an incomplete task with the specified name.
      *
-     * @param taskName task name
-     * @throws IllegalArgumentException if the name cannot be represented in storage
+     * @param taskName task name.
+     * @throws IllegalArgumentException if the name cannot be represented in storage.
      */
     public Task(String taskName) {
         validateTaskName(taskName);
@@ -48,8 +48,8 @@ public class Task {
     /**
      * Returns whether the tasks have the same name.
      *
-     * @param task task name to compare
-     * @return whether task names are equal
+     * @param task task name to compare.
+     * @return whether task names are equal.
      */
     public boolean isSameTask(String task) {
         return this.taskName.equals(task);

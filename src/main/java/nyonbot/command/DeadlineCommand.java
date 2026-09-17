@@ -19,8 +19,8 @@ public class DeadlineCommand extends Command {
     /**
      * Creates a deadline command with parsed arguments and a task list.
      *
-     * @param arguments parsed command arguments
-     * @param list task list to add the task to
+     * @param arguments parsed command arguments.
+     * @param list task list to add the task to.
      */
     public DeadlineCommand(HashMap<String, String> arguments, TaskList list) {
         super(arguments);

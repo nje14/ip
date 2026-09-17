@@ -44,14 +44,14 @@ public class NyonBot {
     /**
      * Returns a warning generated while the task list was loaded.
      *
-     * @return startup warning, or an empty string when loading succeeded
+     * @return Startup warning, or an empty string when loading succeeded.
      */
     public String getStartupMessage() {
         return startupMessage;
     }
 
     /**
-     * Returns the greeting to be presented on startup
+     * Returns the greeting to be presented on startup.
      *
      * @return greeting message
      */
@@ -62,8 +62,8 @@ public class NyonBot {
     /**
      * Passes an input to NyonBot.
      *
-     * @param input user input
-     * @return response string
+     * @param input User input.
+     * @return Response string.
      */
     public String respond(String input) {
         try {
@@ -92,9 +92,9 @@ public class NyonBot {
     }
 
     /**
-     * Saves the current list and closes NyonBot
+     * Saves the current list and closes NyonBot.
      *
-     * @return true if successfully written to file, false otherwise
+     * @return true if successfully written to file, false otherwise.
      */
     public boolean onClose() {
         try {
@@ -105,6 +105,11 @@ public class NyonBot {
         }
     }
 
+    /**
+     * Launches NyonBot from command line.
+     *
+     * @param args command line arguments.
+     */
     public static void main(String[] args) {
         NyonBot nyonBot = new NyonBot();
         Ui ui = Ui.getInstance();

@@ -59,8 +59,8 @@ public class MainWindow extends AnchorPane {
     /**
      * Associates this view with the chatbot that processes user commands.
      *
-     * @param nyonBot chatbot instance used by this window
-     * @throws IOException if the startup warning dialog or greeting dialog cannot be loaded
+     * @param nyonBot chatbot instance used by this window.
+     * @throws IOException if the startup warning dialog or greeting dialog cannot be loaded.
      */
     public void setNyonBot(NyonBot nyonBot) throws IOException {
         this.nyonBot = nyonBot;
@@ -86,7 +86,7 @@ public class MainWindow extends AnchorPane {
     /**
      * Adds the user's message and the resulting bot response to the conversation.
      *
-     * @throws IOException if a dialog FXML cannot be loaded
+     * @throws IOException if a dialog FXML cannot be loaded.
      */
     @FXML
     private void handleUserInput() throws IOException {
@@ -101,8 +101,8 @@ public class MainWindow extends AnchorPane {
             return;
         }
 
-        //easter egg check - do not remove
-        if (response == ManCommand.MANTEXT) {
+        //easter egg check
+        if (response.equals(ManCommand.MAN_TEXT)) {
             Image manImage = loadImage("/static/man.png");
             dialogContainer.getChildren().add(DialogBox.getBotDialog(response, manImage));
             userInput.clear();

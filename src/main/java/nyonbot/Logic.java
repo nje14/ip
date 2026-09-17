@@ -13,9 +13,10 @@ public class Logic {
     /**
      * Stores the result of executing a command.
      *
-     * @param out text to display to the user
-     * @param shouldExit whether the application should close
-     * @param shouldWrite whether the task list should be saved
+     * @param out text to display to the user.
+     * @param shouldExit whether the application should close.
+     * @param shouldWrite whether the task list should be saved.
+     * @param funValue control flag used mainly easter egg purposes.
      */
     public record Result(String out, boolean shouldExit, boolean shouldWrite, int funValue) {
         public Result(String out) {
@@ -53,7 +54,7 @@ public class Logic {
     /**
      * Replaces the current task list with the input list.
      *
-     * @param newList task list to load, or {@code null} to clear the current list
+     * @param newList task list to load, or {@code null} to clear the current list.
      */
     public void loadList(TaskList newList) {
         list.clear();
@@ -69,9 +70,9 @@ public class Logic {
     /**
      * Executes the given command.
      *
-     * @param command command to execute
-     * @return result of the command
-     * @throws NyonException if the command input is invalid
+     * @param command command to execute.
+     * @return result of the command.
+     * @throws NyonException if the command input is invalid.
      */
     public Result execute(Command command) throws NyonException {
         return command.execute();

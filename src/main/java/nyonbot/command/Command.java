@@ -6,7 +6,7 @@ import nyonbot.Logic.Result;
 import nyonbot.model.NyonException;
 
 /**
- * Represents an executable user command
+ * Represents an executable user command.
  */
 public abstract class Command {
     public static final String COMMAND_KEY = "command";
@@ -24,6 +24,7 @@ public abstract class Command {
 
     /**
      * Executes this command
+     *
      * @return <code>Result</code> containing output and application control info
      * @throws NyonException if command input is invalid or otherwise raises issues
      */

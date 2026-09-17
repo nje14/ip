@@ -32,7 +32,7 @@ public enum CommandType {
     /**
      * Returns the primary user-facing command name.
      *
-     * @return canonical command keyword
+     * @return canonical command keyword.
      */
     public String keyword() {
         return mainKeyword;
@@ -41,7 +41,7 @@ public enum CommandType {
     /**
      * Returns the canonical command keyword and its aliases.
      *
-     * @return immutable command keyword list
+     * @return immutable command keyword list.
      */
     public List<String> keywords() {
         return keywords;
@@ -54,8 +54,8 @@ public enum CommandType {
     /**
      * Converts a command keyword or alias to its command type.
      *
-     * @param keyword command keyword to parse
-     * @return corresponding command type, or {@link #UNKNOWN} when not recognized
+     * @param keyword command keyword to parse.
+     * @return corresponding command type, or {@link #UNKNOWN} when not recognized.
      */
     public static CommandType toCommandType(String keyword) {
         for (CommandType type : values()) {

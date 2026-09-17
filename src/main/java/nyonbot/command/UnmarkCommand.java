@@ -8,15 +8,16 @@ import nyonbot.model.Task;
 import nyonbot.model.TaskList;
 
 /**
- * Unmarks a task
+ * Unmarks a task.
  */
 public class UnmarkCommand extends Command {
     private TaskList list;
 
     /**
      * Creates an Unmark command with parsed arguments and a TaskList.
-     * @param arguments parsed command arguments
-     * @param list the TaskList to search
+     *
+     * @param arguments parsed command arguments.
+     * @param list the TaskList to search.
      */
     public UnmarkCommand(HashMap<String, String> arguments, TaskList list) {
         super(arguments);

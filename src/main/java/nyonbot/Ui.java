@@ -6,7 +6,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 /**
- * Handles all input and output for the NyonBot application
+ * Handles all input and output for the NyonBot application.
  */
 public class Ui {
     private static Ui instance = null;
@@ -31,7 +31,7 @@ public class Ui {
     }
 
     /**
-     * Displays the goodbye banner
+     * Displays the goodbye banner.
      */
     public void goodbye() {
         String out = ResourceLoader.readTextFile("static/goodbye.txt");
@@ -39,7 +39,7 @@ public class Ui {
     }
 
     /**
-     * Displays the title banner
+     * Displays the title banner.
      */
     public void banner() {
         String banner = ResourceLoader.readTextFile("static/ascii-banner.txt");
@@ -47,8 +47,9 @@ public class Ui {
     }
 
     /**
-     * Reads one command from the standard input
-     * @return the command entered by the user
+     * Reads one command from the standard input.
+     *
+     * @return the command entered by the user.
      */
     public String readCommand() {
 
@@ -58,17 +59,19 @@ public class Ui {
     }
 
     /**
-     * Prints a message to the standard output
-     * @param out the message to be printed
+     * Prints a message to the standard output.
+     *
+     * @param out the message to be printed.
      */
     public void showOutput(String out) {
         System.out.println(out);
     }
 
     /**
-     * Formats a date to the display pattern {@code dd MMM yyyy HHmm}
-     * @param dateTime <code>DateTime</code> to be formatted
-     * @return the formatted date string
+     * Formats a date to the display pattern {@code dd MMM yyyy HHmm}.
+     *
+     * @param dateTime <code>DateTime</code> to be formatted.
+     * @return the formatted date string.
      */
     public static String showDate(LocalDateTime dateTime) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm", Locale.US);

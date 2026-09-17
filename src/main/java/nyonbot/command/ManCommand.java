@@ -3,13 +3,13 @@ package nyonbot.command;
 import nyonbot.Logic.Result;
 
 /**
- * Easter egg command that creates a Man event
+ * Easter egg command that creates a Man event.
  */
 public class ManCommand extends Command {
-    public static final String MANTEXT = "Well, there is a man here";
+    public static final String MAN_TEXT = "Well, there is a man here";
 
     /**
-     * Creates a Man Command
+     * Creates a Man Command.
      */
     public ManCommand() {
 
@@ -18,6 +18,6 @@ public class ManCommand extends Command {
     /** {@inheritDoc} */
     @Override
     public Result execute() {
-        return new Result(MANTEXT, false, false, 66);
+        return new Result(MAN_TEXT, false, false, 66);
     }
 }

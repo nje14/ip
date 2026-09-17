@@ -5,7 +5,7 @@ import java.util.HashMap;
 import nyonbot.Logic.Result;
 
 /**
- * Echos the user input
+ * Echos the user input.
  */
 public class EchoCommand extends Command {
     public EchoCommand(HashMap<String, String> arguments) {

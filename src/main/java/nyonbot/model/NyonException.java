@@ -7,7 +7,7 @@ public class NyonException extends Exception {
     /**
      * Creates an exception with a user-facing message.
      *
-     * @param message explanation of the invalid input
+     * @param message explanation of the invalid input.
      */
     public NyonException(String message) {
         super(message);

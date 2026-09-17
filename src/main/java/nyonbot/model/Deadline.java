@@ -11,9 +11,10 @@ public class Deadline extends Task {
     private LocalDateTime deadline;
 
     /**
-     * Creates a Deadline task with the associated name and deadline
-     * @param taskName
-     * @param deadline
+     * Creates a Deadline task with the associated name and deadline.
+     *
+     * @param taskName task name.
+     * @param deadline deadline of task.
      */
     public Deadline(String taskName, LocalDateTime deadline) {
         super(taskName);
