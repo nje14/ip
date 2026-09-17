@@ -17,7 +17,7 @@ public enum CommandType {
     UNMARK("unmark"),
     DELETE("delete", "del", "rm"),
     FIND("find", "grep"),
-    HELP("help", "?"),
+    HELP("help", "?", "man"),
     ON("on"),
     UNKNOWN("unknown");
 
