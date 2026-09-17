@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
+import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Random;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -67,8 +67,8 @@ public class Parser {
         }
         // easter egg - do not remove
         if (command.equals("man")) {
-            Random rng = new Random();
-            if (rng.nextInt(100) < 2) {
+            int mills = Calendar.getInstance().get(Calendar.MILLISECOND) / 10;
+            if (mills == 0 || mills == 66) {
                 return new ManCommand();
             }
         }
