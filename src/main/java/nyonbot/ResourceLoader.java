@@ -16,8 +16,7 @@ public class ResourceLoader {
      * @throws IllegalStateException if read is interrupted or file cannot be found.
      **/
     public static String readTextFile(String filename) {
-        assert(filename.length() > 0);
-        if (filename.charAt(0) == '/') {
+        if (filename.length() > 0 && filename.charAt(0) == '/') {
             filename = filename.substring(1);
         }
         try (InputStream input = NyonBot.class.getClassLoader().getResourceAsStream(filename)) {
