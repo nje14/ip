@@ -113,3 +113,13 @@ NyonBot also supports some common aliases. Refer to docs for specifics.
 |on|returns all tasks occuring on specified date|`on <date>`|[On docs](https://nje14.github.io/ip/ON)|
 |todo|creates a todo|`todo <name>`|[Todo docs](https://nje14.github.io/ip/TODO)|
 |unmark|marks task as incomplete|`unmark <index\|name>`|[Unmark docs](https://nje14.github.io/ip/UNMARK)|
+
+## Attribution
+
+MainWindow and DialogBox was adapted from the [se-education JavaFX tutorial](https://se-education.org/guides/tutorials/javaFx.html)
+
+Parts of the code were created with assistance from NUS ChatGPT
+
+Images and sounds were taken from the [deltarune wiki](https://deltarune.wiki)
+
+Big Shot font taken from https://www.dafont.com/big-shot.font
