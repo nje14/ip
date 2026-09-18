@@ -47,55 +47,6 @@ All dates **MUST** be entered in the format dd/MM/yyyy HHmm
 
 NyonBot supports the following features
 
-# NyonBot User Guide
-
-![nyon](https://static.tvtropes.org/pmwiki/pub/images/kawkaw_battle_idle_1_400x280.png)
-
-![screenshot of ui](https://nje14.github.io/ip/Ui.png)
-
-NyonBot is a simple chatbot based off the _Duke_ greenfield Java project template
-
-NyonBot is based on the [KawKaw NPC from deltarune](https://deltarune.wiki/w/Kawkaw)
-
-## Quick start guide
-
-Download the latest release from [releases](https://github.com/nje14/ip/releases)
-
-If there are no releases present:
-
-1. Go to the latest [github action](https://github.com/nje14/ip/actions)
-
-2. Select the latest working workflow (should have a :white_check_mark: next to it)
-
-3. Click on artifacts
-
-4. Download `nyonbot-fat.jar`
-
-Once downloaded, go to terminal / powershell and run
-```bash
-java -jar nyonbot-fat.jar
-```
-
-## Prerequisites
-
-Requires:
-
-* Java 25 or later
-
-That's it
-
-## Important notes 
-
-**Strictly for non-commercial, internal use only**
-
-This software comes with a `help`/`man`
-
-All dates **MUST** be entered in the format dd/MM/yyyy HHmm
-
-## Features
-
-NyonBot supports the following features
-
 NyonBot also supports some common aliases. Refer to docs for specifics.
 
 |Command|Description|Usage|Docs|
