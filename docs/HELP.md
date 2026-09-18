@@ -1,7 +1,8 @@
 # help
 
-displays help page
-optional command argument to see the specific command help page
+displays help page.
+
+pass in optional command argument to see the specific command help page.
 
 ## Synopsis
 
