@@ -96,10 +96,12 @@ All dates **MUST** be entered in the format dd/MM/yyyy HHmm
 
 NyonBot supports the following features
 
+NyonBot also supports some common aliases. Refer to docs for specifics.
+
 |Command|Description|Usage|Docs|
 |---|---|---|---|
 |deadline|creates a new deadline to do by specified date|`deadline <name> --by <date>`|[Deadline docs](https://nje14.github.io/ip/DEADLINE)|
-|delete|deletes a task|`delete <index\|name>`|[Delete docs](https://nje14.github.io/ip/DELETE)|
+|delete|deletes a task|`delete <index \| name>`|[Delete docs](https://nje14.github.io/ip/DELETE)|
 |echo|echoes input|`echo [text]`|[Echo docs](https://nje14.github.io/ip/ECHO)|
 |event|creates an event with specified start and end dates|`event <name> --from <start date> --to <end date>`|[Event docs](https://nje14.github.io/ip/EVENT)|
 |exit|exits software|`exit`|[Exit docs](https://nje14.github.io/ip/EXIT)|
@@ -111,6 +113,3 @@ NyonBot supports the following features
 |on|returns all tasks occuring on specified date|`on <date>`|[On docs](https://nje14.github.io/ip/ON)|
 |todo|creates a todo|`todo <name>`|[Todo docs](https://nje14.github.io/ip/TODO)|
 |unmark|marks task as incomplete|`unmark <index\|name>`|[Unmark docs](https://nje14.github.io/ip/UNMARK)|
-
-
-
