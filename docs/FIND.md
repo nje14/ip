@@ -4,7 +4,7 @@ Finds all tasks that matches the search string
 
 ## Synopsis
 
-find [text to search]
+find \<text to search\>
 
 ## Example usage
 

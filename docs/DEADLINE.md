@@ -4,7 +4,7 @@ Creates and adds a deadline to NyonBot with a specified date
 
 ## Synopsis
 
-deadline [deadline name] --by [deadline date]
+deadline \<name\> --by \<date\>
 
 date must be entered in format dd/MM/yyyy HHmm
 

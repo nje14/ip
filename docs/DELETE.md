@@ -4,7 +4,7 @@ Deletes a task from NyonBot
 
 ## Synopsis
 
-delete [taskname or number]
+delete \<taskname or number\>
 
 ## Example usage
 

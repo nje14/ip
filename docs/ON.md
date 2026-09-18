@@ -4,7 +4,7 @@ Finds all tasks that occur on the specified date
 
 ## Synopsis
 
-on [date to search]
+on \<date to search\>
 
 ## Example usage
 

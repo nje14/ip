@@ -4,7 +4,7 @@ Marks a task complete
 
 ## Synopsis
 
-mark [taskname or number]
+mark \<taskname or number\>
 
 ## Example usage
 

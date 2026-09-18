@@ -4,9 +4,11 @@ Creates and adds an event to NyonBot with a specified start date and end date
 
 ## Synopsis
 
-event [event name] --from [start date] --to [end date]
+event \<event name\> --from \<start date\> --to \<end date\>
 
 date must be entered in format dd/MM/yyyy HHmm
+
+`--from` must be entered before `--to`
 
 ## Example usage
 

@@ -1,23 +1,23 @@
-# echo
+    # echo
 
-repeats user input
+    repeats user input
 
-## Synopsis
+    ## Synopsis
 
-echo [text to echo]
+    echo [text]
 
-## Example usage
+    ## Example usage
 
-```
-echo sleep
-```
-echos "sleep"
+    ```
+    echo sleep
+    ```
+    echos "sleep"
 
-Expected output:
-```
-Nyon! (sleep)
-```
+    Expected output:
+    ```
+    Nyon! (sleep)
+    ```
 
-## Aliases
+    ## Aliases
 
-`cat`
+    `cat`

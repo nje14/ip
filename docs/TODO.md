@@ -4,7 +4,7 @@ Creates and adds a ToDo to NyonBot
 
 ## Synopsis
 
-todo [todo name]
+todo \<todo name\>
 
 ## Example usage
 

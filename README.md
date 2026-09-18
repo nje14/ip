@@ -47,39 +47,70 @@ All dates **MUST** be entered in the format dd/MM/yyyy HHmm
 
 NyonBot supports the following features
 
-[Deadline docs](https://nje14.github.io/ip/DEADLINE)
+# NyonBot User Guide
 
-[Delete docs](https://nje14.github.io/ip/DELETE)
+![nyon](https://static.tvtropes.org/pmwiki/pub/images/kawkaw_battle_idle_1_400x280.png)
 
-[Echo docs](https://nje14.github.io/ip/ECHO)
+![screenshot of ui](https://nje14.github.io/ip/Ui.png)
 
-[Event docs](https://nje14.github.io/ip/EVENT)
+NyonBot is a simple chatbot based off the _Duke_ greenfield Java project template
 
-[Exit docs](https://nje14.github.io/ip/EXIT)
+NyonBot is based on the [KawKaw NPC from deltarune](https://deltarune.wiki/w/Kawkaw)
 
-[Find docs](https://nje14.github.io/ip/FIND)
+## Quick start guide
 
-[Help docs](https://nje14.github.io/ip/HELP)
+Download the latest release from [releases](https://github.com/nje14/ip/releases)
 
-[List docs](https://nje14.github.io/ip/LIST)
+If there are no releases present:
 
-[Mark docs](https://nje14.github.io/ip/MARK)
+1. Go to the latest [github action](https://github.com/nje14/ip/actions)
 
-[Nyon docs](https://nje14.github.io/ip/NYON)
+2. Select the latest working workflow (should have a :white_check_mark: next to it)
 
-[On docs](https://nje14.github.io/ip/ON)
+3. Click on artifacts
 
-[Todo docs](https://nje14.github.io/ip/TODO)
+4. Download `nyonbot-fat.jar`
 
-[Unmark docs](https://nje14.github.io/ip/UNMARK)
+Once downloaded, go to terminal / powershell and run
+```bash
+java -jar nyonbot-fat.jar
+```
 
-## Attribution
+## Prerequisites
 
-MainWindow and DialogBox was adapted from the [se-education JavaFX tutorial](https://se-education.org/guides/tutorials/javaFx.html)
+Requires:
 
-Parts of the code were created with assistance from NUS ChatGPT
+* Java 25 or later
 
-Images and sounds were taken from the [deltarune wiki](https://deltarune.wiki)
+That's it
 
-Big Shot font taken from https://www.dafont.com/big-shot.font
+## Important notes 
+
+**Strictly for non-commercial, internal use only**
+
+This software comes with a `help`/`man`
+
+All dates **MUST** be entered in the format dd/MM/yyyy HHmm
+
+## Features
+
+NyonBot supports the following features
+
+|Command|Description|Usage|Docs|
+|---|---|---|---|
+|deadline|creates a new deadline to do by specified date|`deadline <name> --by <date>`|[Deadline docs](https://nje14.github.io/ip/DEADLINE)|
+|delete|deletes a task|`delete <index\|name>`|[Delete docs](https://nje14.github.io/ip/DELETE)|
+|echo|echoes input|`echo [text]`|[Echo docs](https://nje14.github.io/ip/ECHO)|
+|event|creates an event with specified start and end dates|`event <name> --from <start date> --to <end date>`|[Event docs](https://nje14.github.io/ip/EVENT)|
+|exit|exits software|`exit`|[Exit docs](https://nje14.github.io/ip/EXIT)|
+|find|filters events by search|`find <search text>`|[Find docs](https://nje14.github.io/ip/FIND)|
+|help|pulls up help documents|`help [command]`|[Help docs](https://nje14.github.io/ip/HELP)|
+|list|lists all tasks|`list`|[List docs](https://nje14.github.io/ip/LIST)|
+|mark|marks task as complete|`mark <index\|name>`|[Mark docs](https://nje14.github.io/ip/MARK)|
+|nyon|nyon|`nyon`|[Nyon docs](https://nje14.github.io/ip/NYON)|
+|on|returns all tasks occuring on specified date|`on <date>`|[On docs](https://nje14.github.io/ip/ON)|
+|todo|creates a todo|`todo <name>`|[Todo docs](https://nje14.github.io/ip/TODO)|
+|unmark|marks task as incomplete|`unmark <index\|name>`|[Unmark docs](https://nje14.github.io/ip/UNMARK)|
+
+
 
